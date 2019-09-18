@@ -1,6 +1,6 @@
 # Gem NodeJS API Client
 
-Node.js client library for the [Gem API](https://developers.gem.co/).
+Node.js client library for the [Gem API](https://developers.gem.co/reference).
 
 ## Install
 
@@ -19,14 +19,49 @@ const gem = new Gem({
   secretKey: GEM_API_SECRET,
 });
 
-gem.post('/users').then(
-  ({ id }) => {
-    console.log('New User ID: ', id);
+const Profile = {
+  name: { given_names: 'My First Name', family_names: 'My Last Name' },
+  phone_number: '+11234567890',
+  address: {
+    street_1: '1123 flower',
+    street_2: '',
+    city: 'los angeles',
+    postal_code: '90024',
+    country: 'us',
   },
-  err => {
-    console.log('Oops, something went wrong:', err);
+  email_address: 'someone@example.com',
+  social_security_number: '123-45-0976',
+  date_of_birth: '11-20-1976',
+  documents: [
+    {
+      description: 'some description',
+      type: 'Passport',
+      files: [
+        {
+          description: 'none',
+          file_data: {
+            data: 'data here',
+            encoding: 'base64',
+            media_type: 'image/png',
+          },
+          orientation: 'front',
+        },
+      ],
+    },
+  ],
+};
+
+(async () => {
+  try {
+    const { id } = await gem.post('/users');
+    const profile = await gem.post('/profiles', Profile, {
+      qs: { user_id: id },
+    });
+    console.log(profile);
+  } catch (e) {
+    console.error(e);
   }
-);
+})();
 ```
 
 ## Client API Reference

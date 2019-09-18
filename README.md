@@ -34,7 +34,7 @@ gem.post('/users').then(
 ### Constructor
 
 ```js
-const gem = new GemClient({
+const gem = new Gem({
   /* Parameters */
 });
 ```

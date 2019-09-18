@@ -114,7 +114,7 @@ export class Client {
    * for signing API requests.
    */
   private getTimeStamp(): number {
-    return Math.ceil(Date.now() / 1000);
+    return Math.floor(Date.now() / 1000);
   }
 
   /**

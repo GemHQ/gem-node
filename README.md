@@ -5,14 +5,14 @@ Node.js client library for the [Gem API](https://developers.gem.co/).
 ## Install
 
 ```
-npm install @gem/api
+npm install @gem.co/api
 ```
 
 ## Quickstart
 
 ```js
 const { GEM_API_KEY, GEM_API_SECRET } = process.env;
-const Gem = require('@gem/api').Client;
+const Gem = require('@gem.co/api').Client;
 
 const gem = new Gem({
   apiKey: GEM_API_KEY,

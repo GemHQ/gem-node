@@ -74,7 +74,7 @@ var Client = (function () {
         return reqOpts;
     };
     Client.prototype.getTimeStamp = function () {
-        return Math.ceil(Date.now() / 1000);
+        return Math.floor(Date.now() / 1000);
     };
     Client.prototype.createSignature = function (timeStamp) {
         dbg('Timestamp:', timeStamp);

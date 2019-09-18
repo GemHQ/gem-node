@@ -1,0 +1,38 @@
+{
+  "name": "@gem.co/api",
+  "version": "1.0.0",
+  "description": "Node.js client library for the Gem API.",
+  "main": "./dist/gem.js",
+  "scripts": {
+    "build": "bin/build"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "gem",
+    "cryptocurrency",
+    "crypto",
+    "exchange",
+    "api",
+    "fiat",
+    "kyc"
+  ],
+  "files": [
+    "dist/"
+  ],
+  "author": "Gem",
+  "license": "MIT",
+  "types": "./dist/gem.d.ts",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "es6-shim": "^0.35.3",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.5",
+    "@types/form-data": "^2.5.0",
+    "@types/request": "^2.48.3",
+    "typescript": "^3.2.2"
+  }
+}

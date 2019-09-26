@@ -59,7 +59,8 @@ var Client = (function () {
     Client.prototype.createRequestOptions = function (method, path, params, options) {
         options = options || {};
         var parsedUrl = url.parse(url.resolve(this.config.baseUrl || GEM_BASE_URL, path), true);
-        var json = !(options.headers || {}).hasOwnProperty('Content-Type') ||
+        var json = !(options.headers || {}).hasOwnProperty('content-type') ||
+            !(options.headers || {}).hasOwnProperty('Content-Type') ||
             options.headers['Content-Type'] == 'application/json';
         var reqOpts = __assign(__assign(__assign({}, this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), json: json });
         if (reqOpts.method == 'GET')

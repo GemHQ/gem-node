@@ -78,6 +78,7 @@ export class Client {
     );
 
     const json =
+      !(options.headers || {}).hasOwnProperty('content-type') ||
       !(options.headers || {}).hasOwnProperty('Content-Type') ||
       options.headers['Content-Type'] == 'application/json';
 

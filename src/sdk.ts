@@ -24,8 +24,10 @@ export namespace SDK {
     /**
      * USERS
      */
-    createUser = async (): Promise<any> =>
-      await this.client.post(Endpoints.users, {});
+    createUser = async (emailAddress?: string): Promise<any> =>
+      await this.client.post(Endpoints.users, {
+        ...(emailAddress && { email: emailAddress }),
+      });
 
     listUsers = async (): Promise<any> =>
       await this.client.get(Endpoints.users);

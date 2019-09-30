@@ -12,52 +12,53 @@ npm install @gem.co/api
 
 ```js
 const { GEM_API_KEY, GEM_API_SECRET } = process.env;
-const Gem = require('@gem.co/api').Client;
+const { Gem, Models } = require('@gem.co/api').SDK;
+const { Profile, Document } = Models;
+
+const fs = require('fs');
+const passportFile = fs.createReadStream('/my/passport/file.png');
 
 const gem = new Gem({
   apiKey: GEM_API_KEY,
   secretKey: GEM_API_SECRET,
 });
 
-const Profile = {
+const userProfile = new Profile({
   name: { given_names: 'My First Name', family_names: 'My Last Name' },
   phone_number: '+11234567890',
   address: {
-    street_1: '1123 flower',
-    street_2: '',
-    city: 'los angeles',
+    street_1: '1123 Flower st.',
+    street_2: 'APT 123',
+    city: 'Los Angeles',
     postal_code: '90024',
-    country: 'us',
+    country: 'US',
+    state: 'CA',
   },
   email_address: 'someone@example.com',
   social_security_number: '123-45-0976',
   date_of_birth: '11-20-1976',
-  documents: [
+});
+
+const profileDocument = new Document({
+  type: 'passport',
+  description: 'My passport',
+  files: [
     {
-      description: 'some description',
-      type: 'Passport',
-      files: [
-        {
-          description: 'none',
-          file_data: {
-            data: 'data here',
-            encoding: 'base64',
-            media_type: 'image/png',
-          },
-          orientation: 'front',
-        },
-      ],
+      data: passportFile,
+      media_type: 'image/png',
+      description: 'the file description',
+      orientation: 'front',
     },
   ],
-};
+});
 
 (async () => {
   try {
-    const { id } = await gem.post('/users');
-    const profile = await gem.post('/profiles', Profile, {
-      qs: { user_id: id },
-    });
-    console.log(profile);
+    const user = await gem.createUser();
+    const profile = await gem.createProfile(user.id, userProfile);
+    await gem.createProfileDocument(profile.id, profileDocument);
+    const institutionUser = await gem.createInstitutionUser(profile.id, 'wyre');
+    console.log(institutionUser);
   } catch (e) {
     console.error(e);
   }
@@ -91,6 +92,7 @@ Each function makes a request to Gem's API and returns a promise in response.
 gem.get(path, parameters, options);
 gem.post(path, body, options);
 gem.put(path, body, options);
+gem.patch(path, body, options);
 gem.delete(path, body, options);
 ```
 

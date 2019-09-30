@@ -11,7 +11,7 @@ export declare namespace SDK {
     class Gem {
         private client;
         constructor(config: any);
-        createUser: () => Promise<any>;
+        createUser: (emailAddress?: string) => Promise<any>;
         listUsers: () => Promise<any>;
         getUser: (userId: string) => Promise<any>;
         deleteUser: (userId: string) => Promise<any>;

@@ -6,6 +6,9 @@ import {
   IProfileAddress,
   IProfileName,
 } from './profile';
+import { Destination, BlockchainAddress } from './shared';
+import { TransactionModel } from './transaction';
+import { PlaidAccountModel, INewPlaidAccount, AccountTypes } from './account';
 
 export {
   FileModel,
@@ -16,4 +19,10 @@ export {
   IProfile,
   IProfileAddress,
   IProfileName,
+  TransactionModel,
+  Destination,
+  BlockchainAddress,
+  AccountTypes,
+  INewPlaidAccount,
+  PlaidAccountModel,
 };

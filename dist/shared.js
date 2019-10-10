@@ -10,4 +10,6 @@ var Endpoints;
     Endpoints["documents"] = "/documents";
     Endpoints["institutions"] = "/institutions";
     Endpoints["institution_users"] = "/institution_users";
+    Endpoints["accounts"] = "/accounts";
+    Endpoints["transactions"] = "/transactions";
 })(Endpoints = exports.Endpoints || (exports.Endpoints = {}));

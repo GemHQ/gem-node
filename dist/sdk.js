@@ -91,7 +91,27 @@ var SDK;
             return Profile;
         }(models_1.ProfileModel));
         Models.Profile = Profile;
+        var Transaction = (function (_super) {
+            __extends(Transaction, _super);
+            function Transaction() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return Transaction;
+        }(models_1.TransactionModel));
+        Models.Transaction = Transaction;
+        var PlaidAccount = (function (_super) {
+            __extends(PlaidAccount, _super);
+            function PlaidAccount() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return PlaidAccount;
+        }(models_1.PlaidAccountModel));
+        Models.PlaidAccount = PlaidAccount;
     })(Models = SDK.Models || (SDK.Models = {}));
+    var Enums;
+    (function (Enums) {
+        Enums.NewAccountTypes = models_1.AccountTypes;
+    })(Enums = SDK.Enums || (SDK.Enums = {}));
     var Gem = (function () {
         function Gem(config) {
             var _this = this;
@@ -251,6 +271,46 @@ var SDK;
                     }
                 });
             }); };
+            this.createAccount = function (account) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.post("" + shared_1.Endpoints.accounts, account)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.getAccount = function (accountId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.get(shared_1.Endpoints.accounts + "/" + accountId)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.listAccounts = function (connectionId, userId) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.get("" + shared_1.Endpoints.accounts, __assign({ connection_id: connectionId }, (userId && { user_id: userId })))];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
+            this.createTransaction = function (transactionParams) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.post("" + shared_1.Endpoints.transactions, transactionParams)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.listTransactions = function (page) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.get("" + shared_1.Endpoints.transactions, __assign({}, (page && { page: page })))];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
+            this.getTransaction = function (transactionId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.get(shared_1.Endpoints.transactions + "/" + transactionId)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
             this.client = new client_1.Client(config);
         }
         return Gem;

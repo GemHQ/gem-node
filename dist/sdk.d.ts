@@ -1,4 +1,4 @@
-import { FileModel, DocumentModel, ProfileModel } from './models';
+import { FileModel, DocumentModel, ProfileModel, TransactionModel, PlaidAccountModel, AccountTypes } from './models';
 export declare namespace SDK {
     namespace Models {
         class Document extends DocumentModel {
@@ -7,6 +7,13 @@ export declare namespace SDK {
         }
         class Profile extends ProfileModel {
         }
+        class Transaction extends TransactionModel {
+        }
+        class PlaidAccount extends PlaidAccountModel {
+        }
+    }
+    namespace Enums {
+        const NewAccountTypes: typeof AccountTypes;
     }
     class Gem {
         private client;
@@ -30,5 +37,11 @@ export declare namespace SDK {
         createInstitutionUser: (profileId: string, institutionId: string) => Promise<any>;
         updateInstitutionUser: (institutionUserId: string, profileId: string) => Promise<any>;
         getInstitutionUser: (institutionUserId: string) => Promise<any>;
+        createAccount: (account: PlaidAccountModel) => Promise<any>;
+        getAccount: (accountId: string) => Promise<any>;
+        listAccounts: (connectionId: string, userId?: string) => Promise<any>;
+        createTransaction: (transactionParams: TransactionModel) => Promise<any>;
+        listTransactions: (page?: number) => Promise<any>;
+        getTransaction: (transactionId: string) => Promise<any>;
     }
 }

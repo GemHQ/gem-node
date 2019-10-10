@@ -12,8 +12,9 @@ npm install @gem.co/api
 
 ```js
 const { GEM_API_KEY, GEM_API_SECRET } = process.env;
-const { Gem, Models } = require('@gem.co/api').SDK;
-const { Profile, Document } = Models;
+const { Gem, Models, Enums } = require('@gem.co/api').SDK;
+const { Profile, Document, PlaidAccount, Transaction } = Models;
+const { NewAccountTypes } = Enums;
 
 const fs = require('fs');
 const passportFile = fs.createReadStream('/my/passport/file.png');
@@ -58,7 +59,32 @@ const profileDocument = new Document({
     const profile = await gem.createProfile(user.id, userProfile);
     await gem.createProfileDocument(profile.id, profileDocument);
     const institutionUser = await gem.createInstitutionUser(profile.id, 'wyre');
-    console.log(institutionUser);
+
+    const plaidAccount = new PlaidAccount({
+      connection_id: institutionUser.connection_id,
+      type: NewAccountTypes.PlaidAccount,
+      plaid_token: 'a-wyre-plaid-public-token',
+    });
+
+    const account = await gem.createAccount(plaidAccount);
+
+    // Create a transaction, assuming the third party has approved this account.
+    const txn = await gem.createTransaction(
+      new Transaction({
+        source_id: account.id,
+        amount: {
+          quantity: 101.1453221,
+          asset_id: 'bitcoin',
+        },
+        destination: {
+          blockchain_address: 'mybitcoinaddress',
+        },
+        type: 'buy',
+        fees_inclusive: true,
+      })
+    );
+
+    console.log(txn);
   } catch (e) {
     console.error(e);
   }

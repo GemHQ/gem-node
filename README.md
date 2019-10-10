@@ -107,10 +107,71 @@ Configuration Parameters:
 | --------- | -------------------------------------------------------------------------------------------------------------------------- |
 | apiKey    | Gem API key for the respective environment.                                                                                |
 | secretKey | Gem API secret for the respective environment.                                                                             |
-| baseUrl   | The Gem API base URL you want to use. <br>`https://vgs.gem.co` for production<br>`https://vgs-sandbox.gem.co` for sandbox. |  |
+| baseUrl   | The Gem API base URL you want to use. <br>`https://vgs.gem.co` for production<br>`https://vgs-sandbox.gem.co` for sandbox. |
 | options   | Options that are passed to the [Request](https://github.com/request/request) for _each_ request made to the API.           |
 
-### Requests
+### SDK Requests
+
+#### Users
+
+| method     | description          |
+| ---------- | -------------------- |
+| createUser | Create a user.       |
+| getUser    | Get a user by ID.    |
+| listUsers  | Get a list of users. |
+| deleteUser | Delete a user by ID. |
+
+#### Profiles
+
+| method                 | description                                                             |
+| ---------------------- | ----------------------------------------------------------------------- |
+| createProfile          | Create a profile.                                                       |
+| createTemporaryProfile | Create a temporary profile. This profile will exist for up to one hour. |
+| getProfile             | Get a profile by ID.                                                    |
+| listProfiles           | Get a list of profiles.                                                 |
+| deleteProfile          | Delete a profile by ID.                                                 |
+
+#### Documents
+
+| method                | description                                                                 |
+| --------------------- | --------------------------------------------------------------------------- |
+| createProfileDocument | Attach a document to a profile. (Documents may have many files associated.) |
+| listProfileDocuments  | List all profile documents.                                                 |
+| updateDocument        | Update an document.                                                         |
+| deleteDocument        | Delete a document by ID.                                                    |
+
+#### Institutions
+
+| method           | description                      |
+| ---------------- | -------------------------------- |
+| listInstitutions | List all supported institutions. |
+| getInsitution    | Get an institution by ID.        |
+
+#### Institution Users
+
+| method                | description                    |
+| --------------------- | ------------------------------ |
+| createInstitutionUser | Create an institution user.    |
+| updateInstitutionUser | Update an institution user.    |
+| getInsitutionUser     | Get an institution user by ID. |
+
+#### Accounts
+
+| method        | description             |
+| ------------- | ----------------------- |
+| createAccount | Create an account.      |
+| getAccount    | Get an account by ID    |
+| listAccounts  | Get a list of accounts. |
+
+#### Transactions
+
+| method            | description                 |
+| ----------------- | --------------------------- |
+| createTransaction | Create a transaction.       |
+| getTransaction    | Get a transaction by ID     |
+| listTransaction   | Get a list of transactions. |
+
+### Vanilla Requests
 
 Each function makes a request to Gem's API and returns a promise in response.
 

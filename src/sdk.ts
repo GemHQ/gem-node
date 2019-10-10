@@ -1,4 +1,11 @@
-import { FileModel, DocumentModel, ProfileModel } from './models';
+import {
+  FileModel,
+  DocumentModel,
+  ProfileModel,
+  TransactionModel,
+  PlaidAccountModel,
+  AccountTypes,
+} from './models';
 import { Client } from './client';
 import { Endpoints } from './shared';
 
@@ -7,6 +14,12 @@ export namespace SDK {
     export class Document extends DocumentModel {}
     export class File extends FileModel {}
     export class Profile extends ProfileModel {}
+    export class Transaction extends TransactionModel {}
+    export class PlaidAccount extends PlaidAccountModel {}
+  }
+
+  export namespace Enums {
+    export const NewAccountTypes = AccountTypes;
   }
 
   /**
@@ -154,5 +167,39 @@ export namespace SDK {
       await this.client.get(
         `${Endpoints.institution_users}/${institutionUserId}`
       );
+
+    /**
+     * ACCOUNTS
+     */
+
+    createAccount = async (account: PlaidAccountModel) =>
+      await this.client.post(`${Endpoints.accounts}`, account);
+
+    getAccount = async (accountId: string): Promise<any> =>
+      await this.client.get(`${Endpoints.accounts}/${accountId}`);
+
+    listAccounts = async (
+      connectionId: string,
+      userId?: string
+    ): Promise<any> =>
+      await this.client.get(`${Endpoints.accounts}`, {
+        connection_id: connectionId,
+        ...(userId && { user_id: userId }),
+      });
+
+    /**
+     * TRANSACTIONS
+     */
+
+    createTransaction = async (transactionParams: TransactionModel) =>
+      await this.client.post(`${Endpoints.transactions}`, transactionParams);
+
+    listTransactions = async (page?: number) =>
+      await this.client.get(`${Endpoints.transactions}`, {
+        ...(page && { page }),
+      });
+
+    getTransaction = async (transactionId: string) =>
+      await this.client.get(`${Endpoints.transactions}/${transactionId}`);
   }
 }

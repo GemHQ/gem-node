@@ -169,7 +169,7 @@ Configuration Parameters:
 | ----------------- | --------------------------- |
 | createTransaction | Create a transaction.       |
 | getTransaction    | Get a transaction by ID     |
-| listTransaction   | Get a list of transactions. |
+| listTransactions  | Get a list of transactions. |
 
 ### Vanilla Requests
 

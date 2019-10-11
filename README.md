@@ -137,7 +137,7 @@ Configuration Parameters:
 | --------------------- | --------------------------------------------------------------------------- |
 | createProfileDocument | Attach a document to a profile. (Documents may have many files associated.) |
 | listProfileDocuments  | List all profile documents.                                                 |
-| updateDocument        | Update an document.                                                         |
+| updateDocument        | Update a document.                                                          |
 | deleteDocument        | Delete a document by ID.                                                    |
 
 #### Institutions
@@ -145,7 +145,7 @@ Configuration Parameters:
 | method           | description                      |
 | ---------------- | -------------------------------- |
 | listInstitutions | List all supported institutions. |
-| getInsitution    | Get an institution by ID.        |
+| getInstitution   | Get an institution by ID.        |
 
 #### Institution Users
 
@@ -153,7 +153,7 @@ Configuration Parameters:
 | --------------------- | ------------------------------ |
 | createInstitutionUser | Create an institution user.    |
 | updateInstitutionUser | Update an institution user.    |
-| getInsitutionUser     | Get an institution user by ID. |
+| getInstitutionUser    | Get an institution user by ID. |
 
 #### Accounts
 

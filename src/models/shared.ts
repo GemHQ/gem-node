@@ -1,5 +1,6 @@
 export interface BlockchainAddress {
-  blockchain_address: string;
+  address: string;
+  asset_id: string;
 }
 
 export type Destination = BlockchainAddress;

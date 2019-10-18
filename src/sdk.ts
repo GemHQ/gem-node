@@ -194,6 +194,9 @@ export namespace SDK {
     createTransaction = async (transactionParams: TransactionModel) =>
       await this.client.post(`${Endpoints.transactions}`, transactionParams);
 
+    confirmTransaction = async (transactionId: string) =>
+      await this.client.post(`${Endpoints.transactions}/${transactionId}`);
+
     listTransactions = async (page?: number) =>
       await this.client.get(`${Endpoints.transactions}`, {
         ...(page && { page }),

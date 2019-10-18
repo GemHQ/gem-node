@@ -1,13 +1,14 @@
 {
   "name": "@gem.co/api",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Node.js client library for the Gem API.",
   "main": "./dist/gem.js",
   "scripts": {
     "build": "bin/build"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/GemHQ/gem-node"
   },
   "keywords": [
     "gem",

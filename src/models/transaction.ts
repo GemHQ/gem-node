@@ -1,32 +1,31 @@
-import { IAmount } from './amount';
-import { Destination } from './shared';
+import { BlockchainAddress } from './shared';
 
 export interface ITransaction {
   source_id: string;
+  source_amount: number;
   type: string;
-  fees_inclusive?: boolean;
-  destination: Destination;
-  amount: IAmount;
+  preview?: boolean;
+  blockchain_address: BlockchainAddress;
 }
 
 export class TransactionModel implements ITransaction {
   source_id: string;
+  source_amount: number;
   type: string;
-  fees_inclusive?: boolean;
-  amount: IAmount;
-  destination: Destination;
+  preview?: boolean;
+  blockchain_address: BlockchainAddress;
 
   constructor({
     source_id,
     type,
-    fees_inclusive = false,
-    amount,
-    destination,
+    source_amount,
+    preview = false,
+    blockchain_address,
   }: ITransaction) {
     this.source_id = source_id;
     this.type = type;
-    this.fees_inclusive = fees_inclusive;
-    this.amount = amount;
-    this.destination = destination;
+    this.source_amount = source_amount;
+    this.preview = preview;
+    this.blockchain_address = blockchain_address;
   }
 }

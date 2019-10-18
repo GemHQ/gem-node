@@ -41,6 +41,7 @@ export declare namespace SDK {
         getAccount: (accountId: string) => Promise<any>;
         listAccounts: (connectionId: string, userId?: string) => Promise<any>;
         createTransaction: (transactionParams: TransactionModel) => Promise<any>;
+        confirmTransaction: (transactionId: string) => Promise<any>;
         listTransactions: (page?: number) => Promise<any>;
         getTransaction: (transactionId: string) => Promise<any>;
     }

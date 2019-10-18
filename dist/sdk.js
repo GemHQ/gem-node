@@ -297,6 +297,12 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
+            this.confirmTransaction = function (transactionId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.post(shared_1.Endpoints.transactions + "/" + transactionId)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
             this.listTransactions = function (page) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {

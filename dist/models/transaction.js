@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var TransactionModel = (function () {
     function TransactionModel(_a) {
-        var source_id = _a.source_id, type = _a.type, fees_inclusive = _a.fees_inclusive, amount = _a.amount, destination = _a.destination;
+        var source_id = _a.source_id, type = _a.type, source_amount = _a.source_amount, _b = _a.preview, preview = _b === void 0 ? false : _b, blockchain_address = _a.blockchain_address;
         this.source_id = source_id;
         this.type = type;
-        this.fees_inclusive = fees_inclusive;
-        this.amount = amount;
-        this.destination = destination;
+        this.source_amount = source_amount;
+        this.preview = preview;
+        this.blockchain_address = blockchain_address;
     }
     return TransactionModel;
 }());

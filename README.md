@@ -15,6 +15,7 @@ const { GEM_API_KEY, GEM_API_SECRET } = process.env;
 const { Gem, Models, Enums } = require('@gem.co/api').SDK;
 const { Profile, Document, PlaidAccount, Transaction } = Models;
 const { NewAccountTypes } = Enums;
+const BLOCKCHAIN_ADDRESS = 'mybitcoinaddress';
 
 const fs = require('fs');
 const passportFile = fs.createReadStream('/my/passport/file.png');
@@ -72,15 +73,13 @@ const profileDocument = new Document({
     const txn = await gem.createTransaction(
       new Transaction({
         source_id: account.id,
-        amount: {
-          quantity: 101.1453221,
+        source_amount: 100.0,
+        blockchain_address: {
+          address: BLOCKCHAIN_ADDRESS,
           asset_id: 'bitcoin',
         },
-        destination: {
-          blockchain_address: 'mybitcoinaddress',
-        },
         type: 'buy',
-        fees_inclusive: true,
+        preview: false,
       })
     );
 

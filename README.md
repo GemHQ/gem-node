@@ -165,11 +165,12 @@ Configuration Parameters:
 
 #### Transactions
 
-| method            | description                 |
-| ----------------- | --------------------------- |
-| createTransaction | Create a transaction.       |
-| getTransaction    | Get a transaction by ID     |
-| listTransactions  | Get a list of transactions. |
+| method             | description                    |
+| ------------------ | ------------------------------ |
+| createTransaction  | Create a transaction.          |
+| confirmTransaction | Confirm a transaction preview. |
+| getTransaction     | Get a transaction by ID        |
+| listTransactions   | Get a list of transactions.    |
 
 ### Vanilla Requests
 

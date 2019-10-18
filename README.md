@@ -1,4 +1,4 @@
-# Gem NodeJS API Client
+# Gem API Node.js Client
 
 Node.js client library for the [Gem API](https://developers.gem.co/reference).
 

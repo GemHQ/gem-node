@@ -53,7 +53,7 @@ var Client = (function () {
                 else if (res.statusCode >= 200 && res.statusCode < 300)
                     resolve(res.body || {});
                 else
-                    reject(new gem_api_1.default(res.body || { status: res.statusCode }));
+                    reject(new gem_api_1.default(__assign(__assign({}, res.body), { status: res.statusCode })));
             });
         });
     };

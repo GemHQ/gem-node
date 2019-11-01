@@ -21,6 +21,7 @@ var GemAPIError = (function (_super) {
         Object.setPrototypeOf(_this, _newTarget.prototype);
         _this.description = error.description;
         _this.code = error.code;
+        _this.status = error.status;
         return _this;
     }
     return GemAPIError;

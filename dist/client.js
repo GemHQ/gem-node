@@ -15,6 +15,7 @@ var crypto = require("crypto");
 var shared_1 = require("./shared");
 var request = require("request");
 var url = require("url");
+var gem_api_1 = require("./errors/gem_api");
 var Client = (function () {
     function Client(config) {
         this.config = config;
@@ -52,7 +53,7 @@ var Client = (function () {
                 else if (res.statusCode >= 200 && res.statusCode < 300)
                     resolve(res.body || {});
                 else
-                    reject(res.body || { status: res.statusCode });
+                    reject(new gem_api_1.default(res.body || { status: res.statusCode }));
             });
         });
     };

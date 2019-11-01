@@ -57,7 +57,7 @@ export class Client {
         if (err) throw err;
         else if (res.statusCode >= 200 && res.statusCode < 300)
           resolve(res.body || {});
-        else reject(new GemAPIError(res.body || { status: res.statusCode }));
+        else reject(new GemAPIError({ ...res.body, status: res.statusCode }));
       });
     });
   }

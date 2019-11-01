@@ -2,6 +2,7 @@ import * as crypto from 'crypto';
 import { dbg, GEM_BASE_URL } from './shared';
 import * as request from 'request';
 import * as url from 'url';
+import GemAPIError from './errors/gem_api';
 
 /**
  * The base HTTP client class for the Gem API.
@@ -56,7 +57,7 @@ export class Client {
         if (err) throw err;
         else if (res.statusCode >= 200 && res.statusCode < 300)
           resolve(res.body || {});
-        else reject(res.body || { status: res.statusCode });
+        else reject(new GemAPIError(res.body || { status: res.statusCode }));
       });
     });
   }

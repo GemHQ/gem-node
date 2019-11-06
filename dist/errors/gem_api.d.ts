@@ -1,10 +1,12 @@
 export default class GemAPIError extends Error {
     description: string;
+    error: string;
     code: string;
     status: number;
     constructor(error: {
         description: string;
-        code: string;
+        error: string;
         status: number;
+        code: string;
     });
 }

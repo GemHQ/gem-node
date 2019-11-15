@@ -17,7 +17,7 @@ var GemAPIError = (function (_super) {
     __extends(GemAPIError, _super);
     function GemAPIError(error) {
         var _newTarget = this.constructor;
-        var _this = _super.call(this, error.error) || this;
+        var _this = _super.call(this, error.error || error.code) || this;
         Object.setPrototypeOf(_this, _newTarget.prototype);
         _this.description = error.description;
         _this.error = error.error;

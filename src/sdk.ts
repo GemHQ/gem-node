@@ -147,9 +147,7 @@ export namespace SDK {
     ): Promise<any> =>
       await this.client.post(Endpoints.institution_users, {
         profile_id: profileId,
-        institution_params: {
-          id: institutionId,
-        },
+        institution_id: institutionId,
       });
 
     updateInstitutionUser = async (

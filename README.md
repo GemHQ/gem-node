@@ -168,8 +168,24 @@ Configuration Parameters:
 | ------------------ | ------------------------------ |
 | createTransaction  | Create a transaction.          |
 | confirmTransaction | Confirm a transaction preview. |
-| getTransaction     | Get a transaction by ID        |
+| getTransaction     | Get a transaction by ID.       |
 | listTransactions   | Get a list of transactions.    |
+
+#### Credentials
+
+| method            | description                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ |
+| createCredentials | Create a credentials object which can be used to link a user to a connection. No authentication is required. |
+
+#### Connections
+
+| method           | description                                                         |
+| ---------------- | ------------------------------------------------------------------- |
+| createConnection | Create a connection which will link a credential object and a user. |
+| updateConnection | Update a connection's credential_id.                                |
+| getConnection    | Get a connection by ID.                                             |
+| listConnections  | Get a list of user connections.                                     |
+| deleteConnection | Delete a connection by ID.                                          |
 
 ### Vanilla Requests
 

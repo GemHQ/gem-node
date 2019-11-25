@@ -21,4 +21,6 @@ export enum Endpoints {
   institution_users = '/institution_users',
   accounts = '/accounts',
   transactions = '/transactions',
+  credentials = '/credentials',
+  connections = '/connections',
 }

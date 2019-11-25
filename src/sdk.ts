@@ -5,6 +5,8 @@ import {
   TransactionModel,
   PlaidAccountModel,
   AccountTypes,
+  CredentialsModel,
+  CredentialTypes,
 } from './models';
 import { Client } from './client';
 import { Endpoints } from './shared';
@@ -16,10 +18,12 @@ export namespace SDK {
     export class Profile extends ProfileModel {}
     export class Transaction extends TransactionModel {}
     export class PlaidAccount extends PlaidAccountModel {}
+    export class Credentials extends CredentialsModel {}
   }
 
   export namespace Enums {
     export const NewAccountTypes = AccountTypes;
+    export const NewCredentialTypes = CredentialTypes;
   }
 
   /**
@@ -96,7 +100,7 @@ export namespace SDK {
     /**
      * DOCUMENTS
      */
-    listProfileDocuments = async (profileId: string) =>
+    listProfileDocuments = async (profileId: string): Promise<any> =>
       await this.client.get(`${Endpoints.profiles}/${profileId}/documents`);
 
     createProfileDocument = async (
@@ -170,7 +174,7 @@ export namespace SDK {
      * ACCOUNTS
      */
 
-    createAccount = async (account: PlaidAccountModel) =>
+    createAccount = async (account: PlaidAccountModel): Promise<any> =>
       await this.client.post(`${Endpoints.accounts}`, account);
 
     getAccount = async (accountId: string): Promise<any> =>
@@ -189,18 +193,62 @@ export namespace SDK {
      * TRANSACTIONS
      */
 
-    createTransaction = async (transactionParams: TransactionModel) =>
+    createTransaction = async (
+      transactionParams: TransactionModel
+    ): Promise<any> =>
       await this.client.post(`${Endpoints.transactions}`, transactionParams);
 
-    confirmTransaction = async (transactionId: string) =>
+    confirmTransaction = async (transactionId: string): Promise<any> =>
       await this.client.post(`${Endpoints.transactions}/${transactionId}`);
 
-    listTransactions = async (page?: number) =>
+    listTransactions = async (page?: number): Promise<any> =>
       await this.client.get(`${Endpoints.transactions}`, {
         ...(page && { page }),
       });
 
-    getTransaction = async (transactionId: string) =>
+    getTransaction = async (transactionId: string): Promise<any> =>
       await this.client.get(`${Endpoints.transactions}/${transactionId}`);
+
+    /**
+     * CREDENTIALS
+     */
+
+    createCredentials = async (
+      credentialParams: CredentialsModel
+    ): Promise<any> => {
+      await this.client.post(`${Endpoints.credentials}`, credentialParams);
+    };
+
+    /**
+     * CONNECTIONS
+     */
+
+    createConnection = async (
+      user_id: string,
+      credential_id: string
+    ): Promise<any> =>
+      await this.client.post(Endpoints.connections, {
+        credential_id,
+        user_id,
+      });
+
+    updateConnection = async (
+      connectionId: string,
+      credentialId: string
+    ): Promise<any> =>
+      await this.client.put(`${Endpoints.connections}/${connectionId}`, {
+        credential_id: credentialId,
+      });
+
+    listConnections = async (userId: string): Promise<any> =>
+      await this.client.get(Endpoints.connections, {
+        qs: { user_id: userId },
+      });
+
+    getConnection = async (connectionId: string): Promise<any> =>
+      await this.client.get(`${Endpoints.connections}/${connectionId}`);
+
+    deleteConnection = async (connectionId: string): Promise<any> =>
+      await this.client.delete(`${Endpoints.connections}/${connectionId}`);
   }
 }

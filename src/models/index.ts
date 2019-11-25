@@ -6,9 +6,10 @@ import {
   IProfileAddress,
   IProfileName,
 } from './profile';
-import { Destination, BlockchainAddress } from './shared';
+import { Destination, BlockchainAddress, CredentialTypes } from './shared';
 import { TransactionModel } from './transaction';
 import { PlaidAccountModel, INewPlaidAccount, AccountTypes } from './account';
+import { CredentialsModel } from './credentials';
 
 export {
   FileModel,
@@ -25,4 +26,6 @@ export {
   AccountTypes,
   INewPlaidAccount,
   PlaidAccountModel,
+  CredentialTypes,
+  CredentialsModel,
 };

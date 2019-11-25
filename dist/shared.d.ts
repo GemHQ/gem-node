@@ -8,5 +8,7 @@ export declare enum Endpoints {
     institutions = "/institutions",
     institution_users = "/institution_users",
     accounts = "/accounts",
-    transactions = "/transactions"
+    transactions = "/transactions",
+    credentials = "/credentials",
+    connections = "/connections"
 }

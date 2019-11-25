@@ -107,10 +107,19 @@ var SDK;
             return PlaidAccount;
         }(models_1.PlaidAccountModel));
         Models.PlaidAccount = PlaidAccount;
+        var Credentials = (function (_super) {
+            __extends(Credentials, _super);
+            function Credentials() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return Credentials;
+        }(models_1.CredentialsModel));
+        Models.Credentials = Credentials;
     })(Models = SDK.Models || (SDK.Models = {}));
     var Enums;
     (function (Enums) {
         Enums.NewAccountTypes = models_1.AccountTypes;
+        Enums.NewCredentialTypes = models_1.CredentialTypes;
     })(Enums = SDK.Enums || (SDK.Enums = {}));
     var Gem = (function () {
         function Gem(config) {
@@ -312,6 +321,59 @@ var SDK;
             this.getTransaction = function (transactionId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.transactions + "/" + transactionId)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.createCredentials = function (credentialParams) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.post("" + shared_1.Endpoints.credentials, credentialParams)];
+                        case 1:
+                            _a.sent();
+                            return [2];
+                    }
+                });
+            }); };
+            this.createConnection = function (user_id, credential_id) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.post(shared_1.Endpoints.connections, {
+                                credential_id: credential_id,
+                                user_id: user_id,
+                            })];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
+            this.updateConnection = function (connectionId, credentialId) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.put(shared_1.Endpoints.connections + "/" + connectionId, {
+                                credential_id: credentialId,
+                            })];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
+            this.listConnections = function (userId) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.get(shared_1.Endpoints.connections, {
+                                qs: { user_id: userId },
+                            })];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
+            this.getConnection = function (connectionId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.get(shared_1.Endpoints.connections + "/" + connectionId)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.deleteConnection = function (connectionId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.delete(shared_1.Endpoints.connections + "/" + connectionId)];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };

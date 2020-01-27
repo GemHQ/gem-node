@@ -1,4 +1,5 @@
 import { FileModel, DocumentModel, ProfileModel, TransactionModel, PlaidAccountModel, AccountTypes, CredentialsModel, CredentialTypes } from './models';
+import { GemResponseType } from './shared';
 export declare namespace SDK {
     namespace Models {
         class Document extends DocumentModel {
@@ -21,37 +22,42 @@ export declare namespace SDK {
     class Gem {
         private client;
         constructor(config: any);
-        createUser: (emailAddress?: string) => Promise<any>;
-        listUsers: () => Promise<any>;
-        getUser: (userId: string) => Promise<any>;
-        deleteUser: (userId: string) => Promise<any>;
-        listProfiles: (userId: string) => Promise<any>;
-        getProfile: (profileId: string) => Promise<any>;
-        deleteProfile: (profileId: string) => Promise<any>;
-        updateProfile: (profileId: string, profile: ProfileModel) => Promise<any>;
-        createProfile: (userId: string, profile: ProfileModel) => Promise<any>;
-        createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<any>;
-        listProfileDocuments: (profileId: string) => Promise<any>;
-        createProfileDocument: (profileId: string, document: DocumentModel) => Promise<any>;
-        deleteDocument: (documentId: string) => Promise<any>;
-        updateDocument: (documentId: string, document: DocumentModel) => Promise<any>;
-        listInstitutions: () => Promise<any>;
-        getInstitution: (institutionId: string) => Promise<any>;
-        createInstitutionUser: (profileId: string, institutionId: string) => Promise<any>;
-        updateInstitutionUser: (institutionUserId: string, profileId: string) => Promise<any>;
-        getInstitutionUser: (institutionUserId: string) => Promise<any>;
-        createAccount: (account: PlaidAccountModel) => Promise<any>;
-        getAccount: (accountId: string) => Promise<any>;
-        listAccounts: (connectionId: string, userId?: string) => Promise<any>;
-        createTransaction: (transactionParams: TransactionModel) => Promise<any>;
-        confirmTransaction: (transactionId: string) => Promise<any>;
-        listTransactions: (page?: number) => Promise<any>;
-        getTransaction: (transactionId: string) => Promise<any>;
-        createCredentials: (credentialParams: CredentialsModel) => Promise<any>;
-        createConnection: (user_id: string, credential_id: string) => Promise<any>;
-        updateConnection: (connectionId: string, credentialId: string) => Promise<any>;
-        listConnections: (userId: string) => Promise<any>;
-        getConnection: (connectionId: string) => Promise<any>;
-        deleteConnection: (connectionId: string) => Promise<any>;
+        createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
+        createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;
+        listUsers: () => Promise<GemResponseType.IUser[]>;
+        getUser: (userId: string) => Promise<GemResponseType.IUser>;
+        deleteUser: (userId: string) => Promise<GemResponseType.IBaseMessage>;
+        listProfiles: (userId: string) => Promise<GemResponseType.IProfile[]>;
+        getProfile: (profileId: string) => Promise<GemResponseType.IProfile>;
+        deleteProfile: (profileId: string) => Promise<GemResponseType.IBaseMessage>;
+        updateProfile: (profileId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
+        createProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
+        createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
+        listProfileDocuments: (profileId: string) => Promise<GemResponseType.IDocument[]>;
+        createProfileDocument: (profileId: string, document: DocumentModel) => Promise<GemResponseType.IDocument>;
+        deleteDocument: (documentId: string) => Promise<GemResponseType.IBaseMessage>;
+        updateDocument: (documentId: string, document: DocumentModel) => Promise<GemResponseType.IDocument>;
+        listInstitutions: () => Promise<GemResponseType.IInstitution[]>;
+        getInstitution: (institutionId: string) => Promise<GemResponseType.IInstitution>;
+        createInstitutionUser: (profileId: string, institutionId: string) => Promise<GemResponseType.IInstitutionUser>;
+        updateInstitutionUser: (institutionUserId: string, profileId: string) => Promise<GemResponseType.IInstitutionUser>;
+        getInstitutionUser: (institutionUserId: string) => Promise<GemResponseType.IInstitutionUser>;
+        createAccount: (account: PlaidAccountModel) => Promise<GemResponseType.IAccount>;
+        getAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
+        listAccounts: (connectionId: string, userId?: string) => Promise<GemResponseType.IAccount[]>;
+        createTransaction: (transactionParams: TransactionModel) => Promise<GemResponseType.ITransaction>;
+        confirmTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
+        listTransactions: (page?: number) => Promise<GemResponseType.ITransaction[]>;
+        getTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
+        createCredentials: (credentialParams: CredentialsModel) => Promise<GemResponseType.ICreatedCredential>;
+        createConnection: (user_id: string, credential_id: string) => Promise<GemResponseType.IConnection>;
+        updateConnection: (connectionId: string, credentialId: string) => Promise<GemResponseType.IConnection>;
+        listConnections: (userId: string) => Promise<GemResponseType.IConnection[]>;
+        getConnection: (connectionId: string) => Promise<GemResponseType.IConnection>;
+        deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;
+        findOrCreateUser: (email: string) => Promise<GemResponseType.IUser>;
+        emailOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;
+        verifyOTP: (userId: string, otp: string) => Promise<GemResponseType.IVerifyOTP>;
+        checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;
     }
 }

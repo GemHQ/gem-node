@@ -133,6 +133,12 @@ var SDK;
                     }
                 });
             }); };
+            this.createUserConsent = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.put(shared_1.Endpoints.users + "/" + userId + "/consent")];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
             this.listUsers = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.users)];
@@ -328,9 +334,7 @@ var SDK;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.post("" + shared_1.Endpoints.credentials, credentialParams)];
-                        case 1:
-                            _a.sent();
-                            return [2];
+                        case 1: return [2, _a.sent()];
                     }
                 });
             }); };
@@ -374,6 +378,35 @@ var SDK;
             this.deleteConnection = function (connectionId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.delete(shared_1.Endpoints.connections + "/" + connectionId)];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.findOrCreateUser = function (email) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.post("" + shared_1.Endpoints.users, { email: email })];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.emailOTP = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.post(shared_1.Endpoints.otp + "/email_otp", { user_id: userId })];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.verifyOTP = function (userId, otp) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.post(shared_1.Endpoints.otp + "/verify_otp", {
+                                otp: otp,
+                                user_id: userId,
+                            })];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
+            this.checkSessionValidity = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.post(shared_1.Endpoints.session_validity)];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };

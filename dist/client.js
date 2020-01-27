@@ -60,7 +60,7 @@ var Client = (function () {
         this.IS_NODE = Boolean(globalThis['v8']);
         if (!config.secretKey && this.IS_NODE)
             throw new Error('Gem API secret is missing');
-        if (!config.apiKey && this.IS_NODE)
+        if (!config.apiKey)
             throw new Error('Gem API key is missing');
         this.config.options = this.config.options || {};
     }
@@ -136,10 +136,10 @@ var Client = (function () {
             reqOpts.data = params;
         if (!reqOpts.data || !Object.keys(reqOpts.data).length)
             delete reqOpts.data;
+        reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
         if (this.IS_NODE) {
             var ts = this.getTimeStamp();
             reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
-            reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
             reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);
         }
         shared_1.dbg('Request Options:', reqOpts);

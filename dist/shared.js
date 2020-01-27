@@ -14,4 +14,7 @@ var Endpoints;
     Endpoints["transactions"] = "/transactions";
     Endpoints["credentials"] = "/credentials";
     Endpoints["connections"] = "/connections";
+    Endpoints["auth"] = "/auth";
+    Endpoints["otp"] = "/auth/otp";
+    Endpoints["session_validity"] = "/authenticated";
 })(Endpoints = exports.Endpoints || (exports.Endpoints = {}));

@@ -13,7 +13,7 @@ export class Client {
   IS_NODE = true;
 
   constructor(private config: any) {
-    this.IS_NODE = !globalThis['v8'];
+    this.IS_NODE = Boolean(globalThis['v8']);
 
     if (!config.secretKey && this.IS_NODE)
       throw new Error('Gem API secret is missing');

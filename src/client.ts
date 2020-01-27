@@ -10,9 +10,10 @@ import * as qs from 'qs';
  * This client is used by the SDK namespace for easier HTTP request construction.
  */
 export class Client {
-  IS_NODE = typeof global !== 'undefined';
+  IS_NODE = true;
 
   constructor(private config: any) {
+    this.IS_NODE = typeof global !== 'undefined';
     if (!config.secretKey && this.IS_NODE)
       throw new Error('Gem API secret is missing');
     if (!config.apiKey && this.IS_NODE)

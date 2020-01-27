@@ -1,17 +1,22 @@
 import * as crypto from 'crypto';
 import { dbg, GEM_BASE_URL } from './shared';
-import * as request from 'request';
 import * as url from 'url';
 import GemAPIError from './errors/gem_api';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import * as qs from 'qs';
 
 /**
  * The base HTTP client class for the Gem API.
  * This client is used by the SDK namespace for easier HTTP request construction.
  */
 export class Client {
+  IS_NODE = typeof global !== 'undefined';
+
   constructor(private config: any) {
-    if (!config.secretKey) throw new Error('Gem API secret is missing');
-    if (!config.apiKey) throw new Error('Gem API key is missing');
+    if (!config.secretKey && this.IS_NODE)
+      throw new Error('Gem API secret is missing');
+    if (!config.apiKey && this.IS_NODE)
+      throw new Error('Gem API key is missing');
     this.config.options = this.config.options || {};
   }
 
@@ -42,7 +47,7 @@ export class Client {
    * @param params Any request parameters.
    * @param options Options passed down from the high level request.
    */
-  private request(
+  private async request(
     method: string,
     path: string,
     params: any = {},
@@ -52,14 +57,23 @@ export class Client {
 
     const reqOpts = this.createRequestOptions(method, path, params, options);
 
-    return new Promise((resolve, reject) => {
-      request(reqOpts, (err, res) => {
-        if (err) throw err;
-        else if (res.statusCode >= 200 && res.statusCode < 300)
-          resolve(res.body || {});
-        else reject(new GemAPIError({ ...res.body, status: res.statusCode }));
-      });
-    });
+    try {
+      const { data, status }: AxiosResponse = await axios.request(reqOpts);
+      if (status >= 200 && status < 300) {
+        return data || {};
+      } else {
+        throw new GemAPIError({ ...data, status });
+      }
+    } catch (e) {
+      const res = e.response;
+      if (res) {
+        const { data, status } = res;
+        throw new GemAPIError({ ...data, status });
+      } else {
+        // Non axios exception
+        throw e;
+      }
+    }
   }
 
   /**
@@ -72,11 +86,9 @@ export class Client {
   private createRequestOptions(
     method: string,
     path: string,
-    params: any,
-    options: any
-  ): request.UrlOptions & request.CoreOptions {
-    options = options || {};
-
+    params: any = {},
+    options: any = {}
+  ): any {
     const parsedUrl = url.parse(
       url.resolve(this.config.baseUrl || GEM_BASE_URL, path),
       true
@@ -87,7 +99,7 @@ export class Client {
       !(options.headers || {}).hasOwnProperty('Content-Type') ||
       options.headers['Content-Type'] == 'application/json';
 
-    const reqOpts: request.UrlOptions & request.CoreOptions = {
+    const reqOpts: AxiosRequestConfig & { qs: object } = {
       ...this.config.options,
       ...options,
       url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, // no querystring here!
@@ -101,17 +113,24 @@ export class Client {
         ...options.qs,
       },
       json: json,
+      data: params,
     };
 
+    reqOpts.url = Object.keys(reqOpts.qs).length
+      ? reqOpts.url + '?' + qs.stringify(reqOpts.qs)
+      : reqOpts.url;
+
     if (reqOpts.method == 'GET') reqOpts.qs = Object.assign(reqOpts.qs, params);
-    else reqOpts.body = params;
+    else reqOpts.data = params;
 
-    if (!reqOpts.body || !Object.keys(reqOpts.body).length) delete reqOpts.body;
+    if (!reqOpts.data || !Object.keys(reqOpts.data).length) delete reqOpts.data;
 
-    const ts = this.getTimeStamp();
-    reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
-    reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
-    reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);
+    if (this.IS_NODE) {
+      const ts = this.getTimeStamp();
+      reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
+      reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
+      reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);
+    }
 
     dbg('Request Options:', reqOpts);
     return reqOpts;
@@ -125,6 +144,9 @@ export class Client {
     return Math.floor(Date.now() / 1000);
   }
 
+  /**
+   * SERVER HELPERS
+   */
   /**
    * Sign a request to Gem's API.
    * @param timeStamp Unix timestamp in seconds.

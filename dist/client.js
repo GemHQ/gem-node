@@ -56,7 +56,8 @@ var qs = require("qs");
 var Client = (function () {
     function Client(config) {
         this.config = config;
-        this.IS_NODE = typeof global !== 'undefined';
+        this.IS_NODE = true;
+        this.IS_NODE = !globalThis['v8'];
         if (!config.secretKey && this.IS_NODE)
             throw new Error('Gem API secret is missing');
         if (!config.apiKey && this.IS_NODE)

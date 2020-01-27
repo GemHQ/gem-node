@@ -9,7 +9,7 @@ import {
   CredentialTypes,
 } from './models';
 import { Client } from './client';
-import { Endpoints } from './shared';
+import { Endpoints, GemResponseType } from './shared';
 
 export namespace SDK {
   export namespace Models {
@@ -41,36 +41,49 @@ export namespace SDK {
     /**
      * USERS
      */
-    createUser = async (emailAddress?: string): Promise<any> =>
+    createUser = async (
+      emailAddress?: string
+    ): Promise<GemResponseType.IUser> =>
       await this.client.post(Endpoints.users, {
         ...(emailAddress && { email: emailAddress }),
       });
 
-    listUsers = async (): Promise<any> =>
+    createUserConsent = async (
+      userId: string
+    ): Promise<GemResponseType.IBaseMessage> =>
+      await this.client.put(`${Endpoints.users}/${userId}/consent`);
+
+    listUsers = async (): Promise<GemResponseType.IUser[]> =>
       await this.client.get(Endpoints.users);
 
-    getUser = async (userId: string): Promise<any> =>
+    getUser = async (userId: string): Promise<GemResponseType.IUser> =>
       await this.client.get(`${Endpoints.users}/${userId}`);
 
-    deleteUser = async (userId: string): Promise<any> =>
+    deleteUser = async (
+      userId: string
+    ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.users}/${userId}`);
 
     /**
      * PROFILES
      */
-    listProfiles = async (userId: string): Promise<any> =>
+    listProfiles = async (
+      userId: string
+    ): Promise<GemResponseType.IProfile[]> =>
       await this.client.get(Endpoints.profiles, { user_id: userId });
 
-    getProfile = async (profileId: string): Promise<any> =>
+    getProfile = async (profileId: string): Promise<GemResponseType.IProfile> =>
       await this.client.get(`${Endpoints.profiles}/${profileId}`);
 
-    deleteProfile = async (profileId: string): Promise<any> =>
+    deleteProfile = async (
+      profileId: string
+    ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.profiles}/${profileId}`);
 
     updateProfile = async (
       profileId: string,
       profile: ProfileModel
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IProfile> =>
       await this.client.put(
         `${Endpoints.profiles}/${profileId}`,
         {},
@@ -82,7 +95,7 @@ export namespace SDK {
     createProfile = async (
       userId: string,
       profile: ProfileModel
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IProfile> =>
       await this.client.post(Endpoints.profiles, profile, {
         qs: { user_id: userId },
       });
@@ -90,7 +103,7 @@ export namespace SDK {
     createTemporaryProfile = async (
       userId: string,
       profile: ProfileModel
-    ): Promise<any> => {
+    ): Promise<GemResponseType.IProfile> => {
       const url = `${Endpoints.profiles}/temporary`;
       return await this.client.post(url, profile, {
         qs: { user_id: userId },
@@ -100,13 +113,15 @@ export namespace SDK {
     /**
      * DOCUMENTS
      */
-    listProfileDocuments = async (profileId: string): Promise<any> =>
+    listProfileDocuments = async (
+      profileId: string
+    ): Promise<GemResponseType.IDocument[]> =>
       await this.client.get(`${Endpoints.profiles}/${profileId}/documents`);
 
     createProfileDocument = async (
       profileId: string,
       document: DocumentModel
-    ): Promise<any> => {
+    ): Promise<GemResponseType.IDocument> => {
       const url = `${Endpoints.profiles}/${profileId}/documents`;
       return await this.client.post(
         url,
@@ -117,13 +132,15 @@ export namespace SDK {
       );
     };
 
-    deleteDocument = async (documentId: string): Promise<any> =>
+    deleteDocument = async (
+      documentId: string
+    ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.documents}/${documentId}`);
 
     updateDocument = async (
       documentId: string,
       document: DocumentModel
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IDocument> =>
       await this.client.put(
         `${Endpoints.documents}/${documentId}`,
         {},
@@ -136,10 +153,12 @@ export namespace SDK {
      * INSTITUTIONS
      */
 
-    listInstitutions = async (): Promise<any> =>
+    listInstitutions = async (): Promise<GemResponseType.IInstitution[]> =>
       await this.client.get(Endpoints.institutions);
 
-    getInstitution = async (institutionId: string): Promise<any> =>
+    getInstitution = async (
+      institutionId: string
+    ): Promise<GemResponseType.IInstitution> =>
       await this.client.get(`${Endpoints.institutions}/${institutionId}`);
 
     /**
@@ -148,7 +167,7 @@ export namespace SDK {
     createInstitutionUser = async (
       profileId: string,
       institutionId: string
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IInstitutionUser> =>
       await this.client.post(Endpoints.institution_users, {
         profile_id: profileId,
         institution_id: institutionId,
@@ -157,7 +176,7 @@ export namespace SDK {
     updateInstitutionUser = async (
       institutionUserId: string,
       profileId: string
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IInstitutionUser> =>
       await this.client.put(
         `${Endpoints.institution_users}/${institutionUserId}`,
         {
@@ -165,7 +184,9 @@ export namespace SDK {
         }
       );
 
-    getInstitutionUser = async (institutionUserId: string): Promise<any> =>
+    getInstitutionUser = async (
+      institutionUserId: string
+    ): Promise<GemResponseType.IInstitutionUser> =>
       await this.client.get(
         `${Endpoints.institution_users}/${institutionUserId}`
       );
@@ -174,16 +195,18 @@ export namespace SDK {
      * ACCOUNTS
      */
 
-    createAccount = async (account: PlaidAccountModel): Promise<any> =>
+    createAccount = async (
+      account: PlaidAccountModel
+    ): Promise<GemResponseType.IAccount> =>
       await this.client.post(`${Endpoints.accounts}`, account);
 
-    getAccount = async (accountId: string): Promise<any> =>
+    getAccount = async (accountId: string): Promise<GemResponseType.IAccount> =>
       await this.client.get(`${Endpoints.accounts}/${accountId}`);
 
     listAccounts = async (
       connectionId: string,
       userId?: string
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IAccount[]> =>
       await this.client.get(`${Endpoints.accounts}`, {
         connection_id: connectionId,
         ...(userId && { user_id: userId }),
@@ -195,18 +218,24 @@ export namespace SDK {
 
     createTransaction = async (
       transactionParams: TransactionModel
-    ): Promise<any> =>
+    ): Promise<GemResponseType.ITransaction> =>
       await this.client.post(`${Endpoints.transactions}`, transactionParams);
 
-    confirmTransaction = async (transactionId: string): Promise<any> =>
+    confirmTransaction = async (
+      transactionId: string
+    ): Promise<GemResponseType.ITransaction> =>
       await this.client.post(`${Endpoints.transactions}/${transactionId}`);
 
-    listTransactions = async (page?: number): Promise<any> =>
+    listTransactions = async (
+      page?: number
+    ): Promise<GemResponseType.ITransaction[]> =>
       await this.client.get(`${Endpoints.transactions}`, {
         ...(page && { page }),
       });
 
-    getTransaction = async (transactionId: string): Promise<any> =>
+    getTransaction = async (
+      transactionId: string
+    ): Promise<GemResponseType.ITransaction> =>
       await this.client.get(`${Endpoints.transactions}/${transactionId}`);
 
     /**
@@ -215,8 +244,11 @@ export namespace SDK {
 
     createCredentials = async (
       credentialParams: CredentialsModel
-    ): Promise<any> => {
-      await this.client.post(`${Endpoints.credentials}`, credentialParams);
+    ): Promise<GemResponseType.ICreatedCredential> => {
+      return await this.client.post(
+        `${Endpoints.credentials}`,
+        credentialParams
+      );
     };
 
     /**
@@ -226,7 +258,7 @@ export namespace SDK {
     createConnection = async (
       user_id: string,
       credential_id: string
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IConnection> =>
       await this.client.post(Endpoints.connections, {
         credential_id,
         user_id,
@@ -235,20 +267,48 @@ export namespace SDK {
     updateConnection = async (
       connectionId: string,
       credentialId: string
-    ): Promise<any> =>
+    ): Promise<GemResponseType.IConnection> =>
       await this.client.put(`${Endpoints.connections}/${connectionId}`, {
         credential_id: credentialId,
       });
 
-    listConnections = async (userId: string): Promise<any> =>
+    listConnections = async (
+      userId: string
+    ): Promise<GemResponseType.IConnection[]> =>
       await this.client.get(Endpoints.connections, {
         qs: { user_id: userId },
       });
 
-    getConnection = async (connectionId: string): Promise<any> =>
+    getConnection = async (
+      connectionId: string
+    ): Promise<GemResponseType.IConnection> =>
       await this.client.get(`${Endpoints.connections}/${connectionId}`);
 
-    deleteConnection = async (connectionId: string): Promise<any> =>
+    deleteConnection = async (
+      connectionId: string
+    ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.connections}/${connectionId}`);
+
+    /**
+     * BROWSER AUTH
+     */
+    findOrCreateUser = async (email: string): Promise<GemResponseType.IUser> =>
+      await this.client.post(`${Endpoints.users}`, { email });
+
+    emailOTP = async (userId: string): Promise<GemResponseType.IBaseMessage> =>
+      await this.client.post(`${Endpoints.otp}/email_otp`, { user_id: userId });
+
+    verifyOTP = async (
+      userId: string,
+      otp: string
+    ): Promise<GemResponseType.IVerifyOTP> =>
+      await this.client.post(`${Endpoints.otp}/verify_otp`, {
+        otp,
+        user_id: userId,
+      });
+
+    checkSessionValidity = async (): Promise<
+      GemResponseType.ISessionValidity
+    > => await this.client.post(Endpoints.session_validity);
   }
 }

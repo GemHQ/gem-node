@@ -17,8 +17,7 @@ export class Client {
 
     if (!config.secretKey && this.IS_NODE)
       throw new Error('Gem API secret is missing');
-    if (!config.apiKey && this.IS_NODE)
-      throw new Error('Gem API key is missing');
+    if (!config.apiKey) throw new Error('Gem API key is missing');
     this.config.options = this.config.options || {};
   }
 
@@ -127,10 +126,11 @@ export class Client {
 
     if (!reqOpts.data || !Object.keys(reqOpts.data).length) delete reqOpts.data;
 
+    reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
+
     if (this.IS_NODE) {
       const ts = this.getTimeStamp();
       reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
-      reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
       reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);
     }
 

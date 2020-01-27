@@ -1,11 +1,12 @@
 {
   "name": "@gem.co/api",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "Node.js client library for the Gem API.",
   "main": "./dist/gem.js",
   "scripts": {
     "build": "bin/build",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "publish:dev": "npm publish --tag dev --access public"
   },
   "repository": {
     "type": "git",

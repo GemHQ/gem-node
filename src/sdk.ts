@@ -290,6 +290,56 @@ export namespace SDK {
       await this.client.delete(`${Endpoints.connections}/${connectionId}`);
 
     /**
+     * ASSETS
+     */
+
+    listAssets = async (
+      category: 'cryptocurrency' | 'fiat' = 'cryptocurrency'
+    ): Promise<GemResponseType.IAsset[]> =>
+      await this.client.get(`${Endpoints.assets}`, { category });
+
+    getAsset = async (
+      assetId: string,
+      source?: string
+    ): Promise<GemResponseType.IAsset> =>
+      await this.client.get(
+        `${Endpoints.assets}/${assetId}${source ? '/' + source : ''}`
+      );
+
+    /**
+     * PRICES
+     */
+
+    listAssetPrices = async ({
+      asset_ids,
+      currency_id,
+      source,
+    }: {
+      asset_ids?: string;
+      currency_id?: string;
+      source?: string;
+    }): Promise<GemResponseType.IPrice[]> =>
+      await this.client.get(Endpoints.prices, {
+        currency_id,
+        asset_ids,
+        source,
+      });
+
+    getAssetPrice = async ({
+      asset_id,
+      currency_id,
+      source,
+    }: {
+      asset_id: string;
+      currency_id?: string;
+      source?: string;
+    }): Promise<GemResponseType.IPrice> =>
+      await this.client.get(`${Endpoints.assets}/${asset_id}`, {
+        currency_id,
+        source,
+      });
+
+    /**
      * BROWSER AUTH
      */
     findOrCreateUser = async (email: string): Promise<GemResponseType.IUser> =>

@@ -32,7 +32,7 @@ export namespace SDK {
    * convenience methods for possible Gem API resources.
    */
   export class Gem {
-    private client: Client = null;
+    client: Client = null;
 
     constructor(config: any) {
       this.client = new Client(config);

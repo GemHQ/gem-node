@@ -56,7 +56,7 @@ var qs = require("qs");
 var Client = (function () {
     function Client(config) {
         this.IS_NODE = true;
-        this.config = undefined;
+        this.config = {};
         this.config = config;
         this.IS_NODE = Boolean(globalThis['v8']);
         if (!config.secretKey && this.IS_NODE)

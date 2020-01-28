@@ -1,7 +1,15 @@
+import { AxiosRequestConfig } from 'axios';
+declare type ClientConfigType = {
+    apiKey?: string;
+    secretKey?: string;
+    baseUrl?: string;
+    options?: AxiosRequestConfig;
+    [k: string]: any;
+};
 export declare class Client {
     IS_NODE: boolean;
-    config: any;
-    constructor(config: any);
+    config: ClientConfigType;
+    constructor(config: ClientConfigType);
     get(path: string, params?: any, options?: any): Promise<any>;
     post(path: string, body?: any, options?: any): Promise<any>;
     put(path: string, body?: any, options?: any): Promise<any>;
@@ -12,3 +20,4 @@ export declare class Client {
     private getTimeStamp;
     private createSignature;
 }
+export {};

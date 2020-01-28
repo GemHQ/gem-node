@@ -1,4 +1,5 @@
 import { FileModel, DocumentModel, ProfileModel, TransactionModel, PlaidAccountModel, AccountTypes, CredentialsModel, CredentialTypes } from './models';
+import { Client } from './client';
 import { GemResponseType } from './shared';
 export declare namespace SDK {
     namespace Models {
@@ -20,7 +21,7 @@ export declare namespace SDK {
         const NewCredentialTypes: typeof CredentialTypes;
     }
     class Gem {
-        private client;
+        client: Client;
         constructor(config: any);
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;

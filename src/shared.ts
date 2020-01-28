@@ -23,12 +23,30 @@ export enum Endpoints {
   transactions = '/transactions',
   credentials = '/credentials',
   connections = '/connections',
+  assets = '/gem_assets',
+  prices = '/prices',
   auth = '/auth',
   otp = '/auth/otp',
   session_validity = '/authenticated',
 }
 
 export namespace GemResponseType {
+  export interface IAsset {
+    id: string;
+    created_at: string;
+    updated_at: string;
+    name: string;
+    ticker: string;
+  }
+
+  export interface IPrice {
+    timestamp: string;
+    asset_id: string;
+    currency_id: string;
+    price: number;
+    institution_id: string;
+  }
+
   export interface ICreatedCredential {
     credential_id: string;
     credential_expires_at: string;

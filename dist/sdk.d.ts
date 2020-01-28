@@ -56,6 +56,18 @@ export declare namespace SDK {
         listConnections: (userId: string) => Promise<GemResponseType.IConnection[]>;
         getConnection: (connectionId: string) => Promise<GemResponseType.IConnection>;
         deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;
+        listAssets: (category?: "cryptocurrency" | "fiat") => Promise<GemResponseType.IAsset[]>;
+        getAsset: (assetId: string, source?: string) => Promise<GemResponseType.IAsset>;
+        listAssetPrices: ({ asset_ids, currency_id, source, }: {
+            asset_ids?: string;
+            currency_id?: string;
+            source?: string;
+        }) => Promise<GemResponseType.IPrice[]>;
+        getAssetPrice: ({ asset_id, currency_id, source, }: {
+            asset_id: string;
+            currency_id?: string;
+            source?: string;
+        }) => Promise<GemResponseType.IPrice>;
         findOrCreateUser: (email: string) => Promise<GemResponseType.IUser>;
         emailOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;
         verifyOTP: (userId: string, otpCode: string) => Promise<GemResponseType.IVerifyOTP>;

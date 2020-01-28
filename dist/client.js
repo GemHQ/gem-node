@@ -128,9 +128,6 @@ var Client = (function () {
             !(options.headers || {}).hasOwnProperty('Content-Type') ||
             options.headers['Content-Type'] == 'application/json';
         var reqOpts = __assign(__assign(__assign({}, this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), json: json, data: params });
-        reqOpts.url = Object.keys(reqOpts.qs).length
-            ? reqOpts.url + '?' + qs.stringify(reqOpts.qs)
-            : reqOpts.url;
         if (reqOpts.method == 'GET')
             reqOpts.qs = Object.assign(reqOpts.qs, params);
         else
@@ -143,6 +140,9 @@ var Client = (function () {
             reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
             reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);
         }
+        reqOpts.url = (Object.keys(reqOpts.qs).length > 0
+            ? reqOpts.url + '?' + qs.stringify(reqOpts.qs)
+            : reqOpts.url).replace(/\?$/, '');
         shared_1.dbg('Request Options:', reqOpts);
         return reqOpts;
     };

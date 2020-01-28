@@ -381,6 +381,52 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
+            this.listAssets = function (category) {
+                if (category === void 0) { category = 'cryptocurrency'; }
+                return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.get("" + shared_1.Endpoints.assets, { category: category })];
+                        case 1: return [2, _a.sent()];
+                    }
+                }); });
+            };
+            this.getAsset = function (assetId, source) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.get(shared_1.Endpoints.assets + "/" + assetId + (source ? '/' + source : ''))];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
+            this.listAssetPrices = function (_a) {
+                var asset_ids = _a.asset_ids, currency_id = _a.currency_id, source = _a.source;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4, this.client.get(shared_1.Endpoints.prices, {
+                                    currency_id: currency_id,
+                                    asset_ids: asset_ids,
+                                    source: source,
+                                })];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
+                });
+            };
+            this.getAssetPrice = function (_a) {
+                var asset_id = _a.asset_id, currency_id = _a.currency_id, source = _a.source;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4, this.client.get(shared_1.Endpoints.assets + "/" + asset_id, {
+                                    currency_id: currency_id,
+                                    source: source,
+                                })];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
+                });
+            };
             this.findOrCreateUser = function (email) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.post("" + shared_1.Endpoints.users, { email: email })];

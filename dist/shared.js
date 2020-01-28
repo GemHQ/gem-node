@@ -14,6 +14,8 @@ var Endpoints;
     Endpoints["transactions"] = "/transactions";
     Endpoints["credentials"] = "/credentials";
     Endpoints["connections"] = "/connections";
+    Endpoints["assets"] = "/gem_assets";
+    Endpoints["prices"] = "/prices";
     Endpoints["auth"] = "/auth";
     Endpoints["otp"] = "/auth/otp";
     Endpoints["session_validity"] = "/authenticated";

@@ -300,10 +300,10 @@ export namespace SDK {
 
     verifyOTP = async (
       userId: string,
-      otp: string
+      otpCode: string
     ): Promise<GemResponseType.IVerifyOTP> =>
       await this.client.post(`${Endpoints.otp}/verify_otp`, {
-        otp,
+        otp_code: otpCode,
         user_id: userId,
       });
 

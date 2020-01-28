@@ -127,10 +127,6 @@ export class Client {
       data: params,
     };
 
-    reqOpts.url = Object.keys(reqOpts.qs).length
-      ? reqOpts.url + '?' + qs.stringify(reqOpts.qs)
-      : reqOpts.url;
-
     if (reqOpts.method == 'GET') reqOpts.qs = Object.assign(reqOpts.qs, params);
     else reqOpts.data = params;
 
@@ -143,6 +139,11 @@ export class Client {
       reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
       reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);
     }
+
+    reqOpts.url = (Object.keys(reqOpts.qs).length > 0
+      ? reqOpts.url + '?' + qs.stringify(reqOpts.qs)
+      : reqOpts.url
+    ).replace(/\?$/, '');
 
     dbg('Request Options:', reqOpts);
     return reqOpts;

@@ -5,15 +5,23 @@ import GemAPIError from './errors/gem_api';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as qs from 'qs';
 
+type ClientConfigType = {
+  apiKey?: string;
+  secretKey?: string;
+  baseUrl?: string;
+  options?: AxiosRequestConfig;
+  [k: string]: any;
+};
+
 /**
  * The base HTTP client class for the Gem API.
  * This client is used by the SDK namespace for easier HTTP request construction.
  */
 export class Client {
   IS_NODE = true;
-  config: any = undefined;
+  config: ClientConfigType = {};
 
-  constructor(config: any) {
+  constructor(config: ClientConfigType) {
     this.config = config;
     this.IS_NODE = Boolean(globalThis['v8']);
 

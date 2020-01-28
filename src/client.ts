@@ -11,8 +11,10 @@ import * as qs from 'qs';
  */
 export class Client {
   IS_NODE = true;
+  config: any = undefined;
 
-  constructor(private config: any) {
+  constructor(config: any) {
+    this.config = config;
     this.IS_NODE = Boolean(globalThis['v8']);
 
     if (!config.secretKey && this.IS_NODE)

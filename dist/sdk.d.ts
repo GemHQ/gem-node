@@ -57,7 +57,7 @@ export declare namespace SDK {
         deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;
         findOrCreateUser: (email: string) => Promise<GemResponseType.IUser>;
         emailOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;
-        verifyOTP: (userId: string, otp: string) => Promise<GemResponseType.IVerifyOTP>;
+        verifyOTP: (userId: string, otpCode: string) => Promise<GemResponseType.IVerifyOTP>;
         checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;
     }
 }

@@ -393,11 +393,11 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
-            this.verifyOTP = function (userId, otp) { return __awaiter(_this, void 0, void 0, function () {
+            this.verifyOTP = function (userId, otpCode) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.post(shared_1.Endpoints.otp + "/verify_otp", {
-                                otp: otp,
+                                otp_code: otpCode,
                                 user_id: userId,
                             })];
                         case 1: return [2, _a.sent()];

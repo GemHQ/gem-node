@@ -1,6 +1,6 @@
 export declare class Client {
-    private config;
     IS_NODE: boolean;
+    config: any;
     constructor(config: any);
     get(path: string, params?: any, options?: any): Promise<any>;
     post(path: string, body?: any, options?: any): Promise<any>;

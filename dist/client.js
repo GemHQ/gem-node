@@ -55,8 +55,9 @@ var axios_1 = require("axios");
 var qs = require("qs");
 var Client = (function () {
     function Client(config) {
-        this.config = config;
         this.IS_NODE = true;
+        this.config = undefined;
+        this.config = config;
         this.IS_NODE = Boolean(globalThis['v8']);
         if (!config.secretKey && this.IS_NODE)
             throw new Error('Gem API secret is missing');

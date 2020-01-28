@@ -94,9 +94,12 @@ export namespace GemResponseType {
   }
 
   export interface IVerifyOTP {
-    id: string;
-    created_at: string;
-    updated_at: string;
+    user_id: string;
+    application_id: string;
+    read_access_expires_at: number;
+    execute_access_expires_at: number;
+    csrf: string;
+    access?: string;
     verified: boolean;
     consented: boolean;
   }

@@ -191,6 +191,15 @@ export namespace SDK {
         `${Endpoints.institution_users}/${institutionUserId}`
       );
 
+    listInstitutionUsers = async (
+      user_id: string,
+      profile_id: string
+    ): Promise<GemResponseType.IInstitutionUser> =>
+      await this.client.get(`${Endpoints.institution_users}`, {
+        user_id,
+        profile_id,
+      });
+
     /**
      * ACCOUNTS
      */

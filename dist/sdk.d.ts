@@ -43,7 +43,7 @@ export declare namespace SDK {
         createInstitutionUser: (profileId: string, institutionId: string) => Promise<GemResponseType.IInstitutionUser>;
         updateInstitutionUser: (institutionUserId: string, profileId: string) => Promise<GemResponseType.IInstitutionUser>;
         getInstitutionUser: (institutionUserId: string) => Promise<GemResponseType.IInstitutionUser>;
-        listInstitutionUsers: (user_id: string, profile_id: string) => Promise<GemResponseType.IInstitutionUser>;
+        listInstitutionUsers: (user_id: string, profile_id: string) => Promise<GemResponseType.IInstitutionUser[]>;
         createAccount: (account: PlaidAccountModel) => Promise<GemResponseType.IAccount>;
         getAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
         listAccounts: (connectionId: string, userId?: string) => Promise<GemResponseType.IAccount[]>;

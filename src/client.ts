@@ -1,5 +1,10 @@
 import * as crypto from 'crypto';
-import { dbg, GEM_BASE_URL } from './shared';
+import {
+  dbg,
+  GEM_BASE_URL,
+  GEM_CSRF_COOKIE_NAME,
+  GEM_CSRF_HEADER_NAME,
+} from './shared';
 import * as url from 'url';
 import GemAPIError from './errors/gem_api';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
@@ -22,13 +27,18 @@ export class Client {
   config: ClientConfigType = {};
 
   constructor(config: ClientConfigType) {
+    if (!config.apiKey) throw new Error('Gem SDK API key is missing');
+
     this.config = config;
     this.IS_NODE = Boolean(globalThis['v8']);
-
-    if (!config.secretKey && this.IS_NODE)
-      throw new Error('Gem API secret is missing');
-    if (!config.apiKey) throw new Error('Gem API key is missing');
     this.config.options = this.config.options || {};
+
+    // Runtime environment checks
+    if (this.IS_NODE) {
+      if (!config.secretKey) {
+        throw new Error('Gem SDK API secret is missing');
+      }
+    }
   }
 
   public get(path: string, params?: any, options?: any): Promise<any> {
@@ -111,6 +121,11 @@ export class Client {
       options.headers['Content-Type'] == 'application/json';
 
     const reqOpts: AxiosRequestConfig & { qs: object } = {
+      // NOTE: these will be overridden by config.options and options if available.
+      ...(!this.IS_NODE && {
+        xsrfCookieName: GEM_CSRF_COOKIE_NAME,
+        xsrfHeaderName: GEM_CSRF_HEADER_NAME,
+      }),
       ...this.config.options,
       ...options,
       url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, // no querystring here!

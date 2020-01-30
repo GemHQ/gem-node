@@ -62,10 +62,11 @@ export namespace GemResponseType {
     credential_expires_at: string;
   }
   export interface ISessionValidity {
-    user_id: string;
+    authenticated: boolean;
     application_id: string;
-    read_access_expires_at: string;
-    execute_access_expires_at: string;
+    user_id?: string;
+    read_access_expires_at?: string;
+    execute_access_expires_at?: string;
   }
 
   export interface IConnection {

@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var debug = require("debug");
 exports.dbg = debug('gem:client');
 exports.GEM_BASE_URL = 'https://vgs-sandbox.gem.co';
+exports.GEM_CSRF_COOKIE_NAME = 'gem_user_csrf';
+exports.GEM_CSRF_HEADER_NAME = 'X-Gem-User-Csrf-Token';
 var Endpoints;
 (function (Endpoints) {
     Endpoints["users"] = "/users";

@@ -1,6 +1,8 @@
 import * as debug from 'debug';
 export declare const dbg: debug.Debugger;
 export declare const GEM_BASE_URL = "https://vgs-sandbox.gem.co";
+export declare const GEM_CSRF_COOKIE_NAME = "gem_user_csrf";
+export declare const GEM_CSRF_HEADER_NAME = "X-Gem-User-Csrf-Token";
 export declare enum Endpoints {
     users = "/users",
     profiles = "/profiles",

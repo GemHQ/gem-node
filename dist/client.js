@@ -57,13 +57,16 @@ var Client = (function () {
     function Client(config) {
         this.IS_NODE = true;
         this.config = {};
+        if (!config.apiKey)
+            throw new Error('Gem SDK API key is missing');
         this.config = config;
         this.IS_NODE = Boolean(globalThis['v8']);
-        if (!config.secretKey && this.IS_NODE)
-            throw new Error('Gem API secret is missing');
-        if (!config.apiKey)
-            throw new Error('Gem API key is missing');
         this.config.options = this.config.options || {};
+        if (this.IS_NODE) {
+            if (!config.secretKey) {
+                throw new Error('Gem SDK API secret is missing');
+            }
+        }
     }
     Client.prototype.get = function (path, params, options) {
         return this.request('GET', path, params, options);
@@ -127,7 +130,10 @@ var Client = (function () {
         var json = !(options.headers || {}).hasOwnProperty('content-type') ||
             !(options.headers || {}).hasOwnProperty('Content-Type') ||
             options.headers['Content-Type'] == 'application/json';
-        var reqOpts = __assign(__assign(__assign({}, this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), json: json, data: params });
+        var reqOpts = __assign(__assign(__assign(__assign({}, (!this.IS_NODE && {
+            xsrfCookieName: shared_1.GEM_CSRF_COOKIE_NAME,
+            xsrfHeaderName: shared_1.GEM_CSRF_HEADER_NAME,
+        })), this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), json: json, data: params });
         if (reqOpts.method == 'GET')
             reqOpts.qs = Object.assign(reqOpts.qs, params);
         else

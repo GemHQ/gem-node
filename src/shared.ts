@@ -11,6 +11,16 @@ export const dbg = debug('gem:client');
 export const GEM_BASE_URL = 'https://vgs-sandbox.gem.co';
 
 /**
+ * Incoming CSRF cookie name
+ */
+export const GEM_CSRF_COOKIE_NAME = 'gem_user_csrf';
+
+/**
+ * Outgoing CSRF header name
+ */
+export const GEM_CSRF_HEADER_NAME = 'X-Gem-User-Csrf-Token';
+
+/**
  * Gem API endpoints used by the client
  */
 export enum Endpoints {

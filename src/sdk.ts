@@ -84,13 +84,7 @@ export namespace SDK {
       profileId: string,
       profile: ProfileModel
     ): Promise<GemResponseType.IProfile> =>
-      await this.client.put(
-        `${Endpoints.profiles}/${profileId}`,
-        {},
-        {
-          form: profile,
-        }
-      );
+      await this.client.put(`${Endpoints.profiles}/${profileId}`, profile);
 
     createProfile = async (
       userId: string,

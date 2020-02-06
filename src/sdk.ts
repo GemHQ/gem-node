@@ -82,7 +82,7 @@ export namespace SDK {
 
     updateProfile = async (
       profileId: string,
-      profile: ProfileModel
+      profile: Partial<ProfileModel>
     ): Promise<GemResponseType.IProfile> =>
       await this.client.put(`${Endpoints.profiles}/${profileId}`, profile);
 

@@ -31,7 +31,7 @@ export declare namespace SDK {
         listProfiles: (userId: string) => Promise<GemResponseType.IProfile[]>;
         getProfile: (profileId: string) => Promise<GemResponseType.IProfile>;
         deleteProfile: (profileId: string) => Promise<GemResponseType.IBaseMessage>;
-        updateProfile: (profileId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
+        updateProfile: (profileId: string, profile: Partial<ProfileModel>) => Promise<GemResponseType.IProfile>;
         createProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         listProfileDocuments: (profileId: string) => Promise<GemResponseType.IDocument[]>;

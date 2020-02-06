@@ -1,6 +1,9 @@
 import { FileModel, DocumentModel, ProfileModel, TransactionModel, PlaidAccountModel, AccountTypes, CredentialsModel, CredentialTypes } from './models';
 import { Client } from './client';
 import { GemResponseType } from './shared';
+declare type DeepPartial<T> = {
+    [P in keyof T]?: T[P] extends Array<infer U> ? Array<DeepPartial<U>> : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>;
+};
 export declare namespace SDK {
     namespace Models {
         class Document extends DocumentModel {
@@ -31,7 +34,7 @@ export declare namespace SDK {
         listProfiles: (userId: string) => Promise<GemResponseType.IProfile[]>;
         getProfile: (profileId: string) => Promise<GemResponseType.IProfile>;
         deleteProfile: (profileId: string) => Promise<GemResponseType.IBaseMessage>;
-        updateProfile: (profileId: string, profile: Partial<ProfileModel>) => Promise<GemResponseType.IProfile>;
+        updateProfile: (profileId: string, profile: DeepPartial<ProfileModel>) => Promise<GemResponseType.IProfile>;
         createProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         listProfileDocuments: (profileId: string) => Promise<GemResponseType.IDocument[]>;
@@ -75,3 +78,4 @@ export declare namespace SDK {
         checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;
     }
 }
+export {};

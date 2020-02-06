@@ -11,6 +11,14 @@ import {
 import { Client } from './client';
 import { Endpoints, GemResponseType } from './shared';
 
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer U>
+    ? ReadonlyArray<DeepPartial<U>>
+    : DeepPartial<T[P]>;
+};
+
 export namespace SDK {
   export namespace Models {
     export class Document extends DocumentModel {}
@@ -82,7 +90,7 @@ export namespace SDK {
 
     updateProfile = async (
       profileId: string,
-      profile: Partial<ProfileModel>
+      profile: DeepPartial<ProfileModel>
     ): Promise<GemResponseType.IProfile> =>
       await this.client.put(`${Endpoints.profiles}/${profileId}`, profile);
 

@@ -1,6 +1,6 @@
 {
   "name": "@gem.co/api",
-  "version": "1.17.6",
+  "version": "1.17.7",
   "description": "Node.js client library for the Gem API.",
   "main": "./dist/gem.js",
   "scripts": {

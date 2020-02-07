@@ -42,7 +42,11 @@ export class Client {
   }
 
   checkForNodeProcess = () => {
-    return typeof process !== 'undefined' && process.release.name === 'node';
+    try {
+      return typeof process !== 'undefined' && process.release.name === 'node';
+    } catch (e) {
+      return false;
+    }
   };
 
   public get(path: string, params?: any, options?: any): Promise<any> {

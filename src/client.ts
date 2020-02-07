@@ -30,7 +30,7 @@ export class Client {
     if (!config.apiKey) throw new Error('Gem SDK API key is missing');
 
     this.config = config;
-    this.IS_NODE = Boolean(globalThis['v8']);
+    this.IS_NODE = this.checkForNodeProcess();
     this.config.options = this.config.options || {};
 
     // Runtime environment checks
@@ -40,6 +40,10 @@ export class Client {
       }
     }
   }
+
+  checkForNodeProcess = () => {
+    return typeof process !== 'undefined' && process.release.name === 'node';
+  };
 
   public get(path: string, params?: any, options?: any): Promise<any> {
     return this.request('GET', path, params, options);

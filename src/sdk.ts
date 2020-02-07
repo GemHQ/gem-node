@@ -122,16 +122,18 @@ export namespace SDK {
 
     createProfileDocument = async (
       profileId: string,
-      document: DocumentModel
+      document: any
     ): Promise<GemResponseType.IDocument> => {
       const url = `${Endpoints.profiles}/${profileId}/documents`;
-      return await this.client.post(
-        url,
-        {},
-        {
-          formData: document.toFormData(),
-        }
-      );
+      return await this.client.post(url, document, {
+        headers: {
+          ...(this.client.IS_NODE && {
+            ...document.getHeaders(),
+            'Content-Length': document.getLengthSync(),
+          }),
+          'Content-Type': 'multipart/form-data',
+        },
+      });
     };
 
     deleteDocument = async (
@@ -141,15 +143,17 @@ export namespace SDK {
 
     updateDocument = async (
       documentId: string,
-      document: DocumentModel
+      document: any
     ): Promise<GemResponseType.IDocument> =>
-      await this.client.put(
-        `${Endpoints.documents}/${documentId}`,
-        {},
-        {
-          formData: document.toFormData(),
-        }
-      );
+      await this.client.put(`${Endpoints.documents}/${documentId}`, document, {
+        headers: {
+          ...(this.client.IS_NODE && {
+            ...document.getHeaders(),
+            'Content-Length': document.getLengthSync(),
+          }),
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
     /**
      * INSTITUTIONS

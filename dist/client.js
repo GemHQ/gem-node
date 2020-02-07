@@ -57,10 +57,13 @@ var Client = (function () {
     function Client(config) {
         this.IS_NODE = true;
         this.config = {};
+        this.checkForNodeProcess = function () {
+            return typeof process !== 'undefined' && process.release.name === 'node';
+        };
         if (!config.apiKey)
             throw new Error('Gem SDK API key is missing');
         this.config = config;
-        this.IS_NODE = Boolean(globalThis['v8']);
+        this.IS_NODE = this.checkForNodeProcess();
         this.config.options = this.config.options || {};
         if (this.IS_NODE) {
             if (!config.secretKey) {

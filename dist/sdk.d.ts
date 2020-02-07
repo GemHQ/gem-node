@@ -38,9 +38,9 @@ export declare namespace SDK {
         createProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         listProfileDocuments: (profileId: string) => Promise<GemResponseType.IDocument[]>;
-        createProfileDocument: (profileId: string, document: DocumentModel) => Promise<GemResponseType.IDocument>;
+        createProfileDocument: (profileId: string, document: any) => Promise<GemResponseType.IDocument>;
         deleteDocument: (documentId: string) => Promise<GemResponseType.IBaseMessage>;
-        updateDocument: (documentId: string, document: DocumentModel) => Promise<GemResponseType.IDocument>;
+        updateDocument: (documentId: string, document: any) => Promise<GemResponseType.IDocument>;
         listInstitutions: () => Promise<GemResponseType.IInstitution[]>;
         getInstitution: (institutionId: string) => Promise<GemResponseType.IInstitution>;
         createInstitutionUser: (profileId: string, institutionId: string) => Promise<GemResponseType.IInstitutionUser>;

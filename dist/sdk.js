@@ -216,8 +216,8 @@ var SDK;
                     switch (_a.label) {
                         case 0:
                             url = shared_1.Endpoints.profiles + "/" + profileId + "/documents";
-                            return [4, this.client.post(url, {}, {
-                                    formData: document.toFormData(),
+                            return [4, this.client.post(url, document, {
+                                    headers: __assign(__assign({}, (this.client.IS_NODE && __assign(__assign({}, document.getHeaders()), { 'Content-Length': document.getLengthSync() }))), { 'Content-Type': 'multipart/form-data' }),
                                 })];
                         case 1: return [2, _a.sent()];
                     }
@@ -232,8 +232,8 @@ var SDK;
             this.updateDocument = function (documentId, document) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4, this.client.put(shared_1.Endpoints.documents + "/" + documentId, {}, {
-                                formData: document.toFormData(),
+                        case 0: return [4, this.client.put(shared_1.Endpoints.documents + "/" + documentId, document, {
+                                headers: __assign(__assign({}, (this.client.IS_NODE && __assign(__assign({}, document.getHeaders()), { 'Content-Length': document.getLengthSync() }))), { 'Content-Type': 'multipart/form-data' }),
                             })];
                         case 1: return [2, _a.sent()];
                     }

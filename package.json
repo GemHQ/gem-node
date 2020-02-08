@@ -1,6 +1,6 @@
 {
   "name": "@gem.co/api",
-  "version": "1.17.7",
+  "version": "1.17.8",
   "description": "Node.js client library for the Gem API.",
   "main": "./dist/gem.js",
   "scripts": {
@@ -39,6 +39,7 @@
     "@types/form-data": "^2.5.0",
     "@types/qs": "^6.9.0",
     "@types/request": "^2.48.3",
+    "form-data": "^3.0.0",
     "typescript": "^3.2.2"
   }
 }

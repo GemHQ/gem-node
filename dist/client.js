@@ -135,18 +135,13 @@ var Client = (function () {
         if (params === void 0) { params = {}; }
         if (options === void 0) { options = {}; }
         var parsedUrl = url.parse(url.resolve(this.config.baseUrl || shared_1.GEM_BASE_URL, path), true);
-        var json = !(options.headers || {}).hasOwnProperty('content-type') ||
-            !(options.headers || {}).hasOwnProperty('Content-Type') ||
-            options.headers['Content-Type'] == 'application/json';
         var reqOpts = __assign(__assign(__assign(__assign({}, (!this.IS_NODE && {
             xsrfCookieName: shared_1.GEM_CSRF_COOKIE_NAME,
             xsrfHeaderName: shared_1.GEM_CSRF_HEADER_NAME,
-        })), this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), json: json, data: params });
+        })), this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), data: params });
         if (reqOpts.method == 'GET')
             reqOpts.qs = Object.assign(reqOpts.qs, params);
-        else
-            reqOpts.data = params;
-        if (!reqOpts.data || !Object.keys(reqOpts.data).length)
+        if (['GET', 'DELETE'].includes(reqOpts.method))
             delete reqOpts.data;
         reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
         if (this.IS_NODE) {

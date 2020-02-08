@@ -123,11 +123,6 @@ export class Client {
       true
     );
 
-    const json =
-      !(options.headers || {}).hasOwnProperty('content-type') ||
-      !(options.headers || {}).hasOwnProperty('Content-Type') ||
-      options.headers['Content-Type'] == 'application/json';
-
     const reqOpts: AxiosRequestConfig & { qs: object } = {
       // NOTE: these will be overridden by config.options and options if available.
       ...(!this.IS_NODE && {
@@ -146,14 +141,12 @@ export class Client {
         ...this.config.qs,
         ...options.qs,
       },
-      json: json,
       data: params,
     };
 
     if (reqOpts.method == 'GET') reqOpts.qs = Object.assign(reqOpts.qs, params);
-    else reqOpts.data = params;
 
-    if (!reqOpts.data || !Object.keys(reqOpts.data).length) delete reqOpts.data;
+    if (['GET', 'DELETE'].includes(reqOpts.method)) delete reqOpts.data;
 
     reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
 

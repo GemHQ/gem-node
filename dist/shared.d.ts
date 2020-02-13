@@ -114,6 +114,8 @@ export declare namespace GemResponseType {
         profile: IProfile;
         institution: IInstitution;
         connection: IConnection;
+        created_at: string;
+        updated_at: string;
     }
     interface IAccount {
         id: string;

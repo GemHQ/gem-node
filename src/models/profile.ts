@@ -21,11 +21,10 @@ export interface IProfile {
   date_of_birth: string;
 }
 
-export class ProfileModel implements IProfile {
+export class ProfileModel implements Omit<IProfile, 'email_address'> {
   name: IProfileName;
   phone_number: string;
   address: IProfileAddress;
-  email_address: string;
   social_security_number: string;
   date_of_birth: string;
 
@@ -33,14 +32,12 @@ export class ProfileModel implements IProfile {
     name,
     phone_number,
     address,
-    email_address,
     social_security_number,
     date_of_birth,
   }: IProfile) {
     this.name = name;
     this.phone_number = phone_number;
     this.address = address;
-    this.email_address = email_address;
     this.social_security_number = social_security_number;
     this.date_of_birth = date_of_birth;
   }

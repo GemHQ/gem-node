@@ -1,6 +1,7 @@
 import { FileModel, DocumentModel, ProfileModel, TransactionModel, PlaidAccountModel, AccountTypes, CredentialsModel, CredentialTypes } from './models';
 import { Client } from './client';
 import { GemResponseType } from './shared';
+import { AxiosInstance } from 'axios';
 declare type DeepPartial<T> = {
     [P in keyof T]?: T[P] extends Array<infer U> ? Array<DeepPartial<U>> : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>;
 };
@@ -25,6 +26,7 @@ export declare namespace SDK {
     }
     class Gem {
         client: Client;
+        rawAxios: AxiosInstance;
         constructor(config: any);
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;

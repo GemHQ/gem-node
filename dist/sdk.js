@@ -464,6 +464,7 @@ var SDK;
                 }
             }); }); };
             this.client = new client_1.Client(config);
+            this.rawAxios = this.client.axios;
         }
         return Gem;
     }());

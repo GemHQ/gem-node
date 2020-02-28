@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig, AxiosInstance } from 'axios';
 declare type ClientConfigType = {
     apiKey?: string;
     secretKey?: string;
@@ -9,6 +9,7 @@ declare type ClientConfigType = {
 export declare class Client {
     IS_NODE: boolean;
     config: ClientConfigType;
+    axios: AxiosInstance;
     constructor(config: ClientConfigType);
     checkForNodeProcess: () => boolean;
     get(path: string, params?: any, options?: any): Promise<any>;

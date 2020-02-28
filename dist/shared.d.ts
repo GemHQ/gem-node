@@ -40,10 +40,17 @@ export declare namespace GemResponseType {
     }
     interface ISessionValidity {
         authenticated: boolean;
-        application_id: string;
+        application_id?: string;
         user_id?: string;
         read_access_expires_at?: number;
         execute_access_expires_at?: number;
+        user?: {
+            id: string;
+            created_at: string;
+            updated_at: string;
+            email: string;
+            verified: boolean;
+        };
     }
     interface IConnection {
         id: string;

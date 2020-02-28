@@ -67,6 +67,7 @@ var Client = (function () {
         };
         if (!config.apiKey)
             throw new Error('Gem SDK API key is missing');
+        this.axios = axios_1.default.create();
         this.config = config;
         this.IS_NODE = this.checkForNodeProcess();
         this.config.options = this.config.options || {};
@@ -105,7 +106,7 @@ var Client = (function () {
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4, axios_1.default.request(reqOpts)];
+                        return [4, this.axios.request(reqOpts)];
                     case 2:
                         _a = _b.sent(), data = _a.data, status = _a.status;
                         if (status >= 200 && status < 300) {

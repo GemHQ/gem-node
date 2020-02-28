@@ -10,6 +10,7 @@ import {
 } from './models';
 import { Client } from './client';
 import { Endpoints, GemResponseType } from './shared';
+import { AxiosInstance } from 'axios';
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>
@@ -41,9 +42,11 @@ export namespace SDK {
    */
   export class Gem {
     client: Client = null;
+    rawAxios: AxiosInstance;
 
     constructor(config: any) {
       this.client = new Client(config);
+      this.rawAxios = this.client.axios;
     }
 
     /**

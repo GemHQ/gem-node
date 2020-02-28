@@ -67,6 +67,13 @@ export namespace GemResponseType {
     user_id?: string;
     read_access_expires_at?: number;
     execute_access_expires_at?: number;
+    user?: {
+      id: string;
+      created_at: string;
+      updated_at: string;
+      email: string;
+      verified: boolean;
+    };
   }
 
   export interface IConnection {

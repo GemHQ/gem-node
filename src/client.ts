@@ -7,7 +7,7 @@ import {
 } from './shared';
 import * as url from 'url';
 import GemAPIError from './errors/gem_api';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
 import * as qs from 'qs';
 
 type ClientConfigType = {
@@ -25,10 +25,11 @@ type ClientConfigType = {
 export class Client {
   IS_NODE = true;
   config: ClientConfigType = {};
+  axios: AxiosInstance;
 
   constructor(config: ClientConfigType) {
     if (!config.apiKey) throw new Error('Gem SDK API key is missing');
-
+    this.axios = axios.create();
     this.config = config;
     this.IS_NODE = this.checkForNodeProcess();
     this.config.options = this.config.options || {};
@@ -87,7 +88,7 @@ export class Client {
     const reqOpts = this.createRequestOptions(method, path, params, options);
 
     try {
-      const { data, status }: AxiosResponse = await axios.request(reqOpts);
+      const { data, status }: AxiosResponse = await this.axios.request(reqOpts);
       if (status >= 200 && status < 300) {
         return data || {};
       } else {

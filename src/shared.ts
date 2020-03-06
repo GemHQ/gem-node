@@ -38,6 +38,7 @@ export enum Endpoints {
   auth = '/auth',
   otp = '/auth/otp',
   session_validity = '/authenticated',
+  logout = '/logout',
 }
 
 export namespace GemResponseType {
@@ -100,6 +101,7 @@ export namespace GemResponseType {
     updated_at: string;
     verified: boolean;
     consented: boolean;
+    email: string;
     connections?: IConnection[];
     profiles?: IProfile[];
   }
@@ -111,6 +113,8 @@ export namespace GemResponseType {
     user_id: string;
     status: string;
     expires_at: string;
+    country: string;
+    state: string;
     documents: IDocument[];
   }
 

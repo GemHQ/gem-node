@@ -74,7 +74,11 @@ export declare namespace SDK {
             currency_id?: string;
             source?: string;
         }) => Promise<GemResponseType.IPrice>;
-        findOrCreateUser: (email: string) => Promise<GemResponseType.IUser>;
+        findOrCreateUser: ({ email, userId, }: {
+            email: string;
+            userId: string;
+        }) => Promise<GemResponseType.IUser>;
+        logOutUser: () => Promise<GemResponseType.IBaseMessage>;
         emailOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;
         verifyOTP: (userId: string, otpCode: string) => Promise<GemResponseType.IVerifyOTP>;
         checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;

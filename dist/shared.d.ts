@@ -17,7 +17,8 @@ export declare enum Endpoints {
     prices = "/prices",
     auth = "/auth",
     otp = "/auth/otp",
-    session_validity = "/authenticated"
+    session_validity = "/authenticated",
+    logout = "/logout"
 }
 export declare namespace GemResponseType {
     interface IAsset {
@@ -40,7 +41,7 @@ export declare namespace GemResponseType {
     }
     interface ISessionValidity {
         authenticated: boolean;
-        application_id?: string;
+        application_id: string;
         user_id?: string;
         read_access_expires_at?: number;
         execute_access_expires_at?: number;
@@ -74,6 +75,7 @@ export declare namespace GemResponseType {
         updated_at: string;
         verified: boolean;
         consented: boolean;
+        email: string;
         connections?: IConnection[];
         profiles?: IProfile[];
     }
@@ -84,6 +86,8 @@ export declare namespace GemResponseType {
         user_id: string;
         status: string;
         expires_at: string;
+        country: string;
+        state: string;
         documents: IDocument[];
     }
     interface ICredentialFormat {

@@ -435,13 +435,15 @@ var SDK;
                 });
             };
             this.findOrCreateUser = function (_a) {
-                var email = _a.email, userId = _a.userId;
-                return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_b) {
-                    switch (_b.label) {
-                        case 0: return [4, this.client.post("" + shared_1.Endpoints.users, { email: email, user_id: userId })];
-                        case 1: return [2, _b.sent()];
-                    }
-                }); });
+                var email = _a.email, userId = _a.userId, reCAPTCHAValue = _a.reCAPTCHAValue;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4, this.client.post("" + shared_1.Endpoints.users, __assign({ email: email, user_id: userId }, (!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue })))];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
+                });
             };
             this.logOutUser = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {

@@ -74,9 +74,10 @@ export declare namespace SDK {
             currency_id?: string;
             source?: string;
         }) => Promise<GemResponseType.IPrice>;
-        findOrCreateUser: ({ email, userId, }: {
+        findOrCreateUser: ({ email, userId, reCAPTCHAValue, }: {
             email?: string;
             userId?: string;
+            reCAPTCHAValue?: string;
         }) => Promise<GemResponseType.IUser>;
         logOutUser: () => Promise<GemResponseType.IBaseMessage>;
         emailOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;

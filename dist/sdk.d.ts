@@ -75,8 +75,8 @@ export declare namespace SDK {
             source?: string;
         }) => Promise<GemResponseType.IPrice>;
         findOrCreateUser: ({ email, userId, }: {
-            email: string;
-            userId: string;
+            email?: string;
+            userId?: string;
         }) => Promise<GemResponseType.IUser>;
         logOutUser: () => Promise<GemResponseType.IBaseMessage>;
         emailOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;

@@ -51,6 +51,7 @@ export declare namespace GemResponseType {
             updated_at: string;
             email: string;
             verified: boolean;
+            consented: boolean;
         };
     }
     interface IConnection {

@@ -74,6 +74,7 @@ export namespace GemResponseType {
       updated_at: string;
       email: string;
       verified: boolean;
+      consented: boolean;
     };
   }
 

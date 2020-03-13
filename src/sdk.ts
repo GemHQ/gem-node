@@ -364,8 +364,8 @@ export namespace SDK {
       email,
       userId,
     }: {
-      email: string;
-      userId: string;
+      email?: string;
+      userId?: string;
     }): Promise<GemResponseType.IUser> =>
       await this.client.post(`${Endpoints.users}`, { email, user_id: userId });
 

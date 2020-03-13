@@ -363,11 +363,17 @@ export namespace SDK {
     findOrCreateUser = async ({
       email,
       userId,
+      reCAPTCHAValue,
     }: {
       email?: string;
       userId?: string;
+      reCAPTCHAValue?: string;
     }): Promise<GemResponseType.IUser> =>
-      await this.client.post(`${Endpoints.users}`, { email, user_id: userId });
+      await this.client.post(`${Endpoints.users}`, {
+        email,
+        user_id: userId,
+        ...(!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue }),
+      });
 
     logOutUser = async (): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.logout}`, {});

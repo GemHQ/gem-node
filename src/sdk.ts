@@ -378,8 +378,20 @@ export namespace SDK {
     logOutUser = async (): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.logout}`, {});
 
-    emailOTP = async (userId: string): Promise<GemResponseType.IBaseMessage> =>
-      await this.client.post(`${Endpoints.otp}/email_otp`, { user_id: userId });
+    emailOTP = async ({
+      userId,
+      email,
+      reCAPTCHAValue,
+    }: {
+      userId?: string;
+      email?: string;
+      reCAPTCHAValue: string;
+    }): Promise<GemResponseType.IBaseMessage> =>
+      await this.client.post(`${Endpoints.otp}/email_otp`, {
+        email,
+        ...(userId && { user_id: userId }),
+        ...(!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue }),
+      });
 
     verifyOTP = async (
       userId: string,

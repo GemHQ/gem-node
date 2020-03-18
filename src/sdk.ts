@@ -393,13 +393,19 @@ export namespace SDK {
         ...(!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue }),
       });
 
-    verifyOTP = async (
-      userId: string,
-      otpCode: string
-    ): Promise<GemResponseType.IVerifyOTP> =>
+    verifyOTP = async ({
+      email,
+      userId,
+      otpCode,
+    }: {
+      email?: string;
+      userId?: string;
+      otpCode: string;
+    }): Promise<GemResponseType.IVerifyOTP> =>
       await this.client.post(`${Endpoints.otp}/verify_otp`, {
+        email,
         otp_code: otpCode,
-        user_id: userId,
+        ...(userId && { user_id: userId }),
       });
 
     checkSessionValidity = async (): Promise<

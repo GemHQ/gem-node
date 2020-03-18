@@ -80,7 +80,11 @@ export declare namespace SDK {
             reCAPTCHAValue?: string;
         }) => Promise<GemResponseType.IUser>;
         logOutUser: () => Promise<GemResponseType.IBaseMessage>;
-        emailOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;
+        emailOTP: ({ userId, email, reCAPTCHAValue, }: {
+            userId?: string;
+            email?: string;
+            reCAPTCHAValue: string;
+        }) => Promise<GemResponseType.IBaseMessage>;
         verifyOTP: (userId: string, otpCode: string) => Promise<GemResponseType.IVerifyOTP>;
         checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;
     }

@@ -451,12 +451,17 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
-            this.emailOTP = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.client.post(shared_1.Endpoints.otp + "/email_otp", { user_id: userId })];
-                    case 1: return [2, _a.sent()];
-                }
-            }); }); };
+            this.emailOTP = function (_a) {
+                var userId = _a.userId, email = _a.email, reCAPTCHAValue = _a.reCAPTCHAValue;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4, this.client.post(shared_1.Endpoints.otp + "/email_otp", __assign(__assign({ email: email }, (userId && { user_id: userId })), (!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue })))];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
+                });
+            };
             this.verifyOTP = function (userId, otpCode) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {

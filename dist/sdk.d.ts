@@ -85,7 +85,11 @@ export declare namespace SDK {
             email?: string;
             reCAPTCHAValue: string;
         }) => Promise<GemResponseType.IBaseMessage>;
-        verifyOTP: (userId: string, otpCode: string) => Promise<GemResponseType.IVerifyOTP>;
+        verifyOTP: ({ email, userId, otpCode, }: {
+            email?: string;
+            userId?: string;
+            otpCode: string;
+        }) => Promise<GemResponseType.IVerifyOTP>;
         checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;
     }
 }

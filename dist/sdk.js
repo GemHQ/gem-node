@@ -462,17 +462,17 @@ var SDK;
                     });
                 });
             };
-            this.verifyOTP = function (userId, otpCode) { return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4, this.client.post(shared_1.Endpoints.otp + "/verify_otp", {
-                                otp_code: otpCode,
-                                user_id: userId,
-                            })];
-                        case 1: return [2, _a.sent()];
-                    }
+            this.verifyOTP = function (_a) {
+                var email = _a.email, userId = _a.userId, otpCode = _a.otpCode;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4, this.client.post(shared_1.Endpoints.otp + "/verify_otp", __assign({ email: email, otp_code: otpCode }, (userId && { user_id: userId })))];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
                 });
-            }); };
+            };
             this.checkSessionValidity = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.post(shared_1.Endpoints.session_validity)];

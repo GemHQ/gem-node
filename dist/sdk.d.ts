@@ -33,6 +33,8 @@ export declare namespace SDK {
         listUsers: () => Promise<GemResponseType.IUser[]>;
         getUser: (userId: string) => Promise<GemResponseType.IUser>;
         deleteUser: (userId: string) => Promise<GemResponseType.IBaseMessage>;
+        sendUserSMSOTP: (userId: string) => Promise<any>;
+        verifyUserSMSOTP: (userId: string, otp: string) => Promise<any>;
         listProfiles: (userId: string) => Promise<GemResponseType.IProfile[]>;
         getProfile: (profileId: string) => Promise<GemResponseType.IProfile>;
         deleteProfile: (profileId: string) => Promise<GemResponseType.IBaseMessage>;

@@ -157,6 +157,22 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
+            this.sendUserSMSOTP = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.client.post(shared_1.Endpoints.users + "/" + userId + "/send_sms", {})];
+                    case 1: return [2, _a.sent()];
+                }
+            }); }); };
+            this.verifyUserSMSOTP = function (userId, otp) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.post(shared_1.Endpoints.users + "/" + userId + "/verify_sms", {
+                                code: otp,
+                            })];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
             this.listProfiles = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.profiles, { user_id: userId })];

@@ -75,6 +75,14 @@ export namespace SDK {
     ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.users}/${userId}`);
 
+    sendUserSMSOTP = async (userId: string) =>
+      await this.client.post(`${Endpoints.users}/${userId}/send_sms`, {});
+
+    verifyUserSMSOTP = async (userId: string, otp: string) =>
+      await this.client.post(`${Endpoints.users}/${userId}/verify_sms`, {
+        code: otp,
+      });
+
     /**
      * PROFILES
      */

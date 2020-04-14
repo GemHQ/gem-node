@@ -75,6 +75,7 @@ export declare namespace GemResponseType {
         created_at: string;
         updated_at: string;
         verified: boolean;
+        status: 'verified' | 'pending' | 'pending_phone_verification';
         consented: boolean;
         email: string;
         connections?: IConnection[];

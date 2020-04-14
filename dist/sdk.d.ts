@@ -30,11 +30,15 @@ export declare namespace SDK {
         constructor(config: any);
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;
+        updateUser: (args: {
+            userId: string;
+            phoneNumber?: string;
+        }) => Promise<GemResponseType.IUser>;
         listUsers: () => Promise<GemResponseType.IUser[]>;
         getUser: (userId: string) => Promise<GemResponseType.IUser>;
         deleteUser: (userId: string) => Promise<GemResponseType.IBaseMessage>;
-        sendUserSMSOTP: (userId: string) => Promise<any>;
-        verifyUserSMSOTP: (userId: string, otp: string) => Promise<any>;
+        sendUserSMSOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;
+        verifyUserSMSOTP: (userId: string, otp: string) => Promise<GemResponseType.IBaseMessage>;
         listProfiles: (userId: string) => Promise<GemResponseType.IProfile[]>;
         getProfile: (profileId: string) => Promise<GemResponseType.IProfile>;
         deleteProfile: (profileId: string) => Promise<GemResponseType.IBaseMessage>;

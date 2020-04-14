@@ -59,10 +59,21 @@ export namespace SDK {
         ...(emailAddress && { email: emailAddress }),
       });
 
+    // TODO: move this to updateUser once supported by API.
     createUserConsent = async (
       userId: string
     ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.put(`${Endpoints.users}/${userId}/consent`);
+
+    updateUser = async (args: {
+      userId: string;
+      phoneNumber?: string;
+    }): Promise<GemResponseType.IUser> => {
+      const { userId, phoneNumber } = args;
+      return await this.client.put(`${Endpoints.users}/${userId}`, {
+        phoneNumber,
+      });
+    };
 
     listUsers = async (): Promise<GemResponseType.IUser[]> =>
       await this.client.get(Endpoints.users);
@@ -75,10 +86,15 @@ export namespace SDK {
     ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.delete(`${Endpoints.users}/${userId}`);
 
-    sendUserSMSOTP = async (userId: string) =>
+    sendUserSMSOTP = async (
+      userId: string
+    ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.post(`${Endpoints.users}/${userId}/send_sms`, {});
 
-    verifyUserSMSOTP = async (userId: string, otp: string) =>
+    verifyUserSMSOTP = async (
+      userId: string,
+      otp: string
+    ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.post(`${Endpoints.users}/${userId}/verify_sms`, {
         code: otp,
       });

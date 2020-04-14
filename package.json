@@ -5,8 +5,7 @@
   "main": "./dist/gem.js",
   "scripts": {
     "build": "bin/build",
-    "publish": "npm publish --access public",
-    "publish:dev": "npm publish --tag dev --access public"
+    "publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",

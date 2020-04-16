@@ -68,14 +68,7 @@ export namespace GemResponseType {
     user_id?: string;
     read_access_expires_at?: number;
     execute_access_expires_at?: number;
-    user?: {
-      id: string;
-      created_at: string;
-      updated_at: string;
-      email: string;
-      verified: boolean;
-      consented: boolean;
-    };
+    user?: IUser;
   }
 
   export interface IConnection {
@@ -101,11 +94,13 @@ export namespace GemResponseType {
     created_at: string;
     updated_at: string;
     verified: boolean;
-    status: 'verified' | 'pending' | 'pending_phone_verification';
+    status:
+      | 'verified'
+      | 'pending_email_verification'
+      | 'pending_phone_number_verification';
     consented: boolean;
     email: string;
-    connections?: IConnection[];
-    profiles?: IProfile[];
+    phone_number?: string;
   }
 
   export interface IProfile {
@@ -139,11 +134,8 @@ export namespace GemResponseType {
     user_id: string;
     application_id: string;
     read_access_expires_at: number;
-    execute_access_expires_at: number;
     csrf: string;
     access?: string;
-    verified: boolean;
-    consented: boolean;
   }
 
   export interface IInstitutionUser {

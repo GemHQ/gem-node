@@ -96,7 +96,7 @@ export namespace SDK {
       otp: string
     ): Promise<GemResponseType.IBaseMessage> =>
       await this.client.post(`${Endpoints.users}/${userId}/verify_sms`, {
-        code: otp,
+        otp_code: otp,
       });
 
     /**

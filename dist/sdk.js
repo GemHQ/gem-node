@@ -180,7 +180,7 @@ var SDK;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.post(shared_1.Endpoints.users + "/" + userId + "/verify_sms", {
-                                code: otp,
+                                otp_code: otp,
                             })];
                         case 1: return [2, _a.sent()];
                     }

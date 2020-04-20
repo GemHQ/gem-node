@@ -140,13 +140,14 @@ var SDK;
                 }
             }); }); };
             this.updateUser = function (args) { return __awaiter(_this, void 0, void 0, function () {
-                var userId, phoneNumber;
+                var userId, phoneNumber, consented;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            userId = args.userId, phoneNumber = args.phoneNumber;
+                            userId = args.userId, phoneNumber = args.phoneNumber, consented = args.consented;
                             return [4, this.client.put(shared_1.Endpoints.users + "/" + userId, {
-                                    phoneNumber: phoneNumber,
+                                    consented: consented,
+                                    phone_number: phoneNumber,
                                 })];
                         case 1: return [2, _a.sent()];
                     }

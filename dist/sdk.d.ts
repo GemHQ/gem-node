@@ -33,6 +33,7 @@ export declare namespace SDK {
         updateUser: (args: {
             userId: string;
             phoneNumber?: string;
+            consented?: boolean;
         }) => Promise<GemResponseType.IUser>;
         listUsers: () => Promise<GemResponseType.IUser[]>;
         getUser: (userId: string) => Promise<GemResponseType.IUser>;

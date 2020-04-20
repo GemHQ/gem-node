@@ -68,10 +68,12 @@ export namespace SDK {
     updateUser = async (args: {
       userId: string;
       phoneNumber?: string;
+      consented?: boolean;
     }): Promise<GemResponseType.IUser> => {
-      const { userId, phoneNumber } = args;
+      const { userId, phoneNumber, consented } = args;
       return await this.client.put(`${Endpoints.users}/${userId}`, {
-        phoneNumber,
+        consented,
+        phone_number: phoneNumber,
       });
     };
 

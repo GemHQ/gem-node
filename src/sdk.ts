@@ -437,5 +437,9 @@ export namespace SDK {
     checkSessionValidity = async (): Promise<
       GemResponseType.ISessionValidity
     > => await this.client.post(Endpoints.session_validity);
+
+    refreshSession = async (): Promise<GemResponseType.IBaseMessage> => {
+      return await this.client.post(Endpoints.refresh, {});
+    };
   }
 }

@@ -18,7 +18,8 @@ export declare enum Endpoints {
     auth = "/auth",
     otp = "/auth/otp",
     session_validity = "/authenticated",
-    logout = "/logout"
+    logout = "/logout",
+    refresh = "/refresh"
 }
 export declare namespace GemResponseType {
     interface IAsset {

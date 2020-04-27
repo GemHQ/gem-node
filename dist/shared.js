@@ -22,4 +22,5 @@ var Endpoints;
     Endpoints["otp"] = "/auth/otp";
     Endpoints["session_validity"] = "/authenticated";
     Endpoints["logout"] = "/logout";
+    Endpoints["refresh"] = "/refresh";
 })(Endpoints = exports.Endpoints || (exports.Endpoints = {}));

@@ -98,6 +98,7 @@ export declare namespace SDK {
             otpCode: string;
         }) => Promise<GemResponseType.IVerifyOTP>;
         checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;
+        refreshSession: () => Promise<GemResponseType.IBaseMessage>;
     }
 }
 export {};

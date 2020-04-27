@@ -509,6 +509,14 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
+            this.refreshSession = function () { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.post(shared_1.Endpoints.refresh, {})];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
             this.client = new client_1.Client(config);
             this.rawAxios = this.client.axios;
         }

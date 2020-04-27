@@ -39,6 +39,7 @@ export enum Endpoints {
   otp = '/auth/otp',
   session_validity = '/authenticated',
   logout = '/logout',
+  refresh = '/refresh',
 }
 
 export namespace GemResponseType {

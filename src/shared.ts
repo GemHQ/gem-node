@@ -85,6 +85,7 @@ export namespace GemResponseType {
   }
 
   export interface IDocument {
+    id: string;
     description: string;
     type: string;
     category: string;

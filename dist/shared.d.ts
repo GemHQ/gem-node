@@ -81,7 +81,7 @@ export declare namespace GemResponseType {
         updated_at: string;
         user_id: string;
         status: string;
-        expires_at: string;
+        expires_at?: string;
         country: string;
         state: string;
         documents: IDocument[];

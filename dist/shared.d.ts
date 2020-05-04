@@ -60,6 +60,7 @@ export declare namespace GemResponseType {
         additional_reason: any;
     }
     interface IDocument {
+        id: string;
         description: string;
         type: string;
         category: string;

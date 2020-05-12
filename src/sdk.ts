@@ -441,5 +441,25 @@ export namespace SDK {
     refreshSession = async (): Promise<GemResponseType.IBaseMessage> => {
       return await this.client.post(Endpoints.refresh, {});
     };
+
+    /**
+     *
+     * Browser Util
+     *
+     */
+
+    generateOnfidoSDKToken = async ({
+      profileId,
+    }: {
+      profileId: string;
+    }): Promise<GemResponseType.IOnfidoSDKToken> => {
+      if (this.client.IS_NODE)
+        return Promise.reject('This request can only be made from a browser.');
+      return await this.client.post(
+        `${Endpoints.profiles}/${profileId}/sdk_session`,
+        {},
+        { qs: { kyc_verifier: 'onfido' } }
+      );
+    };
   }
 }

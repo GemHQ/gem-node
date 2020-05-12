@@ -22,6 +22,9 @@ export declare enum Endpoints {
     refresh = "/refresh"
 }
 export declare namespace GemResponseType {
+    interface IOnfidoSDKToken {
+        sdk_token: string;
+    }
     interface IAsset {
         id: string;
         created_at: string;

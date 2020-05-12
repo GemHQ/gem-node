@@ -517,6 +517,20 @@ var SDK;
                     }
                 });
             }); };
+            this.generateOnfidoSDKToken = function (_a) {
+                var profileId = _a.profileId;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0:
+                                if (this.client.IS_NODE)
+                                    return [2, Promise.reject('This request can only be made from a browser.')];
+                                return [4, this.client.post(shared_1.Endpoints.profiles + "/" + profileId + "/sdk_session", {}, { qs: { kyc_verifier: 'onfido' } })];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
+                });
+            };
             this.client = new client_1.Client(config);
             this.rawAxios = this.client.axios;
         }

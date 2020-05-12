@@ -99,6 +99,9 @@ export declare namespace SDK {
         }) => Promise<GemResponseType.IVerifyOTP>;
         checkSessionValidity: () => Promise<GemResponseType.ISessionValidity>;
         refreshSession: () => Promise<GemResponseType.IBaseMessage>;
+        generateOnfidoSDKToken: ({ profileId, }: {
+            profileId: string;
+        }) => Promise<GemResponseType.IOnfidoSDKToken>;
     }
 }
 export {};

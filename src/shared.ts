@@ -43,6 +43,10 @@ export enum Endpoints {
 }
 
 export namespace GemResponseType {
+  export interface IOnfidoSDKToken {
+    sdk_token: string;
+  }
+
   export interface IAsset {
     id: string;
     created_at: string;

@@ -46,6 +46,14 @@ export declare namespace SDK {
         updateProfile: (profileId: string, profile: DeepPartial<ProfileModel>) => Promise<GemResponseType.IProfile>;
         createProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
+        verifyProfileKYC: ({ profileId, documents, kycVerifier: kyc_verifier, }: {
+            profileId: string;
+            documents: {
+                id: string;
+                document_type: "drivers_license" | "passport" | "selfie";
+            }[];
+            kycVerifier: "onfido";
+        }) => Promise<GemResponseType.IBaseMessage>;
         listProfileDocuments: (profileId: string) => Promise<GemResponseType.IDocument[]>;
         createProfileDocument: (profileId: string, document: any) => Promise<GemResponseType.IDocument>;
         deleteDocument: (documentId: string) => Promise<GemResponseType.IBaseMessage>;

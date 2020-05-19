@@ -23,6 +23,7 @@ var GemAPIError = (function (_super) {
         _this.error = error.error;
         _this.code = error.code;
         _this.status = error.status;
+        _this.error_map = error.error_map;
         return _this;
     }
     return GemAPIError;

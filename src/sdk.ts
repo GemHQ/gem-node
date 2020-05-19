@@ -141,6 +141,31 @@ export namespace SDK {
       });
     };
 
+    verifyProfileKYC = async ({
+      profileId,
+      documents = [],
+      kycVerifier: kyc_verifier,
+    }: {
+      profileId: string;
+      documents: {
+        id: string;
+        document_type: 'drivers_license' | 'passport' | 'selfie';
+      }[];
+      kycVerifier: 'onfido';
+    }): Promise<GemResponseType.IBaseMessage> => {
+      return await this.client.post(
+        `${Endpoints.profiles}/${profileId}/check`,
+        {
+          documents,
+        },
+        {
+          qs: {
+            kyc_verifier,
+          },
+        }
+      );
+    };
+
     /**
      * DOCUMENTS
      */

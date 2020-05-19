@@ -5,12 +5,14 @@ export default class GemAPIError extends Error {
   // but left for backwards compatibility.
   code: string;
   status: number;
+  error_map?: { [key: string]: string };
 
   constructor(error: {
     description: string;
     error: string;
     status: number;
     code: string;
+    error_map?: { [key: string]: string };
   }) {
     super(error.error || error.code);
     // NOTE:  Allow extension of Error class once compiled.
@@ -19,5 +21,6 @@ export default class GemAPIError extends Error {
     this.error = error.error;
     this.code = error.code;
     this.status = error.status;
+    this.error_map = error.error_map;
   }
 }

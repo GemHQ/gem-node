@@ -113,22 +113,23 @@ Configuration Parameters:
 
 #### Users
 
-| method     | description          |
-| ---------- | -------------------- |
-| createUser | Create a user.       |
-| getUser    | Get a user by ID.    |
-| listUsers  | Get a list of users. |
-| deleteUser | Delete a user by ID. |
+| method     | parameters                    | description          | 
+| ---------- | ----------------------------- | -------------------- | 
+| createUser | (emailAddress?: string)       | Create a user.       | 
+| getUser    | (userId: string)              | Get a user by ID.    |
+| listUsers  | none                          | List all users       |
+| deleteUser | (userId: string)              | Delete a user by ID. |
 
 #### Profiles
 
-| method                 | description                                                             |
-| ---------------------- | ----------------------------------------------------------------------- |
-| createProfile          | Create a profile.                                                       |
-| createTemporaryProfile | Create a temporary profile. This profile will exist for up to one hour. |
-| getProfile             | Get a profile by ID.                                                    |
-| listProfiles           | Get a list of profiles.                                                 |
-| deleteProfile          | Delete a profile by ID.                                                 |
+| method                 | parameters                               | description                                                             |
+| ---------------------- | ---------------------------------------- | ----------------------------------------------------------------------- |
+| createProfile          | (userId: string, profile: ProfileModel)  | Create a profile.                                                       |
+| createTemporaryProfile | (userId: string, profile: ProfileModel)  | Create a temporary profile. This profile will exist for up to one hour. |
+| updateProfile          | (userId: string, profile: ProfileModel)  | Create a profile.                                                       |
+| getProfile             | (profileId: string)                      | Get a profile by ID.                                                    |
+| listProfiles           | (userId: string)                         | Get a list of profiles.                                                 |
+| deleteProfile          | (profileId: string)                      | Delete a profile by ID.                                                 |
 
 #### Documents
 

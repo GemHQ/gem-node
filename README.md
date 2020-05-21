@@ -1,6 +1,6 @@
 # Gem API Node.js Client
 
-Node.js client library for the [Gem API](https://developers.gem.co/reference).
+Node.js client library for the [Gem API](https://gem.co/api).
 
 ## Install
 
@@ -123,86 +123,86 @@ Configuration Parameters:
 
 #### Profiles
 
-| method                 | parameters                               | description                                                             |
-| ---------------------- | ---------------------------------------- | ----------------------------------------------------------------------- |
-| createProfile          | (userId: string, profile: ProfileModel)  | Create a profile.                                                       |
-| createTemporaryProfile | (userId: string, profile: ProfileModel)  | Create a temporary profile. This profile will exist for up to one hour. |
-| getProfile             | (profileId: string)                      | Get a profile by ID.                                                    |
-| listProfiles           | (userId: string)                         | Get a list of profiles.                                                 |
-| updateProfile          | (userId: string, profile: ProfileModel)  | Create a profile.                                                       |
-| deleteProfile          | (profileId: string)                      | Delete a profile by ID.                                                 |
+| method                 | parameters                                 | description                                                             |
+| ---------------------- | ------------------------------------------ | ----------------------------------------------------------------------- |
+| createProfile          | ( userId: string, profile: ProfileModel )  | Create a profile.                                                       |
+| createTemporaryProfile | ( userId: string, profile: ProfileModel )  | Create a temporary profile. \This profile will exist for up to one hour.|
+| getProfile             | ( profileId: string )                      | Get a profile by ID.                                                    |
+| listProfiles           | ( userId: string )                         | Get a list of profiles.                                                 |
+| updateProfile          | ( userId: string, profile: ProfileModel )  | Create a profile.                                                       |
+| deleteProfile          | ( profileId: string )                      | Delete a profile by ID.                                                 |
 
 #### Documents
 
-| method                | parameters                                | description                                                                 |
-| --------------------- | ----------------------------------------- | --------------------------------------------------------------------------- |
-| createProfileDocument | (profileId: string, document: string)     | Attach a document to a profile. (Documents may have many files associated.) |
-| listProfileDocuments  | (profileId: string)                       | List all profile documents.                                                 |
-| updateDocument        | (profileId: string, document: string)     | Update a document.                                                          |
-| deleteDocument        | (documentId: string)                      | Delete a document by ID.                                                    |
+| method                | parameters                                  | description                                                                 |
+| --------------------- | ------------------------------------------- | --------------------------------------------------------------------------- |
+| createProfileDocument | ( profileId: string, document: string )     | Attach a document to a profile. \(Documents may have many files associated.)|
+| listProfileDocuments  | ( profileId: string )                       | List all profile documents.                                                 |
+| updateDocument        | ( profileId: string, document: string )     | Update a document.                                                          |
+| deleteDocument        | ( documentId: string )                      | Delete a document by ID.                                                    |
 
 #### Institutions
 
 | method           | parameters                | description                      |
 | ---------------- | ------------------------- | -------------------------------- |
-| getInstitution   | (institutionId: string)   | Get an institution by ID.        |
+| getInstitution   | ( institutionId: string ) | Get an institution by ID.        |
 | listInstitutions | none                      | List all supported institutions. |
 
 #### Institution Users
 
-| method                | parameters                                     | description                    |
-| --------------------- | ---------------------------------------------- | ------------------------------ |
-| createInstitutionUser | (profileId: string, institutionId: string)     | Create an institution user.    |
-| getInstitutionUser    | (institutionUserId: string)                    | Get an institution user by ID. |
-| listInstitutionUser   | (user_id: string, profile_id: string)          | Get an institution user by ID. |
-| updateInstitutionUser | (institutionUserId: string, profileId: string) | Update an institution user.    |
+| method                | parameters                                       | description                    |
+| --------------------- | ------------------------------------------------ | ------------------------------ |
+| createInstitutionUser | ( profileId: string, institutionId: string )     | Create an institution user.    |
+| getInstitutionUser    | ( institutionUserId: string )                    | Get an institution user by ID. |
+| listInstitutionUser   | ( user_id: string, profile_id: string )          | Get an institution user by ID. |
+| updateInstitutionUser | ( institutionUserId: string, profileId: string ) | Update an institution user.    |
 
 #### Accounts
 
-| method        | parameters                              | description             |
-| ------------- | --------------------------------------- | ----------------------- |
-| createAccount | (account: PlaidAccountModel)            | Create an account.      |
-| getAccount    | (accountId: string)                     | Get an account by ID    |
-| listAccounts  | (connectionId: string, userId?: string) | Get a list of accounts. |
+| method        | parameters                                | description             |
+| ------------- | ----------------------------------------- | ----------------------- |
+| createAccount | ( account: PlaidAccountModel )            | Create an account.      |
+| getAccount    | ( accountId: string )                     | Get an account by ID    |
+| listAccounts  | ( connectionId: string, userId?: string ) | Get a list of accounts. |
 
 #### Transactions
 
-| method             | parameters                             | description                    |
-| ------------------ | -------------------------------------- | ------------------------------ |
-| createTransaction  | (transactionParams: TransactionModel)  | Create a transaction.          |
-| confirmTransaction | (transactionId: string)                | Confirm a transaction preview. |
-| getTransaction     | (transactionId: string)                | Get a transaction by ID.       |
-| listTransactions   | (page?: number)                        | Get a list of transactions.    |
+| method             | parameters                               | description                    |
+| ------------------ | ---------------------------------------- | ------------------------------ |
+| createTransaction  | ( transactionParams: TransactionModel )  | Create a transaction.          |
+| confirmTransaction | ( transactionId: string )                | Confirm a transaction preview. |
+| getTransaction     | ( transactionId: string )                | Get a transaction by ID.       |
+| listTransactions   | ( page?: number )                        | Get a list of transactions.    |
 
 #### Credentials
 
 | method            | parameters                           | description                                                                                                  |
 | ----------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| createCredentials | (credentialParams: CredentialsModel) | Create a credentials object which can be used to link a user to a connection. No authentication is required. |
+| createCredentials | ( credentialParams: CredentialsModel ) | Create a credentials object which can be used to link a user to a connection. \No authentication is required.|
 
 #### Connections
 
-| method           | parameters                                   | description                                                         |
-| ---------------- | -------------------------------------------- | ------------------------------------------------------------------- |
-| createConnection | (user_id: string, credential_id: string)     | Create a connection which will link a credential object and a user. |
-| getConnection    | (connectionId: string)                       | Get a connection by ID.                                             |
-| listConnections  | (userId: string)                             | Get a list of user connections.                                     |
-| updateConnection | (connectionId: string, credentialId: string) | Update a connection's credential_id.                                |
-| deleteConnection | (connectionId: string)                       | Delete a connection by ID.                                          |
+| method           | parameters                                     | description                                                         |
+| ---------------- | ---------------------------------------------- | ------------------------------------------------------------------- |
+| createConnection | ( user_id: string, credential_id: string )     | Create a connection which will link a \credential object and a user.|
+| getConnection    | ( connectionId: string )                       | Get a connection by ID.                                             |
+| listConnections  | ( userId: string )                             | Get a list of user connections.                                     |
+| updateConnection | ( connectionId: string, credentialId: string ) | Update a connection's credential_id.                                |
+| deleteConnection | ( connectionId: string )                       | Delete a connection by ID.                                          |
 
 #### Assets
 
-| method           | parameters                             | description                                                       |
-| ---------------- | -------------------------------------- | ----------------------------------------------------------------- |
-| getAssets        | (assetId: string, source?: string)     | Get assets from a source. assetIds can be a comma seperated list. |
-| listAssets       | (category: 'cryptocurrency' or 'fiat') | List all supported assets of a certain category.                  |
+| method           | parameters                               | description                                                       |
+| ---------------- | ---------------------------------------- | ----------------------------------------------------------------- |
+| getAssets        | ( assetId: string, source?: string )     | Get assets from a source. assetIds can be a comma seperated list. |
+| listAssets       | ( category: 'cryptocurrency' or 'fiat' ) | List all supported assets of a certain category.                  |
 
 #### Prices
 
-| method           | parameters                                               | description                                          |
-| ---------------- | -------------------------------------------------------- | ---------------------------------------------------- |
-| getAssetPrice    | (assetId: string, currencyId: string, source?: string)   | Get an asset price in units of a requested currency. |
-| listAssetPrices  | (assetIds: string, currencyId: string, source?: string)  | List asset prices in units of a requested currency.  |
+| method           | parameters                                                 | description                                          |
+| ---------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| getAssetPrice    | ( assetId: string, currencyId: string, source?: string )   | Get an asset price in units of a requested currency. |
+| listAssetPrices  | ( assetIds: string, currencyId: string, source?: string )  | List asset prices in units of a requested currency.  |
 
 ### Vanilla Requests
 

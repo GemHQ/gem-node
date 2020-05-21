@@ -158,11 +158,11 @@ Configuration Parameters:
 
 #### Accounts
 
-| method        | description             |
-| ------------- | ----------------------- |
-| createAccount | Create an account.      |
-| getAccount    | Get an account by ID    |
-| listAccounts  | Get a list of accounts. |
+| method        | parameters                              | description             |
+| ------------- | --------------------------------------- | ----------------------- |
+| createAccount | (account: PlaidAccountModel)            | Create an account.      |
+| getAccount    | (accountId: string)                     | Get an account by ID    |
+| listAccounts  | (connectionId: string, userId?: string) | Get a list of accounts. |
 
 #### Transactions
 

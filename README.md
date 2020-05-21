@@ -23,6 +23,7 @@ const passportFile = fs.createReadStream('/my/passport/file.png');
 const gem = new Gem({
   apiKey: GEM_API_KEY,
   secretKey: GEM_API_SECRET,
+  baseUrl: 'https://api.sandbox.gem.co',
 });
 
 const userProfile = new Profile({

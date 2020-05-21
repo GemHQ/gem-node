@@ -106,8 +106,8 @@ Configuration Parameters:
 | --------- | -------------------------------------------------------------------------------------------------------------------------- |
 | apiKey    | Gem API key for the respective environment.                                                                                |
 | secretKey | Gem API secret for the respective environment.                                                                             |
-| baseUrl   | The Gem API base URL you want to use. <br>`https://vgs.gem.co` for production<br>`https://vgs-sandbox.gem.co` for sandbox. |
-| options   | Options that are passed to the [Request](https://github.com/request/request) for _each_ request made to the API.           |
+| baseUrl   | The Gem API base URL you want to use. <br>`https://api.gem.co` for production<br>`https://api.sandbox.gem.co` for sandbox. |
+| options   | Configuration options that are passed to the [Axios Client](https://github.com/axios/axios#request-config) for _each_ request made to the API.           |
 
 ### SDK Requests
 

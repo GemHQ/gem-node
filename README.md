@@ -126,7 +126,7 @@ Configuration Parameters:
 | method                 | parameters                                 | description                                                             |
 | ---------------------- | ------------------------------------------ | ----------------------------------------------------------------------- |
 | createProfile          | ( userId: string, profile: ProfileModel )  | Create a profile.                                                       |
-| createTemporaryProfile | ( userId: string, profile: ProfileModel )  | Create a temporary profile. \This profile will exist for up to one hour.|
+| createTemporaryProfile | ( userId: string, profile: ProfileModel )  | Create a temporary profile. This profile will exist for up to one hour. |
 | getProfile             | ( profileId: string )                      | Get a profile by ID.                                                    |
 | listProfiles           | ( userId: string )                         | Get a list of profiles.                                                 |
 | updateProfile          | ( userId: string, profile: ProfileModel )  | Create a profile.                                                       |
@@ -136,7 +136,7 @@ Configuration Parameters:
 
 | method                | parameters                                  | description                                                                 |
 | --------------------- | ------------------------------------------- | --------------------------------------------------------------------------- |
-| createProfileDocument | ( profileId: string, document: string )     | Attach a document to a profile. \(Documents may have many files associated.)|
+| createProfileDocument | ( profileId: string, document: string )     | Attach a document to a profile. (Documents may have many files associated.) |
 | listProfileDocuments  | ( profileId: string )                       | List all profile documents.                                                 |
 | updateDocument        | ( profileId: string, document: string )     | Update a document.                                                          |
 | deleteDocument        | ( documentId: string )                      | Delete a document by ID.                                                    |
@@ -178,13 +178,13 @@ Configuration Parameters:
 
 | method            | parameters                           | description                                                                                                  |
 | ----------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| createCredentials | ( credentialParams: CredentialsModel ) | Create a credentials object which can be used to link a user to a connection. \No authentication is required.|
+| createCredentials | ( credentialParams: CredentialsModel ) | Create a credentials object which can be used to link a user to a connection. No authentication is required. |
 
 #### Connections
 
 | method           | parameters                                     | description                                                         |
 | ---------------- | ---------------------------------------------- | ------------------------------------------------------------------- |
-| createConnection | ( user_id: string, credential_id: string )     | Create a connection which will link a \credential object and a user.|
+| createConnection | ( user_id: string, credential_id: string )     | Create a connection which will link a credential object and a user. |
 | getConnection    | ( connectionId: string )                       | Get a connection by ID.                                             |
 | listConnections  | ( userId: string )                             | Get a list of user connections.                                     |
 | updateConnection | ( connectionId: string, credentialId: string ) | Update a connection's credential_id.                                |

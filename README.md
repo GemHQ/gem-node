@@ -133,12 +133,12 @@ Configuration Parameters:
 
 #### Documents
 
-| method                | description                                                                 |
-| --------------------- | --------------------------------------------------------------------------- |
-| createProfileDocument | Attach a document to a profile. (Documents may have many files associated.) |
-| listProfileDocuments  | List all profile documents.                                                 |
-| updateDocument        | Update a document.                                                          |
-| deleteDocument        | Delete a document by ID.                                                    |
+| method                | parameters                                | description                                                                 |
+| --------------------- | ----------------------------------------- | --------------------------------------------------------------------------- |
+| createProfileDocument | (profileId: string, document: string)     | Attach a document to a profile. (Documents may have many files associated.) |
+| listProfileDocuments  | (profileId: string)                       | List all profile documents.                                                 |
+| updateDocument        | (profileId: string, document: string)     | Update a document.                                                          |
+| deleteDocument        | (documentId: string)                      | Delete a document by ID.                                                    |
 
 #### Institutions
 

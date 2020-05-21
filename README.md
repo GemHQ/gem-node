@@ -1,6 +1,6 @@
 # Gem API Node.js Client
 
-Node.js client library for the [Gem API](https://gem.co/api).
+Node.js client library for the [Gem API](http://petstore.swagger.io/?url=https://api.gem.co/apidocs#/).
 
 ## Install
 
@@ -167,12 +167,12 @@ Configuration Parameters:
 
 #### Transactions
 
-| method             | parameters                               | description                    |
-| ------------------ | ---------------------------------------- | ------------------------------ |
-| createTransaction  | ( transactionParams: TransactionModel )  | Create a transaction.          |
-| confirmTransaction | ( transactionId: string )                | Confirm a transaction preview. |
-| getTransaction     | ( transactionId: string )                | Get a transaction by ID.       |
-| listTransactions   | ( page?: number )                        | Get a list of transactions.    |
+| method             | parameters                                                                                              | description                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| createTransaction  | ( transactionParams: TransactionModel )                                                                 | Create a transaction.          |
+| confirmTransaction | ( transactionId: string )                                                                               | Confirm a transaction preview. |
+| getTransaction     | ( transactionId: string )                                                                               | Get a transaction by ID.       |
+| listTransactions   | ({ userId?: string, accountId?: string, beforeId?: string, afterId?: string, limit?: number }?: object) | Get a list of transactions.    |
 
 #### Credentials
 

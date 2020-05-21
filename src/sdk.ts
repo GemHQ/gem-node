@@ -296,11 +296,18 @@ export namespace SDK {
       await this.client.post(`${Endpoints.transactions}/${transactionId}`);
 
     listTransactions = async (
-      page?: number
-    ): Promise<GemResponseType.ITransaction[]> =>
-      await this.client.get(`${Endpoints.transactions}`, {
-        ...(page && { page }),
-      });
+      params?: { userId?: string, accountId?: string, beforeId?: string, afterId?: string, limit?: number }
+    ): Promise<GemResponseType.ITransaction[]> => {
+      const query: { user_id?: string, account_id?: string, before_id?: string, after_id?: string, limit?: number } = {};
+      if (params) {
+        params.userId && (query.user_id = params.userId);
+        params.accountId && (query.account_id = params.accountId);
+        params.beforeId && (query.before_id = params.beforeId);
+        params.afterId && (query.after_id = params.afterId);
+        params.limit && (query.limit = params.limit);
+      }
+      return await this.client.get(`${Endpoints.transactions}`, query);
+    }
 
     getTransaction = async (
       transactionId: string

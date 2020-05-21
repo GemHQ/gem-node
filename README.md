@@ -154,7 +154,7 @@ Configuration Parameters:
 | --------------------- | ------------------------------------------------ | ------------------------------ |
 | createInstitutionUser | ( profileId: string, institutionId: string )     | Create an institution user.    |
 | getInstitutionUser    | ( institutionUserId: string )                    | Get an institution user by ID. |
-| listInstitutionUser   | ( user_id: string, profile_id: string )          | Get an institution user by ID. |
+| listInstitutionUser   | ( userId: string, profile_id: string )          | Get an institution user by ID. |
 | updateInstitutionUser | ( institutionUserId: string, profileId: string ) | Update an institution user.    |
 
 #### Accounts
@@ -184,7 +184,7 @@ Configuration Parameters:
 
 | method           | parameters                                     | description                                                         |
 | ---------------- | ---------------------------------------------- | ------------------------------------------------------------------- |
-| createConnection | ( user_id: string, credential_id: string )     | Create a connection which will link a credential object and a user. |
+| createConnection | ( userId: string, credentialId: string )     | Create a connection which will link a credential object and a user. |
 | getConnection    | ( connectionId: string )                       | Get a connection by ID.                                             |
 | listConnections  | ( userId: string )                             | Get a list of user connections.                                     |
 | updateConnection | ( connectionId: string, credentialId: string ) | Update a connection's credential_id.                                |

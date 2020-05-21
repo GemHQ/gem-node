@@ -189,6 +189,20 @@ Configuration Parameters:
 | updateConnection | (connectionId: string, credentialId: string) | Update a connection's credential_id.                                |
 | deleteConnection | (connectionId: string)                       | Delete a connection by ID.                                          |
 
+#### Assets
+
+| method           | parameters                             | description                                                       |
+| ---------------- | -------------------------------------- | ----------------------------------------------------------------- |
+| getAssets        | (assetId: string, source?: string)     | Get assets from a source. assetIds can be a comma seperated list. |
+| listAssets       | (category: 'cryptocurrency' or 'fiat') | List all supported assets of a certain category.                  |
+
+#### Prices
+
+| method           | parameters                                               | description                                          |
+| ---------------- | -------------------------------------------------------- | ---------------------------------------------------- |
+| getAssetPrice    | (assetId: string, currencyId: string, source?: string)   | Get an asset price in units of a requested currency. |
+| listAssetPrices  | (assetIds: string, currencyId: string, source?: string)  | List asset prices in units of a requested currency.  |
+
 ### Vanilla Requests
 
 Each function makes a request to Gem's API and returns a promise in response.

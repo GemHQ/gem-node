@@ -370,10 +370,20 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
-            this.listTransactions = function (page) { return __awaiter(_this, void 0, void 0, function () {
+            this.listTransactions = function (params) { return __awaiter(_this, void 0, void 0, function () {
+                var query;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4, this.client.get("" + shared_1.Endpoints.transactions, __assign({}, (page && { page: page })))];
+                        case 0:
+                            query = {};
+                            if (params) {
+                                params.userId && (query.user_id = params.userId);
+                                params.accountId && (query.account_id = params.accountId);
+                                params.beforeId && (query.before_id = params.beforeId);
+                                params.afterId && (query.after_id = params.afterId);
+                                params.limit && (query.limit = params.limit);
+                            }
+                            return [4, this.client.get("" + shared_1.Endpoints.transactions, query)];
                         case 1: return [2, _a.sent()];
                     }
                 });

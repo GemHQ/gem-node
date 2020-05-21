@@ -69,7 +69,13 @@ export declare namespace SDK {
         listAccounts: (connectionId: string, userId?: string) => Promise<GemResponseType.IAccount[]>;
         createTransaction: (transactionParams: TransactionModel) => Promise<GemResponseType.ITransaction>;
         confirmTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
-        listTransactions: (page?: number) => Promise<GemResponseType.ITransaction[]>;
+        listTransactions: (params?: {
+            userId?: string;
+            accountId?: string;
+            beforeId?: string;
+            afterId?: string;
+            limit?: number;
+        }) => Promise<GemResponseType.ITransaction[]>;
         getTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
         createCredentials: (credentialParams: CredentialsModel) => Promise<GemResponseType.ICreatedCredential>;
         createConnection: (user_id: string, credential_id: string) => Promise<GemResponseType.IConnection>;

@@ -126,9 +126,9 @@ Configuration Parameters:
 | ---------------------- | ---------------------------------------- | ----------------------------------------------------------------------- |
 | createProfile          | (userId: string, profile: ProfileModel)  | Create a profile.                                                       |
 | createTemporaryProfile | (userId: string, profile: ProfileModel)  | Create a temporary profile. This profile will exist for up to one hour. |
-| updateProfile          | (userId: string, profile: ProfileModel)  | Create a profile.                                                       |
 | getProfile             | (profileId: string)                      | Get a profile by ID.                                                    |
 | listProfiles           | (userId: string)                         | Get a list of profiles.                                                 |
+| updateProfile          | (userId: string, profile: ProfileModel)  | Create a profile.                                                       |
 | deleteProfile          | (profileId: string)                      | Delete a profile by ID.                                                 |
 
 #### Documents
@@ -144,16 +144,17 @@ Configuration Parameters:
 
 | method           | parameters                | description                      |
 | ---------------- | ------------------------- | -------------------------------- |
-| listInstitutions | none                      | List all supported institutions. |
 | getInstitution   | (institutionId: string)   | Get an institution by ID.        |
+| listInstitutions | none                      | List all supported institutions. |
 
 #### Institution Users
 
-| method                | description                    |
-| --------------------- | ------------------------------ |
-| createInstitutionUser | Create an institution user.    |
-| updateInstitutionUser | Update an institution user.    |
-| getInstitutionUser    | Get an institution user by ID. |
+| method                | parameters                                     | description                    |
+| --------------------- | ---------------------------------------------- | ------------------------------ |
+| createInstitutionUser | (profileId: string, institutionId: string)     | Create an institution user.    |
+| getInstitutionUser    | (institutionUserId: string)                    | Get an institution user by ID. |
+| listInstitutionUser   | (user_id: string, profile_id: string)          | Get an institution user by ID. |
+| updateInstitutionUser | (institutionUserId: string, profileId: string) | Update an institution user.    |
 
 #### Accounts
 

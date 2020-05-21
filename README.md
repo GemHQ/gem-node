@@ -142,10 +142,10 @@ Configuration Parameters:
 
 #### Institutions
 
-| method           | description                      |
-| ---------------- | -------------------------------- |
-| listInstitutions | List all supported institutions. |
-| getInstitution   | Get an institution by ID.        |
+| method           | parameters                | description                      |
+| ---------------- | ------------------------- | -------------------------------- |
+| listInstitutions | none                      | List all supported institutions. |
+| getInstitution   | (institutionId: string)   | Get an institution by ID.        |
 
 #### Institution Users
 

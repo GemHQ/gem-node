@@ -8,7 +8,7 @@ export const dbg = debug('gem:client');
 /**
  * The Gem API base URL
  */
-export const GEM_BASE_URL = 'https://vgs-sandbox.gem.co';
+export const GEM_BASE_URL = 'https://api.sandbox.gem.co';
 
 /**
  * Incoming CSRF cookie name

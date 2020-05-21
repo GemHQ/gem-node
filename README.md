@@ -181,13 +181,13 @@ Configuration Parameters:
 
 #### Connections
 
-| method           | description                                                         |
-| ---------------- | ------------------------------------------------------------------- |
-| createConnection | Create a connection which will link a credential object and a user. |
-| updateConnection | Update a connection's credential_id.                                |
-| getConnection    | Get a connection by ID.                                             |
-| listConnections  | Get a list of user connections.                                     |
-| deleteConnection | Delete a connection by ID.                                          |
+| method           | parameters                                   | description                                                         |
+| ---------------- | -------------------------------------------- | ------------------------------------------------------------------- |
+| createConnection | (user_id: string, credential_id: string)     | Create a connection which will link a credential object and a user. |
+| getConnection    | (connectionId: string)                       | Get a connection by ID.                                             |
+| listConnections  | (userId: string)                             | Get a list of user connections.                                     |
+| updateConnection | (connectionId: string, credentialId: string) | Update a connection's credential_id.                                |
+| deleteConnection | (connectionId: string)                       | Delete a connection by ID.                                          |
 
 ### Vanilla Requests
 

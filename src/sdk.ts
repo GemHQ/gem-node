@@ -166,6 +166,16 @@ export namespace SDK {
       );
     };
 
+    listProfileVerifications = async ({
+      profileId,
+    }: {
+      profileId: string;
+    }): Promise<GemResponseType.IProfileVerification[]> => {
+      return await this.client.get(
+        `${Endpoints.profiles}/${profileId}/verifications`
+      );
+    };
+
     /**
      * DOCUMENTS
      */
@@ -295,10 +305,20 @@ export namespace SDK {
     ): Promise<GemResponseType.ITransaction> =>
       await this.client.post(`${Endpoints.transactions}/${transactionId}`);
 
-    listTransactions = async (
-      params?: { userId?: string, accountId?: string, beforeId?: string, afterId?: string, limit?: number }
-    ): Promise<GemResponseType.ITransaction[]> => {
-      const query: { user_id?: string, account_id?: string, before_id?: string, after_id?: string, limit?: number } = {};
+    listTransactions = async (params?: {
+      userId?: string;
+      accountId?: string;
+      beforeId?: string;
+      afterId?: string;
+      limit?: number;
+    }): Promise<GemResponseType.ITransaction[]> => {
+      const query: {
+        user_id?: string;
+        account_id?: string;
+        before_id?: string;
+        after_id?: string;
+        limit?: number;
+      } = {};
       if (params) {
         params.userId && (query.user_id = params.userId);
         params.accountId && (query.account_id = params.accountId);
@@ -307,7 +327,7 @@ export namespace SDK {
         params.limit && (query.limit = params.limit);
       }
       return await this.client.get(`${Endpoints.transactions}`, query);
-    }
+    };
 
     getTransaction = async (
       transactionId: string

@@ -43,6 +43,13 @@ export enum Endpoints {
 }
 
 export namespace GemResponseType {
+  export interface IProfileVerification {
+    profile_id: string;
+    status: 'pending' | 'approved' | 'user_action_pending' | 'failed';
+    additional_reason: any;
+    type: 'OnfidoVerification';
+  }
+
   export interface IOnfidoSDKToken {
     sdk_token: string;
   }

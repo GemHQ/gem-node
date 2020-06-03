@@ -54,6 +54,9 @@ export declare namespace SDK {
             }[];
             kycVerifier: "onfido";
         }) => Promise<GemResponseType.IBaseMessage>;
+        listProfileVerifications: ({ profileId, }: {
+            profileId: string;
+        }) => Promise<GemResponseType.IProfileVerification[]>;
         listProfileDocuments: (profileId: string) => Promise<GemResponseType.IDocument[]>;
         createProfileDocument: (profileId: string, document: any) => Promise<GemResponseType.IDocument>;
         deleteDocument: (documentId: string) => Promise<GemResponseType.IBaseMessage>;

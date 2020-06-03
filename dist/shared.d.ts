@@ -22,6 +22,12 @@ export declare enum Endpoints {
     refresh = "/refresh"
 }
 export declare namespace GemResponseType {
+    interface IProfileVerification {
+        profile_id: string;
+        status: 'pending' | 'approved' | 'user_action_pending' | 'failed';
+        additional_reason: any;
+        type: 'OnfidoVerification';
+    }
     interface IOnfidoSDKToken {
         sdk_token: string;
     }

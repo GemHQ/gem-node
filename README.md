@@ -1,6 +1,6 @@
 # Gem API Node.js Client
 
-Node.js client library for the [Gem API](http://petstore.swagger.io/?url=https://api.gem.co/apidocs#/).
+The official Node.js client for the [Gem API](http://petstore.swagger.io/?url=https://api.gem.co/apidocs#/).
 
 ## Install
 
@@ -98,7 +98,7 @@ profileDocument.append('files[0][data]', fileData);
 
 ```js
 const gem = new Gem({
-  /* Parameters */
+  /* Configuration Parameters */
 });
 ```
 
@@ -210,11 +210,17 @@ Configuration Parameters:
 Each function makes a request to Gem's API and returns a promise in response.
 
 ```js
-gem.get(path, parameters, options);
-gem.post(path, body, options);
-gem.put(path, body, options);
-gem.patch(path, body, options);
-gem.delete(path, body, options);
+const gem = new Gem({
+  /* Configuration Parameters */
+});
+
+const client = gem.client;
+
+client.get(path, parameters, options);
+client.post(path, body, options);
+client.put(path, body, options);
+client.patch(path, body, options);
+client.delete(path, body, options);
 ```
 
 ### Debugging

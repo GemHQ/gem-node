@@ -16,7 +16,7 @@ const fs = require('fs'),
 
 /**
  *
- * Gem Related Imports
+ * GEM IMPORTS
  *
  **/
 const { GEM_API_KEY, GEM_API_SECRET } = process.env,
@@ -30,20 +30,20 @@ const { GEM_API_KEY, GEM_API_SECRET } = process.env,
  *
  **/
 
-// Create client
+// Create client.
 const gem = new Gem({
   apiKey: GEM_API_KEY,
   secretKey: GEM_API_SECRET,
   baseUrl: 'https://api.sandbox.gem.co',
 });
 
-// Read document data
+// Retrieve the user's profile document data.
 const fileData = fs.createReadStream('/my/passport/file.png');
 
-// Set blockchain address
+// Set blockchain destination address.
 const BLOCKCHAIN_ADDRESS = 'mybitcoinaddress';
 
-// Setup user profile
+// Setup a user profile.
 const userProfile = {
   name: { given_names: 'My First Name', family_names: 'My Last Name' },
   address: {
@@ -82,7 +82,7 @@ profileDocument.append('files[0][data]', fileData);
       phoneNumber: '+12345678910',
     });
 
-    // Verify a user's phone number
+    // Verify a user's phone number.
     await client.sendUserSMSOTP(user.id);
     const userOTP = await getUserInput();
     await client.verifyUserSMSOTP(user.id, userOTP);
@@ -100,7 +100,7 @@ profileDocument.append('files[0][data]', fileData);
     });
     const account = await gem.createAccount(plaidAccount);
 
-    // Create a transaction
+    // Create a transaction.
     // NOTE: The institution user will need to be
     // approved by the institution first.
     const txn = await gem.createTransaction({

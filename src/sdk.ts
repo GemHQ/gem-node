@@ -49,6 +49,16 @@ export namespace SDK {
       this.rawAxios = this.client.axios;
     }
 
+    private getDocumentContentLength = async (document: {
+      getLength: (cb: (err: any, length: number) => any) => any;
+    }): Promise<number> => {
+      return await new Promise((resolve, reject) => {
+        return document.getLength((err, length) =>
+          err ? reject(err) : resolve(length)
+        );
+      });
+    };
+
     /**
      * USERS
      */
@@ -193,7 +203,7 @@ export namespace SDK {
         headers: {
           ...(this.client.IS_NODE && {
             ...document.getHeaders(),
-            'Content-Length': document.getLengthSync(),
+            'Content-Length': await this.getDocumentContentLength(document),
           }),
           'Content-Type': 'multipart/form-data',
         },
@@ -208,17 +218,21 @@ export namespace SDK {
     updateDocument = async (
       documentId: string,
       document: any
-    ): Promise<GemResponseType.IDocument> =>
-      await this.client.put(`${Endpoints.documents}/${documentId}`, document, {
-        headers: {
-          ...(this.client.IS_NODE && {
-            ...document.getHeaders(),
-            'Content-Length': document.getLengthSync(),
-          }),
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
+    ): Promise<GemResponseType.IDocument> => {
+      return await this.client.put(
+        `${Endpoints.documents}/${documentId}`,
+        document,
+        {
+          headers: {
+            ...(this.client.IS_NODE && {
+              ...document.getHeaders(),
+              'Content-Length': await this.getDocumentContentLength(document),
+            }),
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+    };
     /**
      * INSTITUTIONS
      */

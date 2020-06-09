@@ -77,15 +77,15 @@ profileDocument.append('files[0][data]', fileData);
   try {
     // Setup a Gem user.
     const user = await gem.findOrCreateUser({ email: 'someuser@gmail.com' });
-    await client.updateUser({
+    await gem.updateUser({
       userId: user.id,
       phoneNumber: '+12345678910',
     });
 
     // Verify a user's phone number.
-    await client.sendUserSMSOTP(user.id);
+    await gem.sendUserSMSOTP(user.id);
     const userOTP = await getUserInput();
-    await client.verifyUserSMSOTP(user.id, userOTP);
+    await gem.verifyUserSMSOTP(user.id, userOTP);
 
     // Create a KYC/AML profile and a user account within the institution.
     const profile = await gem.createProfile(user.id, userProfile);

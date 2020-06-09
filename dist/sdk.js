@@ -125,6 +125,18 @@ var SDK;
         function Gem(config) {
             var _this = this;
             this.client = null;
+            this.getDocumentContentLength = function (document) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, new Promise(function (resolve, reject) {
+                                return document.getLength(function (err, length) {
+                                    return err ? reject(err) : resolve(length);
+                                });
+                            })];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
             this.createUser = function (emailAddress) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -269,15 +281,27 @@ var SDK;
                 }
             }); }); };
             this.createProfileDocument = function (profileId, document) { return __awaiter(_this, void 0, void 0, function () {
-                var url;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
+                var url, _a, _b, _c, _d, _e, _f, _g, _h, _j;
+                return __generator(this, function (_k) {
+                    switch (_k.label) {
                         case 0:
                             url = shared_1.Endpoints.profiles + "/" + profileId + "/documents";
-                            return [4, this.client.post(url, document, {
-                                    headers: __assign(__assign({}, (this.client.IS_NODE && __assign(__assign({}, document.getHeaders()), { 'Content-Length': document.getLengthSync() }))), { 'Content-Type': 'multipart/form-data' }),
-                                })];
-                        case 1: return [2, _a.sent()];
+                            _b = (_a = this.client).post;
+                            _c = [url, document];
+                            _d = {};
+                            _e = [{}];
+                            _f = this.client.IS_NODE;
+                            if (!_f) return [3, 2];
+                            _g = [__assign({}, document.getHeaders())];
+                            _h = {};
+                            _j = 'Content-Length';
+                            return [4, this.getDocumentContentLength(document)];
+                        case 1:
+                            _f = __assign.apply(void 0, _g.concat([(_h[_j] = _k.sent(), _h)]));
+                            _k.label = 2;
+                        case 2: return [4, _b.apply(_a, _c.concat([(_d.headers = __assign.apply(void 0, [__assign.apply(void 0, _e.concat([(_f)])), { 'Content-Type': 'multipart/form-data' }]),
+                                    _d)]))];
+                        case 3: return [2, _k.sent()];
                     }
                 });
             }); };
@@ -288,12 +312,27 @@ var SDK;
                 }
             }); }); };
             this.updateDocument = function (documentId, document) { return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4, this.client.put(shared_1.Endpoints.documents + "/" + documentId, document, {
-                                headers: __assign(__assign({}, (this.client.IS_NODE && __assign(__assign({}, document.getHeaders()), { 'Content-Length': document.getLengthSync() }))), { 'Content-Type': 'multipart/form-data' }),
-                            })];
-                        case 1: return [2, _a.sent()];
+                var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+                return __generator(this, function (_k) {
+                    switch (_k.label) {
+                        case 0:
+                            _b = (_a = this.client).put;
+                            _c = [shared_1.Endpoints.documents + "/" + documentId,
+                                document];
+                            _d = {};
+                            _e = [{}];
+                            _f = this.client.IS_NODE;
+                            if (!_f) return [3, 2];
+                            _g = [__assign({}, document.getHeaders())];
+                            _h = {};
+                            _j = 'Content-Length';
+                            return [4, this.getDocumentContentLength(document)];
+                        case 1:
+                            _f = __assign.apply(void 0, _g.concat([(_h[_j] = _k.sent(), _h)]));
+                            _k.label = 2;
+                        case 2: return [4, _b.apply(_a, _c.concat([(_d.headers = __assign.apply(void 0, [__assign.apply(void 0, _e.concat([(_f)])), { 'Content-Type': 'multipart/form-data' }]),
+                                    _d)]))];
+                        case 3: return [2, _k.sent()];
                     }
                 });
             }); };

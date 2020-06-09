@@ -13,22 +13,23 @@ npm install @gem.co/api
 ```js
 const { GEM_API_KEY, GEM_API_SECRET } = process.env;
 const { Gem, Models, Enums } = require('@gem.co/api').SDK;
-const { Profile, Document, PlaidAccount, Transaction } = Models;
+const { PlaidAccount } = Models;
 const { NewAccountTypes } = Enums;
 const BLOCKCHAIN_ADDRESS = 'mybitcoinaddress';
 
+const FormData = require('form-data');
 const fs = require('fs');
-const passportFile = fs.createReadStream('/my/passport/file.png');
+const fileData = fs.createReadStream('/my/passport/file.png');
 
+// Create client
 const gem = new Gem({
   apiKey: GEM_API_KEY,
   secretKey: GEM_API_SECRET,
   baseUrl: 'https://api.sandbox.gem.co',
 });
 
-const userProfile = new Profile({
+const userProfile = {
   name: { given_names: 'My First Name', family_names: 'My Last Name' },
-  phone_number: '+11234567890',
   address: {
     street_1: '1123 Flower st.',
     street_2: 'APT 123',
@@ -40,24 +41,26 @@ const userProfile = new Profile({
   email_address: 'someone@example.com',
   social_security_number: '123-45-0976',
   date_of_birth: '11-20-1976',
-});
+};
 
-const profileDocument = new Document({
-  type: 'passport',
-  description: 'My passport',
-  files: [
-    {
-      data: passportFile,
-      media_type: 'image/png',
-      description: 'the file description',
-      orientation: 'front',
-    },
-  ],
-});
+// Gem's API requires multipart/form-data for document uploads.
+const profileDocument = new FormData();
+profileDocument.append('type', 'passport');
+profileDocument.append('description', 'Top level passport document.');
+profileDocument.append('files[0][media_type]', 'image/png');
+profileDocument.append('files[0][description]', 'First file for document.');
+profileDocument.append('files[0][data]', fileData);
 
 (async () => {
   try {
-    const user = await gem.createUser();
+    const user = await gem.findOrCreateUser({ email: 'someuser@gmail.com' });
+    await client.updateUser({
+      userId: user.id,
+      phoneNumber: '+12345678910',
+    });
+    await client.sendUserSMSOTP(user.id);
+    // Get user input for OTP
+    await client.verifyUserSMSOTP(user.id, userOTP);
     const profile = await gem.createProfile(user.id, userProfile);
     await gem.createProfileDocument(profile.id, profileDocument);
     const institutionUser = await gem.createInstitutionUser(profile.id, 'wyre');
@@ -71,18 +74,16 @@ const profileDocument = new Document({
     const account = await gem.createAccount(plaidAccount);
 
     // Create a transaction, assuming the third party has approved this account.
-    const txn = await gem.createTransaction(
-      new Transaction({
-        source_id: account.id,
-        source_amount: 100.0,
-        blockchain_address: {
-          address: BLOCKCHAIN_ADDRESS,
-          asset_id: 'bitcoin',
-        },
-        type: 'buy',
-        preview: false,
-      })
-    );
+    const txn = await gem.createTransaction({
+      source_id: account.id,
+      source_amount: 100.0,
+      blockchain_address: {
+        address: BLOCKCHAIN_ADDRESS,
+        asset_id: 'bitcoin',
+      },
+      type: 'buy',
+      preview: false,
+    });
 
     console.log(txn);
   } catch (e) {
@@ -103,43 +104,43 @@ const gem = new Gem({
 
 Configuration Parameters:
 
-| parameter | description                                                                                                                |
-| --------- | -------------------------------------------------------------------------------------------------------------------------- |
-| apiKey    | Gem API key for the respective environment.                                                                                |
-| secretKey | Gem API secret for the respective environment.                                                                             |
-| baseUrl   | The Gem API base URL you want to use. <br>`https://api.gem.co` for production<br>`https://api.sandbox.gem.co` for sandbox. |
-| options   | Configuration options that are passed to the [Axios Client](https://github.com/axios/axios#request-config) for _each_ request made to the API.           |
+| parameter | description                                                                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| apiKey    | Gem API key for the respective environment.                                                                                                    |
+| secretKey | Gem API secret for the respective environment.                                                                                                 |
+| baseUrl   | The Gem API base URL you want to use. <br>`https://api.gem.co` for production<br>`https://api.sandbox.gem.co` for sandbox.                     |
+| options   | Configuration options that are passed to the [Axios Client](https://github.com/axios/axios#request-config) for _each_ request made to the API. |
 
 ### SDK Requests
 
 #### Users
 
-| method     | parameters                    | description          | 
-| ---------- | ----------------------------- | -------------------- | 
-| createUser | (emailAddress?: string)       | Create a user.       | 
-| getUser    | (userId: string)              | Get a user by ID.    |
-| listUsers  | none                          | List all users       |
-| deleteUser | (userId: string)              | Delete a user by ID. |
+| method     | parameters              | description          |
+| ---------- | ----------------------- | -------------------- |
+| createUser | (emailAddress?: string) | Create a user.       |
+| getUser    | (userId: string)        | Get a user by ID.    |
+| listUsers  | none                    | List all users       |
+| deleteUser | (userId: string)        | Delete a user by ID. |
 
 #### Profiles
 
-| method                 | parameters                                 | description                                                             |
-| ---------------------- | ------------------------------------------ | ----------------------------------------------------------------------- |
-| createProfile          | ( userId: string, profile: ProfileModel )  | Create a profile.                                                       |
-| createTemporaryProfile | ( userId: string, profile: ProfileModel )  | Create a temporary profile. This profile will exist for up to one hour. |
-| getProfile             | ( profileId: string )                      | Get a profile by ID.                                                    |
-| listProfiles           | ( userId: string )                         | Get a list of profiles.                                                 |
-| updateProfile          | ( userId: string, profile: ProfileModel )  | Create a profile.                                                       |
-| deleteProfile          | ( profileId: string )                      | Delete a profile by ID.                                                 |
+| method                 | parameters                                | description                                                             |
+| ---------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
+| createProfile          | ( userId: string, profile: ProfileModel ) | Create a profile.                                                       |
+| createTemporaryProfile | ( userId: string, profile: ProfileModel ) | Create a temporary profile. This profile will exist for up to one hour. |
+| getProfile             | ( profileId: string )                     | Get a profile by ID.                                                    |
+| listProfiles           | ( userId: string )                        | Get a list of profiles.                                                 |
+| updateProfile          | ( userId: string, profile: ProfileModel ) | Create a profile.                                                       |
+| deleteProfile          | ( profileId: string )                     | Delete a profile by ID.                                                 |
 
 #### Documents
 
-| method                | parameters                                  | description                                                                 |
-| --------------------- | ------------------------------------------- | --------------------------------------------------------------------------- |
-| createProfileDocument | ( profileId: string, document: string )     | Attach a document to a profile. (Documents may have many files associated.) |
-| listProfileDocuments  | ( profileId: string )                       | List all profile documents.                                                 |
-| updateDocument        | ( profileId: string, document: string )     | Update a document.                                                          |
-| deleteDocument        | ( documentId: string )                      | Delete a document by ID.                                                    |
+| method                | parameters                              | description                                                                 |
+| --------------------- | --------------------------------------- | --------------------------------------------------------------------------- |
+| createProfileDocument | ( profileId: string, document: string ) | Attach a document to a profile. (Documents may have many files associated.) |
+| listProfileDocuments  | ( profileId: string )                   | List all profile documents.                                                 |
+| updateDocument        | ( profileId: string, document: string ) | Update a document.                                                          |
+| deleteDocument        | ( documentId: string )                  | Delete a document by ID.                                                    |
 
 #### Institutions
 
@@ -154,7 +155,7 @@ Configuration Parameters:
 | --------------------- | ------------------------------------------------ | ------------------------------ |
 | createInstitutionUser | ( profileId: string, institutionId: string )     | Create an institution user.    |
 | getInstitutionUser    | ( institutionUserId: string )                    | Get an institution user by ID. |
-| listInstitutionUser   | ( userId: string, profile_id: string )          | Get an institution user by ID. |
+| listInstitutionUser   | ( userId: string, profile_id: string )           | Get an institution user by ID. |
 | updateInstitutionUser | ( institutionUserId: string, profileId: string ) | Update an institution user.    |
 
 #### Accounts
@@ -176,15 +177,15 @@ Configuration Parameters:
 
 #### Credentials
 
-| method            | parameters                           | description                                                                                                  |
-| ----------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| method            | parameters                             | description                                                                                                  |
+| ----------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | createCredentials | ( credentialParams: CredentialsModel ) | Create a credentials object which can be used to link a user to a connection. No authentication is required. |
 
 #### Connections
 
 | method           | parameters                                     | description                                                         |
 | ---------------- | ---------------------------------------------- | ------------------------------------------------------------------- |
-| createConnection | ( userId: string, credentialId: string )     | Create a connection which will link a credential object and a user. |
+| createConnection | ( userId: string, credentialId: string )       | Create a connection which will link a credential object and a user. |
 | getConnection    | ( connectionId: string )                       | Get a connection by ID.                                             |
 | listConnections  | ( userId: string )                             | Get a list of user connections.                                     |
 | updateConnection | ( connectionId: string, credentialId: string ) | Update a connection's credential_id.                                |
@@ -192,17 +193,17 @@ Configuration Parameters:
 
 #### Assets
 
-| method           | parameters                               | description                                                       |
-| ---------------- | ---------------------------------------- | ----------------------------------------------------------------- |
-| getAssets        | ( assetId: string, source?: string )     | Get assets from a source. assetIds can be a comma seperated list. |
-| listAssets       | ( category: 'cryptocurrency' or 'fiat' ) | List all supported assets of a certain category.                  |
+| method     | parameters                               | description                                                       |
+| ---------- | ---------------------------------------- | ----------------------------------------------------------------- |
+| getAssets  | ( assetId: string, source?: string )     | Get assets from a source. assetIds can be a comma seperated list. |
+| listAssets | ( category: 'cryptocurrency' or 'fiat' ) | List all supported assets of a certain category.                  |
 
 #### Prices
 
-| method           | parameters                                                 | description                                          |
-| ---------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
-| getAssetPrice    | ( assetId: string, currencyId: string, source?: string )   | Get an asset price in units of a requested currency. |
-| listAssetPrices  | ( assetIds: string, currencyId: string, source?: string )  | List asset prices in units of a requested currency.  |
+| method          | parameters                                                | description                                          |
+| --------------- | --------------------------------------------------------- | ---------------------------------------------------- |
+| getAssetPrice   | ( assetId: string, currencyId: string, source?: string )  | Get an asset price in units of a requested currency. |
+| listAssetPrices | ( assetIds: string, currencyId: string, source?: string ) | List asset prices in units of a requested currency.  |
 
 ### Vanilla Requests
 

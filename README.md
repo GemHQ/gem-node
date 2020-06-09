@@ -11,15 +11,24 @@ npm install @gem.co/api
 ## Quickstart
 
 ```js
-const { GEM_API_KEY, GEM_API_SECRET } = process.env;
-const { Gem, Models, Enums } = require('@gem.co/api').SDK;
-const { PlaidAccount } = Models;
-const { NewAccountTypes } = Enums;
-const BLOCKCHAIN_ADDRESS = 'mybitcoinaddress';
+const fs = require('fs'),
+  FormData = require('form-data');
 
-const FormData = require('form-data');
-const fs = require('fs');
-const fileData = fs.createReadStream('/my/passport/file.png');
+/**
+ *
+ * Gem Related Imports
+ *
+ **/
+const { GEM_API_KEY, GEM_API_SECRET } = process.env,
+  { Gem, Models, Enums } = require('@gem.co/api').SDK,
+  { PlaidAccount } = Models,
+  { NewAccountTypes } = Enums;
+
+/**
+ *
+ * CONSTANTS
+ *
+ **/
 
 // Create client
 const gem = new Gem({
@@ -28,6 +37,13 @@ const gem = new Gem({
   baseUrl: 'https://api.sandbox.gem.co',
 });
 
+// Read document data
+const fileData = fs.createReadStream('/my/passport/file.png');
+
+// Set blockchain address
+const BLOCKCHAIN_ADDRESS = 'mybitcoinaddress';
+
+// Setup user profile
 const userProfile = {
   name: { given_names: 'My First Name', family_names: 'My Last Name' },
   address: {
@@ -38,12 +54,12 @@ const userProfile = {
     country: 'US',
     state: 'CA',
   },
-  email_address: 'someone@example.com',
   social_security_number: '123-45-0976',
   date_of_birth: '11-20-1976',
 };
 
-// Gem's API requires multipart/form-data for document uploads.
+// Setup document and associated files.
+// NOTE: Gem's API requires multipart/form-data for document & file uploads.
 const profileDocument = new FormData();
 profileDocument.append('type', 'passport');
 profileDocument.append('description', 'Top level passport document.');
@@ -51,29 +67,42 @@ profileDocument.append('files[0][media_type]', 'image/png');
 profileDocument.append('files[0][description]', 'First file for document.');
 profileDocument.append('files[0][data]', fileData);
 
+/**
+ *
+ * MAIN
+ *
+ **/
+
 (async () => {
   try {
+    // Setup a Gem user.
     const user = await gem.findOrCreateUser({ email: 'someuser@gmail.com' });
     await client.updateUser({
       userId: user.id,
       phoneNumber: '+12345678910',
     });
+
+    // Verify a user's phone number
     await client.sendUserSMSOTP(user.id);
-    // Get user input for OTP
+    const userOTP = await getUserInput();
     await client.verifyUserSMSOTP(user.id, userOTP);
+
+    // Create a KYC/AML profile and a user account within the institution.
     const profile = await gem.createProfile(user.id, userProfile);
     await gem.createProfileDocument(profile.id, profileDocument);
     const institutionUser = await gem.createInstitutionUser(profile.id, 'wyre');
 
+    // Create a payment method within the institution.
     const plaidAccount = new PlaidAccount({
       connection_id: institutionUser.connection_id,
       type: NewAccountTypes.PlaidAccount,
       plaid_token: 'a-wyre-plaid-public-token',
     });
-
     const account = await gem.createAccount(plaidAccount);
 
-    // Create a transaction, assuming the third party has approved this account.
+    // Create a transaction
+    // NOTE: The institution user will need to be
+    // approved by the institution first.
     const txn = await gem.createTransaction({
       source_id: account.id,
       source_amount: 100.0,

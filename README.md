@@ -1,4 +1,4 @@
-# Gem API Node.js Client
+# Official Gem API Node.js Client
 
 The official Node.js client for the [Gem API](http://petstore.swagger.io/?url=https://api.gem.co/apidocs#/).
 
@@ -10,17 +10,19 @@ npm install @gem.co/api
 
 ## Quickstart
 
+### Server
+
 ```js
 const fs = require('fs'),
-  FormData = require('form-data');
+  FormData = require('form-data'),
+  { GEM_API_KEY, GEM_API_SECRET } = process.env;
 
 /**
  *
  * GEM IMPORTS
  *
  **/
-const { GEM_API_KEY, GEM_API_SECRET } = process.env,
-  { Gem, Models, Enums } = require('@gem.co/api').SDK,
+const { Gem, Models, Enums } = require('@gem.co/api').SDK,
   { PlaidAccount } = Models,
   { NewAccountTypes } = Enums;
 
@@ -164,12 +166,12 @@ Configuration Parameters:
 
 #### Documents
 
-| method                | parameters                              | description                                                                 |
-| --------------------- | --------------------------------------- | --------------------------------------------------------------------------- |
-| createProfileDocument | ( profileId: string, document: string ) | Attach a document to a profile. (Documents may have many files associated.) |
-| listProfileDocuments  | ( profileId: string )                   | List all profile documents.                                                 |
-| updateDocument        | ( profileId: string, document: string ) | Update a document.                                                          |
-| deleteDocument        | ( documentId: string )                  | Delete a document by ID.                                                    |
+| method                | parameters                                | description                                                                 |
+| --------------------- | ----------------------------------------- | --------------------------------------------------------------------------- |
+| createProfileDocument | ( profileId: string, document: FormData ) | Attach a document to a profile. (Documents may have many files associated.) |
+| listProfileDocuments  | ( profileId: string )                     | List all profile documents.                                                 |
+| updateDocument        | ( profileId: string, document: FormData ) | Update a document.                                                          |
+| deleteDocument        | ( documentId: string )                    | Delete a document by ID.                                                    |
 
 #### Institutions
 

@@ -178,6 +178,7 @@ export declare namespace GemResponseType {
         external_id: string;
         type: string;
         additional_data: any;
+        is_preview?: boolean;
         reason: {
             message: string;
         };

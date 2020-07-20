@@ -24,3 +24,19 @@ var Endpoints;
     Endpoints["logout"] = "/logout";
     Endpoints["refresh"] = "/refresh";
 })(Endpoints = exports.Endpoints || (exports.Endpoints = {}));
+var Types;
+(function (Types) {
+    var PartialTransactionDirectionType;
+    (function (PartialTransactionDirectionType) {
+        PartialTransactionDirectionType["BLOCKCHAIN"] = "blockchain";
+        PartialTransactionDirectionType["BANK"] = "bank";
+        PartialTransactionDirectionType["CARD"] = "card";
+    })(PartialTransactionDirectionType = Types.PartialTransactionDirectionType || (Types.PartialTransactionDirectionType = {}));
+    var FullTransactionDirectionType;
+    (function (FullTransactionDirectionType) {
+        FullTransactionDirectionType["BANK_TO_BLOCKCHAIN"] = "bank_blockchain";
+        FullTransactionDirectionType["CARD_TO_BLOCKCHAIN"] = "card_blockchain";
+        FullTransactionDirectionType["BLOCKCHAIN_TO_BANK"] = "blockchain_bank";
+        FullTransactionDirectionType["BLOCKCHAIN_TO_CARD"] = "blockchain_card";
+    })(FullTransactionDirectionType = Types.FullTransactionDirectionType || (Types.FullTransactionDirectionType = {}));
+})(Types = exports.Types || (exports.Types = {}));

@@ -5,6 +5,7 @@ var client_1 = require("./client");
 exports.Client = client_1.Client;
 var shared_1 = require("./shared");
 exports.Endpoints = shared_1.Endpoints;
+exports.Types = shared_1.Types;
 var sdk_1 = require("./sdk");
 exports.SDK = sdk_1.SDK;
 var gem_api_1 = require("./errors/gem_api");

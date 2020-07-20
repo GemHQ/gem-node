@@ -512,6 +512,14 @@ var SDK;
                     }
                 });
             }); };
+            this.listSupportedCurrencies = function (institutionId) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.get(shared_1.Endpoints.institutions + "/" + institutionId + "/supported_currencies")];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
             this.listAssetPrices = function (_a) {
                 var asset_ids = _a.asset_ids, currency_id = _a.currency_id, source = _a.source;
                 return __awaiter(_this, void 0, void 0, function () {

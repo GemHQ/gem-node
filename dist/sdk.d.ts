@@ -89,6 +89,7 @@ export declare namespace SDK {
         deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;
         listAssets: (category?: "cryptocurrency" | "fiat") => Promise<GemResponseType.IAsset[]>;
         getAsset: (assetId: string, source?: string) => Promise<GemResponseType.IAsset>;
+        listSupportedCurrencies: (institutionId: "coinify" | "wyre") => Promise<GemResponseType.ISupportedCurrencyResponse>;
         listAssetPrices: ({ asset_ids, currency_id, source, }: {
             asset_ids?: string;
             currency_id?: string;

@@ -21,6 +21,31 @@ export declare enum Endpoints {
     logout = "/logout",
     refresh = "/refresh"
 }
+export declare namespace Types {
+    interface ResolvedCurrencyType {
+        created_at: string;
+        gem_asset_id: string;
+        mapping_id: string;
+        name: string;
+        primary_color: string;
+        resolved: boolean;
+        source: string;
+        ticker: string;
+        transaction_fields: {};
+        updated_at: string;
+    }
+    enum PartialTransactionDirectionType {
+        BLOCKCHAIN = "blockchain",
+        BANK = "bank",
+        CARD = "card"
+    }
+    enum FullTransactionDirectionType {
+        BANK_TO_BLOCKCHAIN = "bank_blockchain",
+        CARD_TO_BLOCKCHAIN = "card_blockchain",
+        BLOCKCHAIN_TO_BANK = "blockchain_bank",
+        BLOCKCHAIN_TO_CARD = "blockchain_card"
+    }
+}
 export declare namespace GemResponseType {
     interface IProfileVerification {
         profile_id: string;
@@ -181,6 +206,27 @@ export declare namespace GemResponseType {
         is_preview?: boolean;
         reason: {
             message: string;
+        };
+    }
+    interface ISupportedCurrencyResponse {
+        institution_id: 'coinify' | 'wyre';
+        resolved_destination_currency_count: number;
+        resolved_source_currency_count: number;
+        supported_destination_currency_count: number;
+        supported_source_currency_count: number;
+        transaction_direction: Types.FullTransactionDirectionType;
+        destination: {
+            currencies: Types.ResolvedCurrencyType[];
+            fee_percentage: number;
+            medium: Types.PartialTransactionDirectionType;
+        };
+        source: {
+            currencies: Types.ResolvedCurrencyType[];
+            fee_percentage: number;
+            medium: Types.PartialTransactionDirectionType;
+            minimums: {
+                [ticker: string]: number;
+            };
         };
     }
 }

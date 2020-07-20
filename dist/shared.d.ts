@@ -21,7 +21,7 @@ export declare enum Endpoints {
     logout = "/logout",
     refresh = "/refresh"
 }
-export declare namespace Types {
+export declare namespace GemTypes {
     interface ResolvedCurrencyType {
         created_at: string;
         gem_asset_id: string;
@@ -214,16 +214,16 @@ export declare namespace GemResponseType {
         resolved_source_currency_count: number;
         supported_destination_currency_count: number;
         supported_source_currency_count: number;
-        transaction_direction: Types.FullTransactionDirectionType;
+        transaction_direction: GemTypes.FullTransactionDirectionType;
         destination: {
-            currencies: Types.ResolvedCurrencyType[];
+            currencies: GemTypes.ResolvedCurrencyType[];
             fee_percentage: number;
-            medium: Types.PartialTransactionDirectionType;
+            medium: GemTypes.PartialTransactionDirectionType;
         };
         source: {
-            currencies: Types.ResolvedCurrencyType[];
+            currencies: GemTypes.ResolvedCurrencyType[];
             fee_percentage: number;
-            medium: Types.PartialTransactionDirectionType;
+            medium: GemTypes.PartialTransactionDirectionType;
             minimums: {
                 [ticker: string]: number;
             };

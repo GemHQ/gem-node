@@ -416,6 +416,13 @@ export namespace SDK {
         `${Endpoints.assets}/${assetId}${source ? '/' + source : ''}`
       );
 
+    listSupportedCurrencies = async (
+      institutionId: 'wyre' | 'coinify'
+    ): Promise<GemResponseType.ISupportedCurrencyResponse> =>
+      await this.client.get(
+        `${Endpoints.institutions}/${institutionId}/supported_currencies`
+      );
+
     /**
      * PRICES
      */

@@ -75,7 +75,7 @@ export namespace GemTypes {
 }
 
 export namespace GemResponseType {
-  export type ApplicationConfig = {
+  export type IApplicationConfig = {
     id: string;
     application_id: string;
     created_at: string;

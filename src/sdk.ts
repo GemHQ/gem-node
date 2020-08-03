@@ -64,7 +64,7 @@ export namespace SDK {
      */
 
     listApplicationConfigurations = async (): Promise<
-      GemResponseType.ApplicationConfig[]
+      GemResponseType.IApplicationConfig[]
     > => await this.client.get(Endpoints.application_configurations);
 
     /**

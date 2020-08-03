@@ -29,7 +29,7 @@ export declare namespace SDK {
         rawAxios: AxiosInstance;
         constructor(config: any);
         private getDocumentContentLength;
-        listApplicationConfigurations: () => Promise<GemResponseType.ApplicationConfig[]>;
+        listApplicationConfigurations: () => Promise<GemResponseType.IApplicationConfig[]>;
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;
         updateUser: (args: {

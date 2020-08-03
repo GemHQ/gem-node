@@ -60,6 +60,14 @@ export namespace SDK {
     };
 
     /**
+     * APPLICATION
+     */
+
+    listApplicationConfigurations = async (): Promise<
+      GemResponseType.ApplicationConfig[]
+    > => await this.client.get(Endpoints.application_configurations);
+
+    /**
      * USERS
      */
     createUser = async (

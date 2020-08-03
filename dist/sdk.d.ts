@@ -29,6 +29,7 @@ export declare namespace SDK {
         rawAxios: AxiosInstance;
         constructor(config: any);
         private getDocumentContentLength;
+        listApplicationConfigurations: () => Promise<GemResponseType.ApplicationConfig[]>;
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;
         updateUser: (args: {
@@ -89,7 +90,7 @@ export declare namespace SDK {
         deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;
         listAssets: (category?: "cryptocurrency" | "fiat") => Promise<GemResponseType.IAsset[]>;
         getAsset: (assetId: string, source?: string) => Promise<GemResponseType.IAsset>;
-        listSupportedCurrencies: (institutionId: "coinify" | "wyre") => Promise<GemResponseType.ISupportedCurrencyResponse[]>;
+        listSupportedCurrencies: (institutionId: "wyre" | "coinify") => Promise<GemResponseType.ISupportedCurrencyResponse[]>;
         listAssetPrices: ({ asset_ids, currency_id, source, }: {
             asset_ids?: string;
             currency_id?: string;

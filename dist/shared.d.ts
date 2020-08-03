@@ -19,7 +19,8 @@ export declare enum Endpoints {
     otp = "/auth/otp",
     session_validity = "/authenticated",
     logout = "/logout",
-    refresh = "/refresh"
+    refresh = "/refresh",
+    application_configurations = "/application_configs"
 }
 export declare namespace GemTypes {
     interface ResolvedCurrencyType {
@@ -45,8 +46,25 @@ export declare namespace GemTypes {
         BLOCKCHAIN_TO_BANK = "blockchain_bank",
         BLOCKCHAIN_TO_CARD = "blockchain_card"
     }
+    type OnfidoConfigData = {
+        enabled: boolean;
+    };
+    type WyreConfigData = {
+        is_private: boolean;
+    };
+    type CoinifyConfigData = {
+        is_private: boolean;
+    };
 }
 export declare namespace GemResponseType {
+    type ApplicationConfig = {
+        id: string;
+        application_id: string;
+        created_at: string;
+        updated_at: string;
+        type: 'wyre' | 'coinify' | 'onfido';
+        data: GemTypes.OnfidoConfigData | GemTypes.WyreConfigData | GemTypes.CoinifyConfigData;
+    };
     interface IProfileVerification {
         profile_id: string;
         status: 'pending' | 'approved' | 'user_action_pending' | 'failed';

@@ -23,6 +23,7 @@ var Endpoints;
     Endpoints["session_validity"] = "/authenticated";
     Endpoints["logout"] = "/logout";
     Endpoints["refresh"] = "/refresh";
+    Endpoints["application_configurations"] = "/application_configs";
 })(Endpoints = exports.Endpoints || (exports.Endpoints = {}));
 var GemTypes;
 (function (GemTypes) {

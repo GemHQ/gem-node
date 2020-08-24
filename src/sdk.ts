@@ -163,7 +163,12 @@ export namespace SDK {
       profileId,
       documents = [],
       kycVerifier: kyc_verifier,
+      onSuccess,
     }: {
+      onSuccess?: {
+        action: 'create_institution_user';
+        params?: { institution_id: 'wyre' | 'coinify' };
+      };
       profileId: string;
       documents: {
         id: string;
@@ -175,6 +180,7 @@ export namespace SDK {
         `${Endpoints.profiles}/${profileId}/check`,
         {
           documents,
+          ...(onSuccess && { on_success: onSuccess }),
         },
         {
           qs: {

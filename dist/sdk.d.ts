@@ -48,7 +48,13 @@ export declare namespace SDK {
         updateProfile: (profileId: string, profile: DeepPartial<ProfileModel>) => Promise<GemResponseType.IProfile>;
         createProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
-        verifyProfileKYC: ({ profileId, documents, kycVerifier: kyc_verifier, }: {
+        verifyProfileKYC: ({ profileId, documents, kycVerifier: kyc_verifier, onSuccess, }: {
+            onSuccess?: {
+                action: "create_institution_user";
+                params?: {
+                    institution_id: "wyre" | "coinify";
+                };
+            };
             profileId: string;
             documents: {
                 id: string;

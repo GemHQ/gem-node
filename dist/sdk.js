@@ -253,13 +253,11 @@ var SDK;
                 });
             }); };
             this.verifyProfileKYC = function (_a) {
-                var profileId = _a.profileId, _b = _a.documents, documents = _b === void 0 ? [] : _b, kyc_verifier = _a.kycVerifier;
+                var profileId = _a.profileId, _b = _a.documents, documents = _b === void 0 ? [] : _b, kyc_verifier = _a.kycVerifier, onSuccess = _a.onSuccess;
                 return __awaiter(_this, void 0, void 0, function () {
                     return __generator(this, function (_c) {
                         switch (_c.label) {
-                            case 0: return [4, this.client.post(shared_1.Endpoints.profiles + "/" + profileId + "/check", {
-                                    documents: documents,
-                                }, {
+                            case 0: return [4, this.client.post(shared_1.Endpoints.profiles + "/" + profileId + "/check", __assign({ documents: documents }, (onSuccess && { on_success: onSuccess })), {
                                     qs: {
                                         kyc_verifier: kyc_verifier,
                                     },

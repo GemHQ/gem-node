@@ -66,10 +66,14 @@ export declare namespace GemResponseType {
         data: GemTypes.OnfidoConfigData | GemTypes.WyreConfigData | GemTypes.CoinifyConfigData;
     };
     interface IProfileVerification {
+        id: string;
+        additional_note?: string;
         profile_id: string;
-        status: 'pending' | 'approved' | 'user_action_pending' | 'failed';
+        status: 'pending' | 'approved' | 'pending_gem_review' | 'rejected';
         additional_reason: any;
         type: 'OnfidoVerification';
+        created_at: string;
+        updated_at: string;
     }
     interface IOnfidoSDKToken {
         sdk_token: string;

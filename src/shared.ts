@@ -66,8 +66,7 @@ export namespace GemTypes {
     DRIVERS_LICENSE = 'drivers_license',
     PASSPORT = 'passport',
     ACH_AUTHORIZATION_FORM = 'ach_authorization_form',
-    UTILITY_BILL = 'utility_bill',
-    BANK_STATEMENT = 'bank_statement',
+    PROOF_OF_ADDRESS = 'proof_of_address',
     SELFIE = 'selfie',
   }
 
@@ -78,7 +77,7 @@ export namespace GemTypes {
     };
     ProofOfAddress: {
       classifier: 'proof_of_address';
-      options: [DocumentType.UTILITY_BILL, DocumentType.BANK_STATEMENT];
+      options: [DocumentType.PROOF_OF_ADDRESS];
     };
     FacialSimilarity: {
       classifier: 'facial_similarity';

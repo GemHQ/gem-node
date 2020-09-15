@@ -174,7 +174,7 @@ export namespace SDK {
         id: string;
         document_type: 'drivers_license' | 'passport' | 'selfie';
       }[];
-      kycVerifier: 'onfido';
+      kycVerifier: 'onfido' | 'wyre';
     }): Promise<GemResponseType.IBaseMessage> => {
       return await this.client.post(
         `${Endpoints.profiles}/${profileId}/check`,

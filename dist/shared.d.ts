@@ -40,6 +40,32 @@ export declare namespace GemTypes {
         BANK = "bank",
         CARD = "card"
     }
+    enum DocumentType {
+        DRIVERS_LICENSE = "drivers_license",
+        PASSPORT = "passport",
+        ACH_AUTHORIZATION_FORM = "ach_authorization_form",
+        UTILITY_BILL = "utility_bill",
+        BANK_STATEMENT = "bank_statement",
+        SELFIE = "selfie"
+    }
+    interface DocumentClassType {
+        GovernmentId: {
+            classifier: 'government_id';
+            options: [DocumentType.DRIVERS_LICENSE, DocumentType.PASSPORT];
+        };
+        ProofOfAddress: {
+            classifier: 'proof_of_address';
+            options: [DocumentType.UTILITY_BILL, DocumentType.BANK_STATEMENT];
+        };
+        FacialSimilarity: {
+            classifier: 'facial_similarity';
+            options: [DocumentType.SELFIE];
+        };
+        Specialty: {
+            classifier: 'specialty';
+            options: [DocumentType.ACH_AUTHORIZATION_FORM];
+        };
+    }
     enum FullTransactionDirectionType {
         BANK_TO_BLOCKCHAIN = "bank_blockchain",
         CARD_TO_BLOCKCHAIN = "card_blockchain",

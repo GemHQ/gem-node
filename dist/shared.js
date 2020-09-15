@@ -33,6 +33,15 @@ var GemTypes;
         PartialTransactionDirectionType["BANK"] = "bank";
         PartialTransactionDirectionType["CARD"] = "card";
     })(PartialTransactionDirectionType = GemTypes.PartialTransactionDirectionType || (GemTypes.PartialTransactionDirectionType = {}));
+    var DocumentType;
+    (function (DocumentType) {
+        DocumentType["DRIVERS_LICENSE"] = "drivers_license";
+        DocumentType["PASSPORT"] = "passport";
+        DocumentType["ACH_AUTHORIZATION_FORM"] = "ach_authorization_form";
+        DocumentType["UTILITY_BILL"] = "utility_bill";
+        DocumentType["BANK_STATEMENT"] = "bank_statement";
+        DocumentType["SELFIE"] = "selfie";
+    })(DocumentType = GemTypes.DocumentType || (GemTypes.DocumentType = {}));
     var FullTransactionDirectionType;
     (function (FullTransactionDirectionType) {
         FullTransactionDirectionType["BANK_TO_BLOCKCHAIN"] = "bank_blockchain";

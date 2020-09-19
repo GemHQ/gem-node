@@ -13,6 +13,6 @@
     "removeComments": true,
     "rootDir": "src",
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es5"
+    "target": "es3"
   }
 }

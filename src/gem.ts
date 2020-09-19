@@ -1,4 +1,3 @@
-import 'es6-shim';
 import { Client } from './client';
 import { Endpoints, GemResponseType, GemTypes } from './shared';
 import { SDK } from './sdk';

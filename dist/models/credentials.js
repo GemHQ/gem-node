@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var CredentialsModel = (function () {
     function CredentialsModel(_a) {
         var institution_id = _a.institution_id, credential = _a.credential, credential_type = _a.credential_type;

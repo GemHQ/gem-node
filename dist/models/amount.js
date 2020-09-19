@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var AmountModel = (function () {
     function AmountModel(_a) {
         var asset_id = _a.asset_id, quantity = _a.quantity;

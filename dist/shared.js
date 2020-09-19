@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var debug = require("debug");
 exports.dbg = debug('gem:client');
 exports.GEM_BASE_URL = 'https://api.sandbox.gem.co';

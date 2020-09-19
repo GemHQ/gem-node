@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var DocumentModel = (function () {
     function DocumentModel(_a) {
         var type = _a.type, files = _a.files, description = _a.description;

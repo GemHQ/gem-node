@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var file_1 = require("./file");
 exports.FileModel = file_1.FileModel;
 var document_1 = require("./document");

@@ -46,7 +46,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var crypto = require("crypto");
 var shared_1 = require("./shared");
 var url = require("url");
@@ -67,7 +67,7 @@ var Client = (function () {
         };
         if (!config.apiKey)
             throw new Error('Gem SDK API key is missing');
-        this.axios = axios_1.default.create();
+        this.axios = axios_1["default"].create();
         this.config = config;
         this.IS_NODE = this.checkForNodeProcess();
         this.config.options = this.config.options || {};
@@ -89,7 +89,7 @@ var Client = (function () {
     Client.prototype.patch = function (path, body, options) {
         return this.request('PATCH', path, body, options);
     };
-    Client.prototype.delete = function (path, body, options) {
+    Client.prototype["delete"] = function (path, body, options) {
         return this.request('DELETE', path, body, options);
     };
     Client.prototype.request = function (method, path, params, options) {
@@ -113,7 +113,7 @@ var Client = (function () {
                             return [2, data || {}];
                         }
                         else {
-                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status }));
+                            throw new gem_api_1["default"](__assign(__assign({}, data), { status: status }));
                         }
                         return [3, 4];
                     case 3:
@@ -121,7 +121,7 @@ var Client = (function () {
                         res = e_1.response;
                         if (res) {
                             data = res.data, status = res.status;
-                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status }));
+                            throw new gem_api_1["default"](__assign(__assign({}, data), { status: status }));
                         }
                         else {
                             throw e_1;
@@ -138,7 +138,7 @@ var Client = (function () {
         var parsedUrl = url.parse(url.resolve(this.config.baseUrl || shared_1.GEM_BASE_URL, path), true);
         var reqOpts = __assign(__assign(__assign(__assign({}, (!this.IS_NODE && {
             xsrfCookieName: shared_1.GEM_CSRF_COOKIE_NAME,
-            xsrfHeaderName: shared_1.GEM_CSRF_HEADER_NAME,
+            xsrfHeaderName: shared_1.GEM_CSRF_HEADER_NAME
         })), this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), data: params });
         if (reqOpts.method == 'GET')
             reqOpts.qs = Object.assign(reqOpts.qs, params);

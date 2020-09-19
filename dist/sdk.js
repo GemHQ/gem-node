@@ -59,7 +59,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var models_1 = require("./models");
 var client_1 = require("./client");
 var shared_1 = require("./shared");
@@ -165,7 +165,7 @@ var SDK;
                             userId = args.userId, phoneNumber = args.phoneNumber, consented = args.consented;
                             return [4, this.client.put(shared_1.Endpoints.users + "/" + userId, {
                                     consented: consented,
-                                    phone_number: phoneNumber,
+                                    phone_number: phoneNumber
                                 })];
                         case 1: return [2, _a.sent()];
                     }
@@ -185,7 +185,7 @@ var SDK;
             }); }); };
             this.deleteUser = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.client.delete(shared_1.Endpoints.users + "/" + userId)];
+                    case 0: return [4, this.client["delete"](shared_1.Endpoints.users + "/" + userId)];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
@@ -199,7 +199,7 @@ var SDK;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.post(shared_1.Endpoints.users + "/" + userId + "/verify_sms", {
-                                otp_code: otp,
+                                otp_code: otp
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -219,7 +219,7 @@ var SDK;
             }); }); };
             this.deleteProfile = function (profileId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.client.delete(shared_1.Endpoints.profiles + "/" + profileId)];
+                    case 0: return [4, this.client["delete"](shared_1.Endpoints.profiles + "/" + profileId)];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
@@ -233,7 +233,7 @@ var SDK;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.post(shared_1.Endpoints.profiles, profile, {
-                                qs: { user_id: userId },
+                                qs: { user_id: userId }
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -246,7 +246,7 @@ var SDK;
                         case 0:
                             url = shared_1.Endpoints.profiles + "/temporary";
                             return [4, this.client.post(url, profile, {
-                                    qs: { user_id: userId },
+                                    qs: { user_id: userId }
                                 })];
                         case 1: return [2, _a.sent()];
                     }
@@ -259,8 +259,8 @@ var SDK;
                         switch (_c.label) {
                             case 0: return [4, this.client.post(shared_1.Endpoints.profiles + "/" + profileId + "/check", __assign({ documents: documents }, (onSuccess && { on_success: onSuccess })), {
                                     qs: {
-                                        kyc_verifier: kyc_verifier,
-                                    },
+                                        kyc_verifier: kyc_verifier
+                                    }
                                 })];
                             case 1: return [2, _c.sent()];
                         }
@@ -311,7 +311,7 @@ var SDK;
             }); };
             this.deleteDocument = function (documentId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.client.delete(shared_1.Endpoints.documents + "/" + documentId)];
+                    case 0: return [4, this.client["delete"](shared_1.Endpoints.documents + "/" + documentId)];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
@@ -357,7 +357,7 @@ var SDK;
                     switch (_a.label) {
                         case 0: return [4, this.client.post(shared_1.Endpoints.institution_users, {
                                 profile_id: profileId,
-                                institution_id: institutionId,
+                                institution_id: institutionId
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -367,7 +367,7 @@ var SDK;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.put(shared_1.Endpoints.institution_users + "/" + institutionUserId, {
-                                profile_id: profileId,
+                                profile_id: profileId
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -386,7 +386,7 @@ var SDK;
                     switch (_a.label) {
                         case 0: return [4, this.client.get("" + shared_1.Endpoints.institution_users, {
                                 user_id: user_id,
-                                profile_id: profile_id,
+                                profile_id: profile_id
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -461,7 +461,7 @@ var SDK;
                     switch (_a.label) {
                         case 0: return [4, this.client.post(shared_1.Endpoints.connections, {
                                 credential_id: credential_id,
-                                user_id: user_id,
+                                user_id: user_id
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -471,7 +471,7 @@ var SDK;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.put(shared_1.Endpoints.connections + "/" + connectionId, {
-                                credential_id: credentialId,
+                                credential_id: credentialId
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -481,7 +481,7 @@ var SDK;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0: return [4, this.client.get(shared_1.Endpoints.connections, {
-                                qs: { user_id: userId },
+                                qs: { user_id: userId }
                             })];
                         case 1: return [2, _a.sent()];
                     }
@@ -495,7 +495,7 @@ var SDK;
             }); }); };
             this.deleteConnection = function (connectionId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.client.delete(shared_1.Endpoints.connections + "/" + connectionId)];
+                    case 0: return [4, this.client["delete"](shared_1.Endpoints.connections + "/" + connectionId)];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
@@ -532,7 +532,7 @@ var SDK;
                             case 0: return [4, this.client.get(shared_1.Endpoints.prices, {
                                     currency_id: currency_id,
                                     asset_ids: asset_ids,
-                                    source: source,
+                                    source: source
                                 })];
                             case 1: return [2, _b.sent()];
                         }
@@ -546,7 +546,7 @@ var SDK;
                         switch (_b.label) {
                             case 0: return [4, this.client.get(shared_1.Endpoints.assets + "/" + asset_id, {
                                     currency_id: currency_id,
-                                    source: source,
+                                    source: source
                                 })];
                             case 1: return [2, _b.sent()];
                         }
@@ -566,7 +566,7 @@ var SDK;
             };
             this.logOutUser = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.client.delete("" + shared_1.Endpoints.logout, {})];
+                    case 0: return [4, this.client["delete"]("" + shared_1.Endpoints.logout, {})];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };

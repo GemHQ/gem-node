@@ -50,17 +50,17 @@ export declare namespace SDK {
         createTemporaryProfile: (userId: string, profile: ProfileModel) => Promise<GemResponseType.IProfile>;
         verifyProfileKYC: ({ profileId, documents, kycVerifier: kyc_verifier, onSuccess, }: {
             onSuccess?: {
-                action: "create_institution_user";
+                action: 'create_institution_user';
                 params?: {
-                    institution_id: "wyre" | "coinify";
+                    institution_id: 'wyre' | 'coinify';
                 };
             };
             profileId: string;
             documents: {
                 id: string;
-                document_type: "drivers_license" | "passport" | "selfie";
+                document_type: 'drivers_license' | 'passport' | 'selfie';
             }[];
-            kycVerifier: "wyre" | "onfido";
+            kycVerifier: 'onfido' | 'wyre';
         }) => Promise<GemResponseType.IBaseMessage>;
         listProfileVerifications: ({ profileId, }: {
             profileId: string;
@@ -94,9 +94,9 @@ export declare namespace SDK {
         listConnections: (userId: string) => Promise<GemResponseType.IConnection[]>;
         getConnection: (connectionId: string) => Promise<GemResponseType.IConnection>;
         deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;
-        listAssets: (category?: "cryptocurrency" | "fiat") => Promise<GemResponseType.IAsset[]>;
+        listAssets: (category?: 'cryptocurrency' | 'fiat') => Promise<GemResponseType.IAsset[]>;
         getAsset: (assetId: string, source?: string) => Promise<GemResponseType.IAsset>;
-        listSupportedCurrencies: (institutionId: "wyre" | "coinify") => Promise<GemResponseType.ISupportedCurrencyResponse[]>;
+        listSupportedCurrencies: (institutionId: 'wyre' | 'coinify') => Promise<GemResponseType.ISupportedCurrencyResponse[]>;
         listAssetPrices: ({ asset_ids, currency_id, source, }: {
             asset_ids?: string;
             currency_id?: string;

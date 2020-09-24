@@ -1,11 +1,12 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GemTypes = exports.GemAPIError = exports.SDK = exports.Endpoints = exports.Client = void 0;
 var client_1 = require("./client");
-exports.Client = client_1.Client;
+Object.defineProperty(exports, "Client", { enumerable: true, get: function () { return client_1.Client; } });
 var shared_1 = require("./shared");
-exports.Endpoints = shared_1.Endpoints;
-exports.GemTypes = shared_1.GemTypes;
+Object.defineProperty(exports, "Endpoints", { enumerable: true, get: function () { return shared_1.Endpoints; } });
+Object.defineProperty(exports, "GemTypes", { enumerable: true, get: function () { return shared_1.GemTypes; } });
 var sdk_1 = require("./sdk");
-exports.SDK = sdk_1.SDK;
+Object.defineProperty(exports, "SDK", { enumerable: true, get: function () { return sdk_1.SDK; } });
 var gem_api_1 = require("./errors/gem_api");
-exports.GemAPIError = gem_api_1["default"];
+exports.GemAPIError = gem_api_1.default;

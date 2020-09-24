@@ -1,5 +1,6 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GemTypes = exports.Endpoints = exports.GEM_CSRF_HEADER_NAME = exports.GEM_CSRF_COOKIE_NAME = exports.GEM_BASE_URL = exports.dbg = void 0;
 var debug = require("debug");
 exports.dbg = debug('gem:client');
 exports.GEM_BASE_URL = 'https://api.sandbox.gem.co';

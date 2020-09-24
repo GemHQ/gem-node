@@ -1,5 +1,6 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProfileModel = void 0;
 var ProfileModel = (function () {
     function ProfileModel(_a) {
         var name = _a.name, phone_number = _a.phone_number, address = _a.address, social_security_number = _a.social_security_number, date_of_birth = _a.date_of_birth;

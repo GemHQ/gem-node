@@ -1,5 +1,6 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FileModel = void 0;
 var FileModel = (function () {
     function FileModel(_a) {
         var media_type = _a.media_type, data = _a.data, description = _a.description, orientation = _a.orientation;

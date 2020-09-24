@@ -1,5 +1,6 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CredentialTypes = void 0;
 var CredentialTypes;
 (function (CredentialTypes) {
     CredentialTypes["OAUTH_2"] = "oauth2";

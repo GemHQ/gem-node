@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": ["es2015"],
+    "lib": ["es5"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -13,6 +11,6 @@
     "removeComments": true,
     "rootDir": "src",
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es3"
+    "target": "es5"
   }
 }

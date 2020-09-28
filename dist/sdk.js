@@ -172,12 +172,20 @@ var SDK;
                     }
                 });
             }); };
-            this.listUsers = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.client.get(shared_1.Endpoints.users)];
-                    case 1: return [2, _a.sent()];
-                }
-            }); }); };
+            this.listUsers = function (args) {
+                if (args === void 0) { args = {}; }
+                return __awaiter(_this, void 0, void 0, function () {
+                    var page, size;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                page = args.pageNumber, size = args.pageSize;
+                                return [4, this.client.get(shared_1.Endpoints.users, { page: page, size: size })];
+                            case 1: return [2, _a.sent()];
+                        }
+                    });
+                });
+            };
             this.getUser = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.users + "/" + userId)];
@@ -404,10 +412,12 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
-            this.listAccounts = function (connectionId, userId) { return __awaiter(_this, void 0, void 0, function () {
+            this.listAccounts = function (userId) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4, this.client.get("" + shared_1.Endpoints.accounts, __assign({ connection_id: connectionId }, (userId && { user_id: userId })))];
+                        case 0: return [4, this.client.get("" + shared_1.Endpoints.accounts, {
+                                user_id: userId,
+                            })];
                         case 1: return [2, _a.sent()];
                     }
                 });

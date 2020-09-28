@@ -37,7 +37,10 @@ export declare namespace SDK {
             phoneNumber?: string;
             consented?: boolean;
         }) => Promise<GemResponseType.IUser>;
-        listUsers: () => Promise<GemResponseType.IUser[]>;
+        listUsers: (args?: {
+            pageNumber?: number;
+            pageSize?: number;
+        }) => Promise<GemResponseType.IUser[]>;
         getUser: (userId: string) => Promise<GemResponseType.IUser>;
         deleteUser: (userId: string) => Promise<GemResponseType.IBaseMessage>;
         sendUserSMSOTP: (userId: string) => Promise<GemResponseType.IBaseMessage>;
@@ -77,7 +80,7 @@ export declare namespace SDK {
         listInstitutionUsers: (user_id: string, profile_id: string) => Promise<GemResponseType.IInstitutionUser[]>;
         createAccount: (account: PlaidAccountModel) => Promise<GemResponseType.IAccount>;
         getAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
-        listAccounts: (connectionId: string, userId?: string) => Promise<GemResponseType.IAccount[]>;
+        listAccounts: (userId: string) => Promise<GemResponseType.IAccount[]>;
         createTransaction: (transactionParams: TransactionModel) => Promise<GemResponseType.ITransaction>;
         confirmTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
         listTransactions: (params?: {

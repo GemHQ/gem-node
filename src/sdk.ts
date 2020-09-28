@@ -318,12 +318,10 @@ export namespace SDK {
       await this.client.get(`${Endpoints.accounts}/${accountId}`);
 
     listAccounts = async (
-      connectionId: string,
-      userId?: string
+      userId: string
     ): Promise<GemResponseType.IAccount[]> =>
       await this.client.get(`${Endpoints.accounts}`, {
-        connection_id: connectionId,
-        ...(userId && { user_id: userId }),
+        user_id: userId,
       });
 
     /**

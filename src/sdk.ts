@@ -95,8 +95,15 @@ export namespace SDK {
       });
     };
 
-    listUsers = async (): Promise<GemResponseType.IUser[]> =>
-      await this.client.get(Endpoints.users);
+    listUsers = async (
+      args: {
+        pageNumber?: number;
+        pageSize?: number;
+      } = {}
+    ): Promise<GemResponseType.IUser[]> => {
+      const { pageNumber: page, pageSize: size } = args;
+      return await this.client.get(Endpoints.users, { page, size });
+    };
 
     getUser = async (userId: string): Promise<GemResponseType.IUser> =>
       await this.client.get(`${Endpoints.users}/${userId}`);

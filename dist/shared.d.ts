@@ -80,6 +80,9 @@ export declare namespace GemTypes {
     type CoinifyConfigData = {
         is_private: boolean;
     };
+    type FeatureAccessConfigData = {
+        flag: 'stable' | 'beta' | 'alpha';
+    };
 }
 export declare namespace GemResponseType {
     type IApplicationConfig = {
@@ -87,8 +90,8 @@ export declare namespace GemResponseType {
         application_id: string;
         created_at: string;
         updated_at: string;
-        type: 'wyre' | 'coinify' | 'onfido';
-        data: GemTypes.OnfidoConfigData | GemTypes.WyreConfigData | GemTypes.CoinifyConfigData;
+        type: 'wyre' | 'coinify' | 'onfido' | 'feature_access';
+        data: GemTypes.OnfidoConfigData | GemTypes.WyreConfigData | GemTypes.CoinifyConfigData | GemTypes.FeatureAccessConfigData;
     };
     interface IProfileVerification {
         id: string;

@@ -97,8 +97,19 @@ export declare namespace SDK {
         }) => Promise<GemResponseType.ITransaction[]>;
         getTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
         createCredentials: (credentialParams: CredentialsModel) => Promise<GemResponseType.ICreatedCredential>;
-        createConnection: (user_id: string, credential_id: string, institution_id?: string) => Promise<GemResponseType.IConnection>;
-        updateConnection: (connectionId: string, credentialId: string, institution_id?: string) => Promise<GemResponseType.IConnection>;
+        createConnection: (args: {
+            user_id: string;
+            credential_id: string;
+        } | {
+            institution_id: string;
+        }) => Promise<GemResponseType.IConnection>;
+        updateConnection: (args: {
+            connection_id: string;
+            credential_id: string;
+        } | {
+            connection_id: string;
+            institution_id: string;
+        }) => Promise<GemResponseType.IConnection>;
         listConnections: (userId: string) => Promise<GemResponseType.IConnection[]>;
         getConnection: (connectionId: string) => Promise<GemResponseType.IConnection>;
         deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;

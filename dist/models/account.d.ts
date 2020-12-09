@@ -37,7 +37,7 @@ export interface INewCardParams {
     cc_last_4: string;
     cc_issuer: string;
     phone_number: string;
-    email_address: string;
+    cc_first_6?: string;
 }
 export interface INewWyreCardAccount {
     type: AccountTypes.WyreCardAccount;

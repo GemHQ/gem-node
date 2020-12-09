@@ -20,7 +20,8 @@ export declare enum Endpoints {
     session_validity = "/authenticated",
     logout = "/logout",
     refresh = "/refresh",
-    application_configurations = "/application_configs"
+    application_configurations = "/application_configs",
+    intstitution_2fa = "/institution_2fas"
 }
 export declare namespace GemTypes {
     interface ResolvedCurrencyType {

@@ -73,6 +73,10 @@ export declare namespace SDK {
         createProfileDocument: (profileId: string, document: any) => Promise<GemResponseType.IDocument>;
         deleteDocument: (documentId: string) => Promise<GemResponseType.IBaseMessage>;
         updateDocument: (documentId: string, document: any) => Promise<GemResponseType.IDocument>;
+        verifyInstitution2fa: ({ value, two_factor_id, }: {
+            two_factor_id: string;
+            value: string;
+        }) => Promise<GemResponseType.IPending2fa>;
         listInstitutions: () => Promise<GemResponseType.IInstitution[]>;
         getInstitution: (institutionId: string) => Promise<GemResponseType.IInstitution>;
         createInstitutionUser: (profileId: string, institutionId: string) => Promise<GemResponseType.IInstitutionUser>;

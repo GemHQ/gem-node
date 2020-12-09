@@ -25,6 +25,7 @@ var Endpoints;
     Endpoints["logout"] = "/logout";
     Endpoints["refresh"] = "/refresh";
     Endpoints["application_configurations"] = "/application_configs";
+    Endpoints["intstitution_2fa"] = "/institution_2fas";
 })(Endpoints = exports.Endpoints || (exports.Endpoints = {}));
 var GemTypes;
 (function (GemTypes) {

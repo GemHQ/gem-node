@@ -11,6 +11,7 @@ import {
 import { Client } from './client';
 import { Endpoints, GemResponseType } from './shared';
 import { AxiosInstance } from 'axios';
+import { INewWyreCardAccount } from './models/account';
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>
@@ -310,9 +311,10 @@ export namespace SDK {
      */
 
     createAccount = async (
-      account: PlaidAccountModel
-    ): Promise<GemResponseType.IAccount> =>
-      await this.client.post(`${Endpoints.accounts}`, account);
+      account: PlaidAccountModel | INewWyreCardAccount
+    ): Promise<GemResponseType.IAccount> => {
+      return await this.client.post(`${Endpoints.accounts}`, account);
+    };
 
     getAccount = async (accountId: string): Promise<GemResponseType.IAccount> =>
       await this.client.get(`${Endpoints.accounts}/${accountId}`);
@@ -386,19 +388,23 @@ export namespace SDK {
 
     createConnection = async (
       user_id: string,
-      credential_id: string
+      credential_id: string,
+      institution_id?: string
     ): Promise<GemResponseType.IConnection> =>
       await this.client.post(Endpoints.connections, {
         credential_id,
         user_id,
+        ...(institution_id && { institution_id }),
       });
 
     updateConnection = async (
       connectionId: string,
-      credentialId: string
+      credentialId: string,
+      institution_id?: string
     ): Promise<GemResponseType.IConnection> =>
       await this.client.put(`${Endpoints.connections}/${connectionId}`, {
         credential_id: credentialId,
+        ...(institution_id && { institution_id }),
       });
 
     listConnections = async (
@@ -526,9 +532,8 @@ export namespace SDK {
         ...(userId && { user_id: userId }),
       });
 
-    checkSessionValidity = async (): Promise<
-      GemResponseType.ISessionValidity
-    > => await this.client.post(Endpoints.session_validity);
+    checkSessionValidity = async (): Promise<GemResponseType.ISessionValidity> =>
+      await this.client.post(Endpoints.session_validity);
 
     refreshSession = async (): Promise<{ read_access_expires_at: number }> => {
       return await this.client.post(Endpoints.refresh, {});

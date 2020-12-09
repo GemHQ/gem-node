@@ -259,6 +259,18 @@ export namespace SDK {
      * INSTITUTIONS
      */
 
+    verifyInstitution2fa = async ({
+      value,
+      two_factor_id,
+    }: {
+      two_factor_id: string;
+      value: string;
+    }): Promise<GemResponseType.IPending2fa> =>
+      await this.client.post(
+        `${Endpoints.intstitution_2fa}/${two_factor_id}/verify`,
+        { value }
+      );
+
     listInstitutions = async (): Promise<GemResponseType.IInstitution[]> =>
       await this.client.get(Endpoints.institutions);
 

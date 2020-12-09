@@ -399,25 +399,24 @@ export namespace SDK {
      */
 
     createConnection = async (
-      user_id: string,
-      credential_id: string,
-      institution_id?: string
+      args:
+        | {
+            user_id: string;
+            credential_id: string;
+          }
+        | { institution_id: string }
     ): Promise<GemResponseType.IConnection> =>
-      await this.client.post(Endpoints.connections, {
-        credential_id,
-        user_id,
-        ...(institution_id && { institution_id }),
-      });
+      await this.client.post(Endpoints.connections, args);
 
     updateConnection = async (
-      connectionId: string,
-      credentialId: string,
-      institution_id?: string
+      args:
+        | { connection_id: string; credential_id: string }
+        | { connection_id: string; institution_id: string }
     ): Promise<GemResponseType.IConnection> =>
-      await this.client.put(`${Endpoints.connections}/${connectionId}`, {
-        credential_id: credentialId,
-        ...(institution_id && { institution_id }),
-      });
+      await this.client.put(
+        `${Endpoints.connections}/${args.connection_id}`,
+        args
+      );
 
     listConnections = async (
       userId: string

@@ -400,12 +400,14 @@ var SDK;
                     }
                 });
             }); };
-            this.createAccount = function (account) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.client.post("" + shared_1.Endpoints.accounts, account)];
-                    case 1: return [2, _a.sent()];
-                }
-            }); }); };
+            this.createAccount = function (account) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4, this.client.post("" + shared_1.Endpoints.accounts, account)];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
             this.getAccount = function (accountId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.accounts + "/" + accountId)];
@@ -466,23 +468,19 @@ var SDK;
                     }
                 });
             }); };
-            this.createConnection = function (user_id, credential_id) { return __awaiter(_this, void 0, void 0, function () {
+            this.createConnection = function (user_id, credential_id, institution_id) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4, this.client.post(shared_1.Endpoints.connections, {
-                                credential_id: credential_id,
-                                user_id: user_id,
-                            })];
+                        case 0: return [4, this.client.post(shared_1.Endpoints.connections, __assign({ credential_id: credential_id,
+                                user_id: user_id }, (institution_id && { institution_id: institution_id })))];
                         case 1: return [2, _a.sent()];
                     }
                 });
             }); };
-            this.updateConnection = function (connectionId, credentialId) { return __awaiter(_this, void 0, void 0, function () {
+            this.updateConnection = function (connectionId, credentialId, institution_id) { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4, this.client.put(shared_1.Endpoints.connections + "/" + connectionId, {
-                                credential_id: credentialId,
-                            })];
+                        case 0: return [4, this.client.put(shared_1.Endpoints.connections + "/" + connectionId, __assign({ credential_id: credentialId }, (institution_id && { institution_id: institution_id })))];
                         case 1: return [2, _a.sent()];
                     }
                 });

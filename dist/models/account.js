@@ -10,6 +10,7 @@ var AccountTypes;
     AccountTypes["ExchangeAccount"] = "ExchangeAccount";
     AccountTypes["Wallet"] = "Wallet";
     AccountTypes["BlockchainAddress"] = "BlockchainAddress";
+    AccountTypes["WyreCardAccount"] = "WyreDebitCardAccount";
 })(AccountTypes = exports.AccountTypes || (exports.AccountTypes = {}));
 var PlaidAccountModel = (function () {
     function PlaidAccountModel(_a) {

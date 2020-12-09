@@ -2,6 +2,7 @@ import { FileModel, DocumentModel, ProfileModel, TransactionModel, PlaidAccountM
 import { Client } from './client';
 import { GemResponseType } from './shared';
 import { AxiosInstance } from 'axios';
+import { INewWyreCardAccount } from './models/account';
 declare type DeepPartial<T> = {
     [P in keyof T]?: T[P] extends Array<infer U> ? Array<DeepPartial<U>> : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>;
 };
@@ -78,7 +79,7 @@ export declare namespace SDK {
         updateInstitutionUser: (institutionUserId: string, profileId: string) => Promise<GemResponseType.IInstitutionUser>;
         getInstitutionUser: (institutionUserId: string) => Promise<GemResponseType.IInstitutionUser>;
         listInstitutionUsers: (user_id: string, profile_id: string) => Promise<GemResponseType.IInstitutionUser[]>;
-        createAccount: (account: PlaidAccountModel) => Promise<GemResponseType.IAccount>;
+        createAccount: (account: PlaidAccountModel | INewWyreCardAccount) => Promise<GemResponseType.IAccount>;
         getAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
         listAccounts: (userId: string) => Promise<GemResponseType.IAccount[]>;
         createTransaction: (transactionParams: TransactionModel) => Promise<GemResponseType.ITransaction>;
@@ -92,8 +93,8 @@ export declare namespace SDK {
         }) => Promise<GemResponseType.ITransaction[]>;
         getTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
         createCredentials: (credentialParams: CredentialsModel) => Promise<GemResponseType.ICreatedCredential>;
-        createConnection: (user_id: string, credential_id: string) => Promise<GemResponseType.IConnection>;
-        updateConnection: (connectionId: string, credentialId: string) => Promise<GemResponseType.IConnection>;
+        createConnection: (user_id: string, credential_id: string, institution_id?: string) => Promise<GemResponseType.IConnection>;
+        updateConnection: (connectionId: string, credentialId: string, institution_id?: string) => Promise<GemResponseType.IConnection>;
         listConnections: (userId: string) => Promise<GemResponseType.IConnection[]>;
         getConnection: (connectionId: string) => Promise<GemResponseType.IConnection>;
         deleteConnection: (connectionId: string) => Promise<GemResponseType.IBaseMessage>;

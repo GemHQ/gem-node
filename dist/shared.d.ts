@@ -225,6 +225,16 @@ export declare namespace GemResponseType {
         summary: string;
         description: string;
     }
+    interface IPending2fa {
+        id: string;
+        status: 'pending' | 'completed' | string;
+        retry_attempts: number;
+        '2fa_type': 'card' | 'sms' | 'string';
+        resource_id: string;
+        institution_id: 'coinify' | 'wyre' | string;
+        created_at: string;
+        updated_at: string;
+    }
     interface ITransaction {
         id: string;
         created_at: string;
@@ -257,6 +267,23 @@ export declare namespace GemResponseType {
         reason: {
             message: string;
         };
+        breakdown: {
+            source: {
+                total: number;
+                amount: number;
+                asset_id: string;
+                currency: string;
+                partner_fee: number;
+            };
+            destination: {
+                total: number;
+                amount: number;
+                asset_id: string;
+                currency: string;
+                network_fee: number;
+            };
+        };
+        pending_institution_2fas: IPending2fa[];
     }
     interface ISupportedCurrencyResponse {
         institution_id: 'coinify' | 'wyre';

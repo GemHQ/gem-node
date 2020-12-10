@@ -325,7 +325,9 @@ export namespace SDK {
     createAccount = async (
       account: PlaidAccountModel | INewWyreCardAccount
     ): Promise<GemResponseType.IAccount> => {
-      return await this.client.post(`${Endpoints.accounts}`, account);
+      return await this.client.post(`${Endpoints.accounts}`, account, {
+        isPCI: account.type === AccountTypes.WyreCardAccount,
+      });
     };
 
     getAccount = async (accountId: string): Promise<GemResponseType.IAccount> =>

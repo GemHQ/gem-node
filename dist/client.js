@@ -136,7 +136,12 @@ var Client = (function () {
     Client.prototype.createRequestOptions = function (method, path, params, options) {
         if (params === void 0) { params = {}; }
         if (options === void 0) { options = {}; }
-        var parsedUrl = url.parse(url.resolve(this.config.baseUrl || shared_1.GEM_BASE_URL, path), true);
+        var _a = options.isPCI, isPCI = _a === void 0 ? false : _a;
+        var providedURL = this.config.baseUrl || shared_1.GEM_BASE_URL;
+        providedURL = isPCI
+            ? providedURL.replace(/:\/\/api\./g, '://api-pci.')
+            : providedURL;
+        var parsedUrl = url.parse(url.resolve(providedURL, path), true);
         var reqOpts = __assign(__assign(__assign(__assign({}, (!this.IS_NODE && {
             xsrfCookieName: shared_1.GEM_CSRF_COOKIE_NAME,
             xsrfHeaderName: shared_1.GEM_CSRF_HEADER_NAME,
@@ -164,10 +169,7 @@ var Client = (function () {
         shared_1.dbg('Timestamp:', timeStamp);
         var _a = this.config, secretKey = _a.secretKey, apiKey = _a.apiKey;
         var data = apiKey + ":" + timeStamp;
-        return crypto
-            .createHmac('sha256', secretKey)
-            .update(data)
-            .digest('hex');
+        return crypto.createHmac('sha256', secretKey).update(data).digest('hex');
     };
     return Client;
 }());

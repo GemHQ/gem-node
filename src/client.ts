@@ -119,10 +119,12 @@ export class Client {
     params: any = {},
     options: any = {}
   ): any {
-    const parsedUrl = url.parse(
-      url.resolve(this.config.baseUrl || GEM_BASE_URL, path),
-      true
-    );
+    const { isPCI = false } = options;
+    let providedURL = this.config.baseUrl || GEM_BASE_URL;
+    providedURL = isPCI
+      ? providedURL.replace(/:\/\/api\./g, '://api-pci.')
+      : providedURL;
+    const parsedUrl = url.parse(url.resolve(providedURL, path), true);
 
     const reqOpts: AxiosRequestConfig & { qs: object } = {
       // NOTE: these will be overridden by config.options and options if available.
@@ -185,9 +187,6 @@ export class Client {
     dbg('Timestamp:', timeStamp);
     const { secretKey, apiKey } = this.config;
     const data = `${apiKey}:${timeStamp}`;
-    return crypto
-      .createHmac('sha256', secretKey)
-      .update(data)
-      .digest('hex');
+    return crypto.createHmac('sha256', secretKey).update(data).digest('hex');
   }
 }

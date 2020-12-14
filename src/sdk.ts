@@ -271,6 +271,15 @@ export namespace SDK {
         { value }
       );
 
+    listInstitution2fas = async ({
+      resourceId,
+    }: {
+      resourceId: string;
+    }): Promise<GemResponseType.IPending2fa[]> =>
+      await this.client.get(Endpoints.intstitution_2fa, {
+        resource_id: resourceId,
+      });
+
     listInstitutions = async (): Promise<GemResponseType.IInstitution[]> =>
       await this.client.get(Endpoints.institutions);
 

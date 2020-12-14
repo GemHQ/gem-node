@@ -77,6 +77,9 @@ export declare namespace SDK {
             two_factor_id: string;
             value: string;
         }) => Promise<GemResponseType.IPending2fa>;
+        listInstitution2fas: ({ resourceId, }: {
+            resourceId: string;
+        }) => Promise<GemResponseType.IPending2fa[]>;
         listInstitutions: () => Promise<GemResponseType.IInstitution[]>;
         getInstitution: (institutionId: string) => Promise<GemResponseType.IInstitution>;
         createInstitutionUser: (profileId: string, institutionId: string) => Promise<GemResponseType.IInstitutionUser>;

@@ -359,6 +359,19 @@ var SDK;
                     });
                 });
             };
+            this.listInstitution2fas = function (_a) {
+                var resourceId = _a.resourceId;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4, this.client.get(shared_1.Endpoints.intstitution_2fa, {
+                                    resource_id: resourceId,
+                                })];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
+                });
+            };
             this.listInstitutions = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.institutions)];

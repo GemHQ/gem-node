@@ -392,6 +392,16 @@ export namespace SDK {
     ): Promise<GemResponseType.ITransaction> =>
       await this.client.get(`${Endpoints.transactions}/${transactionId}`);
 
+    // NOTE: this request is the same as getTransaction but makes requests to partners
+    listTransactionPending2fas = async ({
+      transactionId,
+    }: {
+      transactionId: string;
+    }): Promise<GemResponseType.ITransaction> =>
+      await this.client.get(
+        `${Endpoints.transactions}/${transactionId}/2fa_requirements`
+      );
+
     /**
      * CREDENTIALS
      */

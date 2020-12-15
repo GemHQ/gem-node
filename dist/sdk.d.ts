@@ -99,6 +99,9 @@ export declare namespace SDK {
             limit?: number;
         }) => Promise<GemResponseType.ITransaction[]>;
         getTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
+        listTransactionPending2fas: ({ transactionId, }: {
+            transactionId: string;
+        }) => Promise<GemResponseType.ITransaction>;
         createCredentials: (credentialParams: CredentialsModel) => Promise<GemResponseType.ICreatedCredential>;
         createConnection: (args: {
             user_id: string;

@@ -359,9 +359,12 @@ export namespace SDK {
       await this.client.post(`${Endpoints.transactions}`, transactionParams);
 
     confirmTransaction = async (
-      transactionId: string
+      transactionId: string,
+      cvc?: string
     ): Promise<GemResponseType.ITransaction> =>
-      await this.client.post(`${Endpoints.transactions}/${transactionId}`);
+      await this.client.post(`${Endpoints.transactions}/${transactionId}`, {
+        ...(cvc && { cvc }),
+      });
 
     listTransactions = async (params?: {
       userId?: string;

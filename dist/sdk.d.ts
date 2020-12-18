@@ -90,7 +90,7 @@ export declare namespace SDK {
         getAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
         listAccounts: (userId: string) => Promise<GemResponseType.IAccount[]>;
         createTransaction: (transactionParams: TransactionModel) => Promise<GemResponseType.ITransaction>;
-        confirmTransaction: (transactionId: string) => Promise<GemResponseType.ITransaction>;
+        confirmTransaction: (transactionId: string, cvc?: string) => Promise<GemResponseType.ITransaction>;
         listTransactions: (params?: {
             userId?: string;
             accountId?: string;

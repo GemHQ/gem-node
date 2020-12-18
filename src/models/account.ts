@@ -45,7 +45,6 @@ export interface INewCardParams {
   address_city: string;
   address_postal_code: string;
   cc_number: string;
-  cc_verification_code: string;
   cc_exp_month: string;
   cc_exp_year: string;
   cc_last_4: string;

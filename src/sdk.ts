@@ -349,6 +349,10 @@ export namespace SDK {
         user_id: userId,
       });
 
+    deleteAccount = async (accountId: string): Promise<GemResponseType.IAccount> => {
+      return await this.client.delete(`${Endpoints.accounts}/${accountId}`);
+    }
+
     /**
      * TRANSACTIONS
      */

@@ -89,6 +89,7 @@ export declare namespace SDK {
         createAccount: (account: PlaidAccountModel | INewWyreCardAccount) => Promise<GemResponseType.IAccount>;
         getAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
         listAccounts: (userId: string) => Promise<GemResponseType.IAccount[]>;
+        deleteAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
         createTransaction: (transactionParams: TransactionModel) => Promise<GemResponseType.ITransaction>;
         confirmTransaction: (transactionId: string, cvc?: string) => Promise<GemResponseType.ITransaction>;
         listTransactions: (params?: {

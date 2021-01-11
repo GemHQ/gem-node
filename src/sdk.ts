@@ -180,7 +180,11 @@ export namespace SDK {
       profileId: string;
       documents: {
         id: string;
-        document_type: 'drivers_license' | 'passport' | 'selfie';
+        document_type:
+          | 'drivers_license'
+          | 'passport'
+          | 'selfie'
+          | 'national_identity_card';
       }[];
       kycVerifier: 'onfido' | 'wyre';
     }): Promise<GemResponseType.IBaseMessage> => {
@@ -349,9 +353,11 @@ export namespace SDK {
         user_id: userId,
       });
 
-    deleteAccount = async (accountId: string): Promise<GemResponseType.IAccount> => {
+    deleteAccount = async (
+      accountId: string
+    ): Promise<GemResponseType.IAccount> => {
       return await this.client.delete(`${Endpoints.accounts}/${accountId}`);
-    }
+    };
 
     /**
      * TRANSACTIONS

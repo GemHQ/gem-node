@@ -62,7 +62,7 @@ export declare namespace SDK {
             profileId: string;
             documents: {
                 id: string;
-                document_type: 'drivers_license' | 'passport' | 'selfie';
+                document_type: 'drivers_license' | 'passport' | 'selfie' | 'national_identity_card';
             }[];
             kycVerifier: 'onfido' | 'wyre';
         }) => Promise<GemResponseType.IBaseMessage>;

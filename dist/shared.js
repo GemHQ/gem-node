@@ -43,6 +43,12 @@ var GemTypes;
         DocumentType["PROOF_OF_ADDRESS"] = "proof_of_address";
         DocumentType["SELFIE"] = "selfie";
     })(DocumentType = GemTypes.DocumentType || (GemTypes.DocumentType = {}));
+    var SupportedTransactionType;
+    (function (SupportedTransactionType) {
+        SupportedTransactionType["SELL"] = "sell";
+        SupportedTransactionType["BUY"] = "buy";
+        SupportedTransactionType["TRANSFER"] = "transfer";
+    })(SupportedTransactionType = GemTypes.SupportedTransactionType || (GemTypes.SupportedTransactionType = {}));
     var FullTransactionDirectionType;
     (function (FullTransactionDirectionType) {
         FullTransactionDirectionType["BANK_TO_BLOCKCHAIN"] = "bank_blockchain";

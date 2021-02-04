@@ -48,6 +48,11 @@ export declare namespace GemTypes {
         PROOF_OF_ADDRESS = "proof_of_address",
         SELFIE = "selfie"
     }
+    enum SupportedTransactionType {
+        SELL = "sell",
+        BUY = "buy",
+        TRANSFER = "transfer"
+    }
     interface DocumentClassType {
         GovernmentId: {
             classifier: 'government_id';
@@ -218,6 +223,10 @@ export declare namespace GemResponseType {
         enabled: boolean;
         connection_id: string;
         institution_id: string;
+        supported_transaction_types: GemTypes.SupportedTransactionType[];
+        card_network?: string;
+        total_amount?: number;
+        available_amount?: number;
     }
     interface ITransactionFee {
         type: string;

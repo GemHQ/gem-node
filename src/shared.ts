@@ -71,6 +71,12 @@ export namespace GemTypes {
     SELFIE = 'selfie',
   }
 
+  export enum SupportedTransactionType {
+    SELL = 'sell',
+    BUY = 'buy',
+    TRANSFER = 'transfer',
+  }
+
   export interface DocumentClassType {
     GovernmentId: {
       classifier: 'government_id';
@@ -256,6 +262,10 @@ export namespace GemResponseType {
     enabled: boolean;
     connection_id: string;
     institution_id: string;
+    supported_transaction_types: GemTypes.SupportedTransactionType[];
+    card_network?: string;
+    total_amount?: number;
+    available_amount?: number;
   }
 
   export interface ITransactionFee {

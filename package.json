@@ -17,7 +17,13 @@
     "exchange",
     "api",
     "fiat",
-    "kyc"
+    "kyc",
+    "bitcoin",
+    "ethereum",
+    "wyre",
+    "coinify",
+    "moonpay",
+    "sfox"
   ],
   "files": [
     "dist/"

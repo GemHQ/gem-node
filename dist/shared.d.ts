@@ -229,11 +229,9 @@ export declare namespace GemResponseType {
         available_amount?: number;
     }
     interface ITransactionFee {
-        type: string;
+        type: 'partner_fee' | 'network_fee' | string;
         amount: number;
         asset_id: string;
-        summary: string;
-        description: string;
     }
     interface IPending2fa {
         id: string;
@@ -278,19 +276,18 @@ export declare namespace GemResponseType {
             message: string;
         };
         breakdown: {
+            fees: ITransactionFee[];
             source: {
                 total: number;
                 amount: number;
                 asset_id: string;
                 currency: string;
-                partner_fee: number;
             };
             destination: {
                 total: number;
                 amount: number;
                 asset_id: string;
                 currency: string;
-                network_fee: number;
             };
         };
         pending_institution_2fas: IPending2fa[];

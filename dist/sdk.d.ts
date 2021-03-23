@@ -123,10 +123,11 @@ export declare namespace SDK {
         listAssets: (category?: 'cryptocurrency' | 'fiat') => Promise<GemResponseType.IAsset[]>;
         getAsset: (assetId: string, source?: string) => Promise<GemResponseType.IAsset>;
         listSupportedCurrencies: (institutionId: 'wyre' | 'coinify') => Promise<GemResponseType.ISupportedCurrencyResponse[]>;
-        listAssetPrices: ({ asset_ids, currency_id, source, }: {
+        listAssetPrices: ({ asset_ids, currency_id, source, sources, }: {
             asset_ids?: string;
             currency_id?: string;
             source?: string;
+            sources?: string;
         }) => Promise<GemResponseType.IPrice[]>;
         getAssetPrice: ({ asset_id, currency_id, source, }: {
             asset_id: string;

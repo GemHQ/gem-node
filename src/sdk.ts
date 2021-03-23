@@ -501,16 +501,21 @@ export namespace SDK {
       asset_ids,
       currency_id,
       source,
+      sources,
     }: {
       asset_ids?: string;
       currency_id?: string;
+      // source is left for backward compatibility
       source?: string;
-    }): Promise<GemResponseType.IPrice[]> =>
-      await this.client.get(Endpoints.prices, {
+      sources?: string;
+    }): Promise<GemResponseType.IPrice[]> => {
+      return await this.client.get(Endpoints.prices, {
         currency_id,
         asset_ids,
         source,
+        sources: source || sources,
       });
+    };
 
     getAssetPrice = async ({
       asset_id,
@@ -523,7 +528,7 @@ export namespace SDK {
     }): Promise<GemResponseType.IPrice> =>
       await this.client.get(`${Endpoints.assets}/${asset_id}`, {
         currency_id,
-        source,
+        sources: source,
       });
 
     /**

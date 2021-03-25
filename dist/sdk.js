@@ -577,15 +577,15 @@ var SDK;
                 });
             }); };
             this.listAssetPrices = function (_a) {
-                var asset_ids = _a.asset_ids, currency_id = _a.currency_id, source = _a.source, sources = _a.sources;
+                var asset_ids = _a.asset_ids, currency_id = _a.currency_id, currency_ids = _a.currency_ids, source = _a.source, sources = _a.sources;
                 return __awaiter(_this, void 0, void 0, function () {
                     return __generator(this, function (_b) {
                         switch (_b.label) {
                             case 0: return [4, this.client.get(shared_1.Endpoints.prices, {
-                                    currency_id: currency_id,
-                                    asset_ids: asset_ids,
                                     source: source,
+                                    asset_ids: asset_ids,
                                     sources: source || sources,
+                                    currency_ids: currency_id || currency_ids,
                                 })];
                             case 1: return [2, _b.sent()];
                         }

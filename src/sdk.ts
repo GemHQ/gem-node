@@ -500,20 +500,23 @@ export namespace SDK {
     listAssetPrices = async ({
       asset_ids,
       currency_id,
+      currency_ids,
       source,
       sources,
     }: {
       asset_ids?: string;
+      // currency_id is left for backward compatibility
       currency_id?: string;
+      currency_ids?: string;
       // source is left for backward compatibility
       source?: string;
       sources?: string;
     }): Promise<GemResponseType.IPrice[]> => {
       return await this.client.get(Endpoints.prices, {
-        currency_id,
-        asset_ids,
         source,
+        asset_ids,
         sources: source || sources,
+        currency_ids: currency_id || currency_ids,
       });
     };
 

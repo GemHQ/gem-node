@@ -13,61 +13,16 @@ npm install @gem.co/api
 ### Server
 
 ```js
-const fs = require('fs'),
-  FormData = require('form-data'),
-  { GEM_API_KEY, GEM_API_SECRET } = process.env;
+// Set the SDK constants.
+const { GEM_API_KEY, GEM_API_SECRET } = process.env;
+const { Gem } = require('@gem.co/api').SDK;
 
-/**
- *
- * GEM IMPORTS
- *
- **/
-const { Gem, Models, Enums } = require('@gem.co/api').SDK,
-  { PlaidAccount } = Models,
-  { NewAccountTypes } = Enums;
-
-/**
- *
- * CONSTANTS
- *
- **/
-
-// Create client.
+// Create client instance.
 const gem = new Gem({
   apiKey: GEM_API_KEY,
   secretKey: GEM_API_SECRET,
   baseUrl: 'https://api.sandbox.gem.co',
 });
-
-// Retrieve the user's profile document data.
-const fileData = fs.createReadStream('/my/passport/file.png');
-
-// Set blockchain destination address.
-const BLOCKCHAIN_ADDRESS = 'mybitcoinaddress';
-
-// Setup a user profile.
-const userProfile = {
-  name: { given_names: 'My First Name', family_names: 'My Last Name' },
-  address: {
-    street_1: '1123 Flower st.',
-    street_2: 'APT 123',
-    city: 'Los Angeles',
-    postal_code: '90024',
-    country: 'US',
-    state: 'CA',
-  },
-  social_security_number: '123-45-0976',
-  date_of_birth: '11-20-1976',
-};
-
-// Setup document and associated files.
-// NOTE: Gem's API requires multipart/form-data for document & file uploads.
-const profileDocument = new FormData();
-profileDocument.append('type', 'passport');
-profileDocument.append('description', 'Top level passport document.');
-profileDocument.append('files[0][media_type]', 'image/png');
-profileDocument.append('files[0][description]', 'First file for document.');
-profileDocument.append('files[0][data]', fileData);
 
 /**
  *
@@ -77,48 +32,18 @@ profileDocument.append('files[0][data]', fileData);
 
 (async () => {
   try {
-    // Setup a Gem user.
-    const user = await gem.findOrCreateUser({ email: 'someuser@gmail.com' });
-    await gem.updateUser({
-      userId: user.id,
-      phoneNumber: '+12345678910',
-    });
+    let transactions = [];
 
-    // Verify a user's phone number.
-    await gem.sendUserSMSOTP(user.id);
-    const userOTP = await getUserInput();
-    await gem.verifyUserSMSOTP(user.id, userOTP);
+    const applicationUsers = await gem.listUsers();
+    const firstUser = applicationUsers[0];
 
-    // Create a KYC/AML profile and a user account within the institution.
-    const profile = await gem.createProfile(user.id, userProfile);
-    await gem.createProfileDocument(profile.id, profileDocument);
-    const institutionUser = await gem.createInstitutionUser(profile.id, 'wyre');
+    if (firstUser) {
+      transactions = await gem.listTransactions({ userId: firstUser.id });
+    }
 
-    // Create a payment method within the institution.
-    const plaidAccount = new PlaidAccount({
-      connection_id: institutionUser.connection_id,
-      type: NewAccountTypes.PlaidAccount,
-      plaid_token: 'a-wyre-plaid-public-token',
-    });
-    const account = await gem.createAccount(plaidAccount);
-
-    // Create a transaction.
-    // NOTE: The institution user will need to be
-    // approved by the institution first.
-    const txn = await gem.createTransaction({
-      source_id: account.id,
-      source_amount: 100.0,
-      blockchain_address: {
-        address: BLOCKCHAIN_ADDRESS,
-        asset_id: 'bitcoin',
-      },
-      type: 'buy',
-      preview: false,
-    });
-
-    console.log(txn);
+    console.log('User Transactions', transactions);
   } catch (e) {
-    console.error(e);
+    console.error('Gem Error', e);
   }
 })();
 ```
@@ -146,14 +71,12 @@ Configuration Parameters:
 
 #### Users
 
-| method     | parameters              | description          |
-| ---------- | ----------------------- | -------------------- |
-| createUser | (emailAddress?: string) | Create a user.       |
-| getUser    | (userId: string)        | Get a user by ID.    |
-| listUsers  | none                    | List all users       |
-| deleteUser | (userId: string)        | Delete a user by ID. |
+| method    | parameters                               | description       |
+| --------- | ---------------------------------------- | ----------------- |
+| getUser   | (userId: string)                         | Get a user by ID. |
+| listUsers | (pageNumber?: number, pageSize?: number) | List all users    |
 
-#### Profiles
+<!-- #### Profiles
 
 | method                 | parameters                                | description                                                             |
 | ---------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
@@ -162,16 +85,16 @@ Configuration Parameters:
 | getProfile             | ( profileId: string )                     | Get a profile by ID.                                                    |
 | listProfiles           | ( userId: string )                        | Get a list of profiles.                                                 |
 | updateProfile          | ( userId: string, profile: ProfileModel ) | Create a profile.                                                       |
-| deleteProfile          | ( profileId: string )                     | Delete a profile by ID.                                                 |
+| deleteProfile          | ( profileId: string )                     | Delete a profile by ID.                                                 | -->
 
-#### Documents
+<!-- #### Documents
 
 | method                | parameters                                | description                                                                 |
 | --------------------- | ----------------------------------------- | --------------------------------------------------------------------------- |
 | createProfileDocument | ( profileId: string, document: FormData ) | Attach a document to a profile. (Documents may have many files associated.) |
 | listProfileDocuments  | ( profileId: string )                     | List all profile documents.                                                 |
 | updateDocument        | ( profileId: string, document: FormData ) | Update a document.                                                          |
-| deleteDocument        | ( documentId: string )                    | Delete a document by ID.                                                    |
+| deleteDocument        | ( documentId: string )                    | Delete a document by ID.                                                    | -->
 
 #### Institutions
 
@@ -180,39 +103,37 @@ Configuration Parameters:
 | getInstitution   | ( institutionId: string ) | Get an institution by ID.        |
 | listInstitutions | none                      | List all supported institutions. |
 
-#### Institution Users
+<!-- #### Institution Users
 
 | method                | parameters                                       | description                    |
 | --------------------- | ------------------------------------------------ | ------------------------------ |
 | createInstitutionUser | ( profileId: string, institutionId: string )     | Create an institution user.    |
 | getInstitutionUser    | ( institutionUserId: string )                    | Get an institution user by ID. |
 | listInstitutionUser   | ( userId: string, profile_id: string )           | Get an institution user by ID. |
-| updateInstitutionUser | ( institutionUserId: string, profileId: string ) | Update an institution user.    |
+| updateInstitutionUser | ( institutionUserId: string, profileId: string ) | Update an institution user.    | -->
 
-#### Accounts
+<!-- #### Accounts
 
 | method        | parameters                                | description             |
 | ------------- | ----------------------------------------- | ----------------------- |
 | createAccount | ( account: PlaidAccountModel )            | Create an account.      |
 | getAccount    | ( accountId: string )                     | Get an account by ID    |
-| listAccounts  | ( connectionId: string, userId?: string ) | Get a list of accounts. |
+| listAccounts  | ( connectionId: string, userId?: string ) | Get a list of accounts. | -->
 
 #### Transactions
 
-| method             | parameters                                                                                              | description                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| createTransaction  | ( transactionParams: TransactionModel )                                                                 | Create a transaction.          |
-| confirmTransaction | ( transactionId: string )                                                                               | Confirm a transaction preview. |
-| getTransaction     | ( transactionId: string )                                                                               | Get a transaction by ID.       |
-| listTransactions   | ({ userId?: string, accountId?: string, beforeId?: string, afterId?: string, limit?: number }?: object) | Get a list of transactions.    |
+| method           | parameters                                                                                              | description                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------- | --------------------------- |
+| getTransaction   | ( transactionId: string )                                                                               | Get a transaction by ID.    |
+| listTransactions | ({ userId?: string, accountId?: string, beforeId?: string, afterId?: string, limit?: number }?: object) | Get a list of transactions. |
 
-#### Credentials
+<!-- #### Credentials
 
 | method            | parameters                             | description                                                                                                  |
 | ----------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| createCredentials | ( credentialParams: CredentialsModel ) | Create a credentials object which can be used to link a user to a connection. No authentication is required. |
+| createCredentials | ( credentialParams: CredentialsModel ) | Create a credentials object which can be used to link a user to a connection. No authentication is required. | -->
 
-#### Connections
+<!-- #### Connections
 
 | method           | parameters                                     | description                                                         |
 | ---------------- | ---------------------------------------------- | ------------------------------------------------------------------- |
@@ -220,7 +141,7 @@ Configuration Parameters:
 | getConnection    | ( connectionId: string )                       | Get a connection by ID.                                             |
 | listConnections  | ( userId: string )                             | Get a list of user connections.                                     |
 | updateConnection | ( connectionId: string, credentialId: string ) | Update a connection's credential_id.                                |
-| deleteConnection | ( connectionId: string )                       | Delete a connection by ID.                                          |
+| deleteConnection | ( connectionId: string )                       | Delete a connection by ID.                                          | -->
 
 #### Assets
 

@@ -138,6 +138,24 @@ var SDK;
                     }
                 });
             }); };
+            this.web = {
+                emailUserOTP: function (_a) {
+                    var userId = _a.userId, email = _a.email;
+                    return _this.client.post(shared_1.Endpoints.users + "/otp", __assign(__assign({}, (userId && { user_id: userId })), (email && { email: email })));
+                },
+                confirmUserOTP: function (_a) {
+                    var otp = _a.otp, email = _a.email, userId = _a.userId;
+                    return _this.client.post(shared_1.Endpoints.users + "/sign_in", __assign(__assign({ otp: otp }, (userId && { user_id: userId })), (email && { email: email })));
+                },
+                getUserInfo: function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4, this.client.get(shared_1.Endpoints.users + "/info")];
+                            case 1: return [2, _a.sent()];
+                        }
+                    });
+                }); },
+            };
             this.listApplicationConfigurations = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.application_configurations)];

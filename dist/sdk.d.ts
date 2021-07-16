@@ -30,6 +30,18 @@ export declare namespace SDK {
         rawAxios: AxiosInstance;
         constructor(config: any);
         private getDocumentContentLength;
+        web: {
+            emailUserOTP: ({ userId, email, }: {
+                email?: string;
+                userId?: string;
+            }) => Promise<any>;
+            confirmUserOTP: ({ otp, email, userId, }: {
+                otp: string;
+                email?: string;
+                userId?: string;
+            }) => Promise<any>;
+            getUserInfo: () => Promise<any>;
+        };
         listApplicationConfigurations: () => Promise<GemResponseType.IApplicationConfig[]>;
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;

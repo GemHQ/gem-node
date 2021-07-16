@@ -145,13 +145,13 @@ var Client = (function () {
         var reqOpts = __assign(__assign(__assign(__assign({}, (!this.IS_NODE && {
             xsrfCookieName: shared_1.GEM_CSRF_COOKIE_NAME,
             xsrfHeaderName: shared_1.GEM_CSRF_HEADER_NAME,
-        })), this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign({}, this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), data: params });
+        })), this.config.options), options), { url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, method: method, headers: __assign(__assign(__assign({}, this.axios.defaults.headers.common), this.config.options.headers), options.headers), qs: __assign(__assign({}, this.config.qs), options.qs), data: params });
         if (reqOpts.method == 'GET')
             reqOpts.qs = Object.assign(reqOpts.qs, params);
         if (['GET', 'DELETE'].includes(reqOpts.method))
             delete reqOpts.data;
         reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
-        if (this.IS_NODE) {
+        if (this.IS_NODE && !reqOpts.headers['Authorization']) {
             var ts = this.getTimeStamp();
             reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
             reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);

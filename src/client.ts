@@ -137,6 +137,7 @@ export class Client {
       url: parsedUrl.protocol + '//' + parsedUrl.host + parsedUrl.pathname, // no querystring here!
       method: method,
       headers: {
+        ...this.axios.defaults.headers.common,
         ...this.config.options.headers,
         ...options.headers,
       },
@@ -153,15 +154,16 @@ export class Client {
 
     reqOpts.headers['X-Gem-Api-Key'] = this.config.apiKey;
 
-    if (this.IS_NODE) {
+    if (this.IS_NODE && !reqOpts.headers['Authorization']) {
       const ts = this.getTimeStamp();
       reqOpts.headers['X-Gem-Access-Timestamp'] = ts;
       reqOpts.headers['X-Gem-Signature'] = this.createSignature(ts);
     }
 
-    reqOpts.url = (Object.keys(reqOpts.qs).length > 0
-      ? reqOpts.url + '?' + qs.stringify(reqOpts.qs)
-      : reqOpts.url
+    reqOpts.url = (
+      Object.keys(reqOpts.qs).length > 0
+        ? reqOpts.url + '?' + qs.stringify(reqOpts.qs)
+        : reqOpts.url
     ).replace(/\?$/, '');
 
     dbg('Request Options:', reqOpts);

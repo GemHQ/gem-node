@@ -60,6 +60,42 @@ export namespace SDK {
       });
     };
 
+    web = {
+      // Email user OTP.
+      emailUserOTP: ({
+        userId,
+        email,
+      }: {
+        email?: string;
+        userId?: string;
+      }) => {
+        return this.client.post(`${Endpoints.users}/otp`, {
+          ...(userId && { user_id: userId }),
+          ...(email && { email }),
+        });
+      },
+      // Verify email OTP.
+      confirmUserOTP: ({
+        otp,
+        email,
+        userId,
+      }: {
+        otp: string;
+        email?: string;
+        userId?: string;
+      }) => {
+        return this.client.post(`${Endpoints.users}/sign_in`, {
+          otp,
+          ...(userId && { user_id: userId }),
+          ...(email && { email }),
+        });
+      },
+      // Get a logged in user's info.
+      getUserInfo: async () => {
+        return await this.client.get(`${Endpoints.users}/info`);
+      },
+    };
+
     /**
      * APPLICATION
      */
@@ -585,8 +621,9 @@ export namespace SDK {
         ...(userId && { user_id: userId }),
       });
 
-    checkSessionValidity = async (): Promise<GemResponseType.ISessionValidity> =>
-      await this.client.post(Endpoints.session_validity);
+    checkSessionValidity =
+      async (): Promise<GemResponseType.ISessionValidity> =>
+        await this.client.post(Endpoints.session_validity);
 
     refreshSession = async (): Promise<{ read_access_expires_at: number }> => {
       return await this.client.post(Endpoints.refresh, {});

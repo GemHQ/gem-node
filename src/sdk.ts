@@ -61,20 +61,24 @@ export namespace SDK {
     };
 
     web = {
-      // Email user OTP.
+      /**
+       * Email user OTP.
+       */
       emailUserOTP: ({
         userId,
         email,
       }: {
         email?: string;
         userId?: string;
-      }) => {
+      }): Promise<GemResponseType.IBaseMessage> => {
         return this.client.post(`${Endpoints.users}/otp`, {
           ...(userId && { user_id: userId }),
           ...(email && { email }),
         });
       },
-      // Verify email OTP.
+      /**
+       * Verify email OTP.
+       */
       confirmUserOTP: ({
         otp,
         email,
@@ -83,15 +87,45 @@ export namespace SDK {
         otp: string;
         email?: string;
         userId?: string;
-      }) => {
+      }): Promise<GemResponseType.IUserInfo> => {
         return this.client.post(`${Endpoints.users}/sign_in`, {
           otp,
           ...(userId && { user_id: userId }),
           ...(email && { email }),
         });
       },
-      // Get a logged in user's info.
-      getUserInfo: async () => {
+      /**
+       * Add a user phone number
+       */
+      addUserPhoneNumber: ({
+        phoneNumber,
+      }: {
+        phoneNumber: string;
+      }): Promise<GemResponseType.IUserPhoneNumber> => {
+        return this.client.post(`${Endpoints.users}/phone_numbers`, {
+          value: phoneNumber,
+        });
+      },
+      /**
+       * List a user's phone numbers
+       */
+      listUserPhoneNumbers: async (): Promise<
+        GemResponseType.IUserPhoneNumber[]
+      > => {
+        return this.client.get(`${Endpoints.users}/phone_numbers`);
+      },
+      /**
+       * Set a user's primary phone number
+       */
+      setUserPrimaryPhoneNumber: async ({ id }: { id: string }) => {
+        return this.client.post(`${Endpoints.users}/phone_numbers/primary`, {
+          id,
+        });
+      },
+      /**
+       * Get a logged in user's info.
+       */
+      getUserInfo: async (): Promise<GemResponseType.IIAMUser> => {
         return await this.client.get(`${Endpoints.users}/info`);
       },
     };

@@ -34,13 +34,20 @@ export declare namespace SDK {
             emailUserOTP: ({ userId, email, }: {
                 email?: string;
                 userId?: string;
-            }) => Promise<any>;
+            }) => Promise<GemResponseType.IBaseMessage>;
             confirmUserOTP: ({ otp, email, userId, }: {
                 otp: string;
                 email?: string;
                 userId?: string;
+            }) => Promise<GemResponseType.IUserInfo>;
+            addUserPhoneNumber: ({ phoneNumber, }: {
+                phoneNumber: string;
+            }) => Promise<GemResponseType.IUserPhoneNumber>;
+            listUserPhoneNumbers: () => Promise<GemResponseType.IUserPhoneNumber[]>;
+            setUserPrimaryPhoneNumber: ({ id }: {
+                id: string;
             }) => Promise<any>;
-            getUserInfo: () => Promise<any>;
+            getUserInfo: () => Promise<GemResponseType.IIAMUser>;
         };
         listApplicationConfigurations: () => Promise<GemResponseType.IApplicationConfig[]>;
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;

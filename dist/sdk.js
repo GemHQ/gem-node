@@ -147,6 +147,27 @@ var SDK;
                     var otp = _a.otp, email = _a.email, userId = _a.userId;
                     return _this.client.post(shared_1.Endpoints.users + "/sign_in", __assign(__assign({ otp: otp }, (userId && { user_id: userId })), (email && { email: email })));
                 },
+                addUserPhoneNumber: function (_a) {
+                    var phoneNumber = _a.phoneNumber;
+                    return _this.client.post(shared_1.Endpoints.users + "/phone_numbers", {
+                        value: phoneNumber,
+                    });
+                },
+                listUserPhoneNumbers: function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2, this.client.get(shared_1.Endpoints.users + "/phone_numbers")];
+                    });
+                }); },
+                setUserPrimaryPhoneNumber: function (_a) {
+                    var id = _a.id;
+                    return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_b) {
+                            return [2, this.client.post(shared_1.Endpoints.users + "/phone_numbers/primary", {
+                                    id: id,
+                                })];
+                        });
+                    });
+                },
                 getUserInfo: function () { return __awaiter(_this, void 0, void 0, function () {
                     return __generator(this, function (_a) {
                         switch (_a.label) {

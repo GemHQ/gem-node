@@ -60,11 +60,11 @@ export namespace SDK {
       });
     };
 
-    web = {
+    asUser = {
       /**
        * Email user OTP.
        */
-      emailUserOTP: ({
+      emailOTP: ({
         userId,
         email,
       }: {
@@ -79,7 +79,7 @@ export namespace SDK {
       /**
        * Verify email OTP.
        */
-      confirmUserOTP: ({
+      confirmOTP: ({
         otp,
         email,
         userId,
@@ -97,7 +97,7 @@ export namespace SDK {
       /**
        * Add a user phone number
        */
-      addUserPhoneNumber: ({
+      addPhoneNumber: ({
         phoneNumber,
       }: {
         phoneNumber: string;
@@ -109,7 +109,7 @@ export namespace SDK {
       /**
        * List a user's phone numbers
        */
-      listUserPhoneNumbers: async (): Promise<
+      listPhoneNumbers: async (): Promise<
         GemResponseType.IUserPhoneNumber[]
       > => {
         return this.client.get(`${Endpoints.users}/phone_numbers`);
@@ -117,15 +117,61 @@ export namespace SDK {
       /**
        * Set a user's primary phone number
        */
-      setUserPrimaryPhoneNumber: async ({ id }: { id: string }) => {
+      setPrimaryPhoneNumber: async ({
+        id,
+      }: {
+        id: string;
+      }): Promise<GemResponseType.IBaseMessage> => {
         return this.client.post(`${Endpoints.users}/phone_numbers/primary`, {
           id,
         });
       },
       /**
+       * Given a user's phone number ID,
+       * sends a new verification code to the number.
+       */
+      sendPhoneVerificationCode: async ({
+        id,
+      }: {
+        id: string;
+      }): Promise<GemResponseType.IBaseMessage> => {
+        return this.client.post(
+          `${Endpoints.users}/phone_numbers/${id}/resend_verification_code`,
+          {}
+        );
+      },
+      /**
+       * Verify a user's SMS OTP.
+       */
+      verifyPhoneVerificationCode: async (args: {
+        id: string;
+        otp: string;
+      }): Promise<GemResponseType.IUserPhoneNumber> => {
+        return this.client.post(
+          `${Endpoints.users}/phone_numbers/${args.id}/verify`,
+          { otp: args.otp }
+        );
+      },
+      /**
+       * Delete a user's phone number by ID.
+       */
+      deletePhoneNumber: async ({
+        id,
+      }: {
+        id: string;
+      }): Promise<GemResponseType.IBaseMessage> => {
+        return this.client.delete(`${Endpoints.users}/phone_numbers/${id}`);
+      },
+      /**
+       * Refresh a logged in user's session
+       */
+      refreshSession: async (): Promise<GemResponseType.IUserInfo> => {
+        return this.client.post(`${Endpoints.users}/session_refresh`, {});
+      },
+      /**
        * Get a logged in user's info.
        */
-      getUserInfo: async (): Promise<GemResponseType.IIAMUser> => {
+      getMyInfo: async (): Promise<GemResponseType.IUserInfo> => {
         return await this.client.get(`${Endpoints.users}/info`);
       },
     };

@@ -59,6 +59,10 @@ export declare namespace SDK {
             }) => Promise<GemResponseType.IBaseMessage>;
             refreshSession: () => Promise<GemResponseType.IUserInfo>;
             getMyInfo: () => Promise<GemResponseType.IUserInfo>;
+            checkSessionValidity: () => Promise<{
+                user: GemResponseType.IUserInfo;
+                is_authenticated: boolean;
+            }>;
         };
         listApplicationConfigurations: () => Promise<GemResponseType.IApplicationConfig[]>;
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;

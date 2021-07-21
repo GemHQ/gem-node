@@ -202,6 +202,11 @@ var SDK;
                         }
                     });
                 }); },
+                checkSessionValidity: function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2, this.client.get(shared_1.Endpoints.users + "/is_authenticated")];
+                    });
+                }); },
             };
             this.listApplicationConfigurations = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {

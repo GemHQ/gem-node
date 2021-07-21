@@ -179,6 +179,15 @@ export namespace SDK {
       getMyInfo: async (): Promise<GemResponseType.IUserInfo> => {
         return await this.client.get(`${Endpoints.users}/info`);
       },
+      /**
+       * Check the validity of a user's session.
+       */
+      checkSessionValidity: async (): Promise<{
+        user: GemResponseType.IUserInfo;
+        is_authenticated: boolean;
+      }> => {
+        return this.client.get(`${Endpoints.users}/is_authenticated`);
+      },
     };
 
     /**

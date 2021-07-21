@@ -60,6 +60,11 @@ export namespace SDK {
       });
     };
 
+    /**
+     * Used by the Gem widget only.
+     * Public access should not rely on these methods.
+     * There is ** no ** guarantee of compatibility maintenance.
+     */
     asUser = {
       /**
        * Email user OTP.

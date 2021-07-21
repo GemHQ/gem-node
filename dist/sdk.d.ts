@@ -30,24 +30,35 @@ export declare namespace SDK {
         rawAxios: AxiosInstance;
         constructor(config: any);
         private getDocumentContentLength;
-        web: {
-            emailUserOTP: ({ userId, email, }: {
+        asUser: {
+            emailOTP: ({ userId, email, }: {
                 email?: string;
                 userId?: string;
             }) => Promise<GemResponseType.IBaseMessage>;
-            confirmUserOTP: ({ otp, email, userId, }: {
+            confirmOTP: ({ otp, email, userId, }: {
                 otp: string;
                 email?: string;
                 userId?: string;
             }) => Promise<GemResponseType.IUserInfo>;
-            addUserPhoneNumber: ({ phoneNumber, }: {
+            addPhoneNumber: ({ phoneNumber, }: {
                 phoneNumber: string;
             }) => Promise<GemResponseType.IUserPhoneNumber>;
-            listUserPhoneNumbers: () => Promise<GemResponseType.IUserPhoneNumber[]>;
-            setUserPrimaryPhoneNumber: ({ id }: {
+            listPhoneNumbers: () => Promise<GemResponseType.IUserPhoneNumber[]>;
+            setPrimaryPhoneNumber: ({ id, }: {
                 id: string;
-            }) => Promise<any>;
-            getUserInfo: () => Promise<GemResponseType.IIAMUser>;
+            }) => Promise<GemResponseType.IBaseMessage>;
+            sendPhoneVerificationCode: ({ id, }: {
+                id: string;
+            }) => Promise<GemResponseType.IBaseMessage>;
+            verifyPhoneVerificationCode: (args: {
+                id: string;
+                otp: string;
+            }) => Promise<GemResponseType.IUserPhoneNumber>;
+            deletePhoneNumber: ({ id, }: {
+                id: string;
+            }) => Promise<GemResponseType.IBaseMessage>;
+            refreshSession: () => Promise<GemResponseType.IUserInfo>;
+            getMyInfo: () => Promise<GemResponseType.IUserInfo>;
         };
         listApplicationConfigurations: () => Promise<GemResponseType.IApplicationConfig[]>;
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;

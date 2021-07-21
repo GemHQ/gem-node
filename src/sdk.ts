@@ -61,6 +61,136 @@ export namespace SDK {
     };
 
     /**
+     * Used by the Gem widget only.
+     * Public access should not rely on these methods.
+     * There is ** no ** guarantee of compatibility maintenance.
+     */
+    asUser = {
+      /**
+       * Email user OTP.
+       */
+      emailOTP: ({
+        userId,
+        email,
+      }: {
+        email?: string;
+        userId?: string;
+      }): Promise<GemResponseType.IBaseMessage> => {
+        return this.client.post(`${Endpoints.users}/otp`, {
+          ...(userId && { user_id: userId }),
+          ...(email && { email }),
+        });
+      },
+      /**
+       * Verify email OTP.
+       */
+      confirmOTP: ({
+        otp,
+        email,
+        userId,
+      }: {
+        otp: string;
+        email?: string;
+        userId?: string;
+      }): Promise<GemResponseType.IUserInfo> => {
+        return this.client.post(`${Endpoints.users}/sign_in`, {
+          otp,
+          ...(userId && { user_id: userId }),
+          ...(email && { email }),
+        });
+      },
+      /**
+       * Add a user phone number
+       */
+      addPhoneNumber: ({
+        phoneNumber,
+      }: {
+        phoneNumber: string;
+      }): Promise<GemResponseType.IUserPhoneNumber> => {
+        return this.client.post(`${Endpoints.users}/phone_numbers`, {
+          value: phoneNumber,
+        });
+      },
+      /**
+       * List a user's phone numbers
+       */
+      listPhoneNumbers: async (): Promise<
+        GemResponseType.IUserPhoneNumber[]
+      > => {
+        return this.client.get(`${Endpoints.users}/phone_numbers`);
+      },
+      /**
+       * Set a user's primary phone number
+       */
+      setPrimaryPhoneNumber: async ({
+        id,
+      }: {
+        id: string;
+      }): Promise<GemResponseType.IBaseMessage> => {
+        return this.client.post(`${Endpoints.users}/phone_numbers/primary`, {
+          id,
+        });
+      },
+      /**
+       * Given a user's phone number ID,
+       * sends a new verification code to the number.
+       */
+      sendPhoneVerificationCode: async ({
+        id,
+      }: {
+        id: string;
+      }): Promise<GemResponseType.IBaseMessage> => {
+        return this.client.post(
+          `${Endpoints.users}/phone_numbers/${id}/resend_verification_code`,
+          {}
+        );
+      },
+      /**
+       * Verify a user's SMS OTP.
+       */
+      verifyPhoneVerificationCode: async (args: {
+        id: string;
+        otp: string;
+      }): Promise<GemResponseType.IUserPhoneNumber> => {
+        return this.client.post(
+          `${Endpoints.users}/phone_numbers/${args.id}/verify`,
+          { otp: args.otp }
+        );
+      },
+      /**
+       * Delete a user's phone number by ID.
+       */
+      deletePhoneNumber: async ({
+        id,
+      }: {
+        id: string;
+      }): Promise<GemResponseType.IBaseMessage> => {
+        return this.client.delete(`${Endpoints.users}/phone_numbers/${id}`);
+      },
+      /**
+       * Refresh a logged in user's session
+       */
+      refreshSession: async (): Promise<GemResponseType.IUserInfo> => {
+        return this.client.post(`${Endpoints.users}/session_refresh`, {});
+      },
+      /**
+       * Get a logged in user's info.
+       */
+      getMyInfo: async (): Promise<GemResponseType.IUserInfo> => {
+        return await this.client.get(`${Endpoints.users}/info`);
+      },
+      /**
+       * Check the validity of a user's session.
+       */
+      checkSessionValidity: async (): Promise<{
+        user: GemResponseType.IUserInfo;
+        is_authenticated: boolean;
+      }> => {
+        return this.client.get(`${Endpoints.users}/is_authenticated`);
+      },
+    };
+
+    /**
      * APPLICATION
      */
 
@@ -585,8 +715,9 @@ export namespace SDK {
         ...(userId && { user_id: userId }),
       });
 
-    checkSessionValidity = async (): Promise<GemResponseType.ISessionValidity> =>
-      await this.client.post(Endpoints.session_validity);
+    checkSessionValidity =
+      async (): Promise<GemResponseType.ISessionValidity> =>
+        await this.client.post(Endpoints.session_validity);
 
     refreshSession = async (): Promise<{ read_access_expires_at: number }> => {
       return await this.client.post(Endpoints.refresh, {});

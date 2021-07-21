@@ -30,6 +30,40 @@ export declare namespace SDK {
         rawAxios: AxiosInstance;
         constructor(config: any);
         private getDocumentContentLength;
+        asUser: {
+            emailOTP: ({ userId, email, }: {
+                email?: string;
+                userId?: string;
+            }) => Promise<GemResponseType.IBaseMessage>;
+            confirmOTP: ({ otp, email, userId, }: {
+                otp: string;
+                email?: string;
+                userId?: string;
+            }) => Promise<GemResponseType.IUserInfo>;
+            addPhoneNumber: ({ phoneNumber, }: {
+                phoneNumber: string;
+            }) => Promise<GemResponseType.IUserPhoneNumber>;
+            listPhoneNumbers: () => Promise<GemResponseType.IUserPhoneNumber[]>;
+            setPrimaryPhoneNumber: ({ id, }: {
+                id: string;
+            }) => Promise<GemResponseType.IBaseMessage>;
+            sendPhoneVerificationCode: ({ id, }: {
+                id: string;
+            }) => Promise<GemResponseType.IBaseMessage>;
+            verifyPhoneVerificationCode: (args: {
+                id: string;
+                otp: string;
+            }) => Promise<GemResponseType.IUserPhoneNumber>;
+            deletePhoneNumber: ({ id, }: {
+                id: string;
+            }) => Promise<GemResponseType.IBaseMessage>;
+            refreshSession: () => Promise<GemResponseType.IUserInfo>;
+            getMyInfo: () => Promise<GemResponseType.IUserInfo>;
+            checkSessionValidity: () => Promise<{
+                user: GemResponseType.IUserInfo;
+                is_authenticated: boolean;
+            }>;
+        };
         listApplicationConfigurations: () => Promise<GemResponseType.IApplicationConfig[]>;
         createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;

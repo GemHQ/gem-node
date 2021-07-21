@@ -313,4 +313,40 @@ export declare namespace GemResponseType {
             };
         };
     }
+    interface IUserPhoneNumber {
+        confirmed_at: null | string;
+        created_at: string;
+        id: number;
+        phone_number: string;
+        primary: boolean;
+        updated_at: string;
+    }
+    interface IUserEmail {
+        confirmed_at: null | string;
+        created_at: string;
+        email: string;
+        id: number;
+        primary: boolean;
+        receive_notifications: boolean;
+        updated_at: string;
+    }
+    interface IIAMUser {
+        backoffice_role: null | string;
+        created_at: string;
+        emails: IUserEmail[];
+        gem_uid: string;
+        phone_numbers: IUserPhoneNumber[];
+        updated_at: string;
+        username: null | string;
+    }
+    interface IUserInfo {
+        consented: boolean;
+        created_at: string;
+        email: string;
+        iam_user: IIAMUser;
+        id: string;
+        phone_number: null | string;
+        status: 'pending_phone_number_verification' | string;
+        updated_at: string;
+    }
 }

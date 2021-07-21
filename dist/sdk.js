@@ -138,6 +138,76 @@ var SDK;
                     }
                 });
             }); };
+            this.asUser = {
+                emailOTP: function (_a) {
+                    var userId = _a.userId, email = _a.email;
+                    return _this.client.post(shared_1.Endpoints.users + "/otp", __assign(__assign({}, (userId && { user_id: userId })), (email && { email: email })));
+                },
+                confirmOTP: function (_a) {
+                    var otp = _a.otp, email = _a.email, userId = _a.userId;
+                    return _this.client.post(shared_1.Endpoints.users + "/sign_in", __assign(__assign({ otp: otp }, (userId && { user_id: userId })), (email && { email: email })));
+                },
+                addPhoneNumber: function (_a) {
+                    var phoneNumber = _a.phoneNumber;
+                    return _this.client.post(shared_1.Endpoints.users + "/phone_numbers", {
+                        value: phoneNumber,
+                    });
+                },
+                listPhoneNumbers: function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2, this.client.get(shared_1.Endpoints.users + "/phone_numbers")];
+                    });
+                }); },
+                setPrimaryPhoneNumber: function (_a) {
+                    var id = _a.id;
+                    return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_b) {
+                            return [2, this.client.post(shared_1.Endpoints.users + "/phone_numbers/primary", {
+                                    id: id,
+                                })];
+                        });
+                    });
+                },
+                sendPhoneVerificationCode: function (_a) {
+                    var id = _a.id;
+                    return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_b) {
+                            return [2, this.client.post(shared_1.Endpoints.users + "/phone_numbers/" + id + "/resend_verification_code", {})];
+                        });
+                    });
+                },
+                verifyPhoneVerificationCode: function (args) { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2, this.client.post(shared_1.Endpoints.users + "/phone_numbers/" + args.id + "/verify", { otp: args.otp })];
+                    });
+                }); },
+                deletePhoneNumber: function (_a) {
+                    var id = _a.id;
+                    return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_b) {
+                            return [2, this.client.delete(shared_1.Endpoints.users + "/phone_numbers/" + id)];
+                        });
+                    });
+                },
+                refreshSession: function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2, this.client.post(shared_1.Endpoints.users + "/session_refresh", {})];
+                    });
+                }); },
+                getMyInfo: function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4, this.client.get(shared_1.Endpoints.users + "/info")];
+                            case 1: return [2, _a.sent()];
+                        }
+                    });
+                }); },
+                checkSessionValidity: function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        return [2, this.client.get(shared_1.Endpoints.users + "/is_authenticated")];
+                    });
+                }); },
+            };
             this.listApplicationConfigurations = function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.application_configurations)];

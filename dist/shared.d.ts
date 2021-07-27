@@ -339,14 +339,7 @@ export declare namespace GemResponseType {
         updated_at: string;
         username: null | string;
     }
-    interface IUserInfo {
-        consented: boolean;
-        created_at: string;
-        email: string;
+    interface IUserInfo extends IUser {
         iam_user: IIAMUser;
-        id: string;
-        phone_number: null | string;
-        status: 'pending_phone_number_verification' | string;
-        updated_at: string;
     }
 }

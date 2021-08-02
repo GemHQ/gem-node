@@ -140,8 +140,10 @@ var SDK;
             }); };
             this.asUser = {
                 emailOTP: function (_a) {
-                    var userId = _a.userId, email = _a.email;
-                    return _this.client.post(shared_1.Endpoints.users + "/otp", __assign(__assign({}, (userId && { user_id: userId })), (email && { email: email })));
+                    var userId = _a.userId, email = _a.email, reCAPTCHAValue = _a.reCAPTCHAValue;
+                    return _this.client.post(shared_1.Endpoints.users + "/otp", __assign(__assign(__assign({}, (userId && { user_id: userId })), (email && { email: email })), (!_this.client.IS_NODE && {
+                        'g-recaptcha-response': reCAPTCHAValue,
+                    })));
                 },
                 confirmOTP: function (_a) {
                     var otp = _a.otp, email = _a.email, userId = _a.userId;

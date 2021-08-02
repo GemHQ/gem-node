@@ -31,9 +31,10 @@ export declare namespace SDK {
         constructor(config: any);
         private getDocumentContentLength;
         asUser: {
-            emailOTP: ({ userId, email, }: {
+            emailOTP: ({ userId, email, reCAPTCHAValue, }: {
                 email?: string;
                 userId?: string;
+                reCAPTCHAValue: string;
             }) => Promise<GemResponseType.IBaseMessage>;
             confirmOTP: ({ otp, email, userId, }: {
                 otp: string;

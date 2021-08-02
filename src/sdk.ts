@@ -72,13 +72,18 @@ export namespace SDK {
       emailOTP: ({
         userId,
         email,
+        reCAPTCHAValue,
       }: {
         email?: string;
         userId?: string;
+        reCAPTCHAValue: string;
       }): Promise<GemResponseType.IBaseMessage> => {
         return this.client.post(`${Endpoints.users}/otp`, {
           ...(userId && { user_id: userId }),
           ...(email && { email }),
+          ...(!this.client.IS_NODE && {
+            'g-recaptcha-response': reCAPTCHAValue,
+          }),
         });
       },
       /**

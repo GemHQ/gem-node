@@ -308,7 +308,14 @@ export namespace GemResponseType {
     source_amount: number;
     destination_amount: number;
     source_asset_id: string;
-    instructions: any;
+    instructions?:
+      | {
+          amount: number;
+          asset_id: string;
+          ticker: string;
+          address_details: { address: string };
+        }
+      | object;
     destination_asset_id: string;
     external_id: string;
     type: string;

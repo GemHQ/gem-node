@@ -42,6 +42,7 @@ export enum Endpoints {
   refresh = '/refresh',
   application_configurations = '/application_configs',
   intstitution_2fa = '/institution_2fas',
+  plaid = '/plaid',
 }
 export namespace GemTypes {
   export interface ResolvedCurrencyType {

@@ -745,6 +745,13 @@ var SDK;
                     });
                 });
             };
+            this.generatePlaidSDKToken = function () { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    if (this.client.IS_NODE)
+                        return [2, Promise.reject('This request can only be made from a browser.')];
+                    return [2, this.client.post(shared_1.Endpoints.plaid + "/link_token", {})];
+                });
+            }); };
             this.client = new client_1.Client(config);
             this.rawAxios = this.client.axios;
         }

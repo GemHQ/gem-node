@@ -4,6 +4,7 @@ exports.PlaidAccountModel = exports.AccountTypes = void 0;
 var AccountTypes;
 (function (AccountTypes) {
     AccountTypes["PlaidAccount"] = "PlaidAccount";
+    AccountTypes["WyrePlaidAccount"] = "WyrePlaidAccount";
     AccountTypes["BankAccount"] = "BankAccount";
     AccountTypes["CreditCard"] = "CreditCard";
     AccountTypes["DebitCard"] = "DebitCard";

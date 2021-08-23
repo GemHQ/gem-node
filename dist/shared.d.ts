@@ -21,7 +21,8 @@ export declare enum Endpoints {
     logout = "/logout",
     refresh = "/refresh",
     application_configurations = "/application_configs",
-    intstitution_2fa = "/institution_2fas"
+    intstitution_2fa = "/institution_2fas",
+    plaid = "/plaid"
 }
 export declare namespace GemTypes {
     interface ResolvedCurrencyType {

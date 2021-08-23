@@ -1,5 +1,6 @@
 export enum AccountTypes {
   PlaidAccount = 'PlaidAccount',
+  WyrePlaidAccount = 'WyrePlaidAccount',
   BankAccount = 'BankAccount',
   CreditCard = 'CreditCard',
   DebitCard = 'DebitCard',

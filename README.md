@@ -150,6 +150,12 @@ Configuration Parameters:
 | getAssets  | ( assetId: string, source?: string )     | Get assets from a source. assetIds can be a comma seperated list. |
 | listAssets | ( category: 'cryptocurrency' or 'fiat' ) | List all supported assets of a certain category.                  |
 
+#### Payment Methods + Supported Currencies
+
+| method                  | parameters                       | description                                                                       |
+| ----------------------- | -------------------------------- | --------------------------------------------------------------------------------- |
+| listSupportedCurrencies | (institutionId: wyre or coinify) | List payment methods for a particular institution and their supported currencies. |
+
 #### Prices
 
 | method          | parameters                                                | description                                          |

@@ -745,18 +745,13 @@ var SDK;
                     });
                 });
             };
-            this.generatePlaidSDKToken = function (_a) {
-                var accountId = _a.accountId;
-                return __awaiter(_this, void 0, void 0, function () {
-                    return __generator(this, function (_b) {
-                        if (this.client.IS_NODE)
-                            return [2, Promise.reject('This request can only be made from a browser.')];
-                        return [2, this.client.post(shared_1.Endpoints.plaid + "/link_token", {
-                                account_id: accountId,
-                            })];
-                    });
+            this.generatePlaidSDKToken = function (params) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    if (this.client.IS_NODE)
+                        return [2, Promise.reject('This request can only be made from a browser.')];
+                    return [2, this.client.post(shared_1.Endpoints.plaid + "/link_token", __assign({}, (params.accountId && { account_id: params.accountId })))];
                 });
-            };
+            }); };
             this.client = new client_1.Client(config);
             this.rawAxios = this.client.axios;
         }

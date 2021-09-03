@@ -748,9 +748,7 @@ export namespace SDK {
       );
     };
 
-    generatePlaidSDKToken = async ({
-      accountId,
-    }: {
+    generatePlaidSDKToken = async (params?: {
       accountId?: string;
     }): Promise<{
       token: string;
@@ -759,7 +757,7 @@ export namespace SDK {
       if (this.client.IS_NODE)
         return Promise.reject('This request can only be made from a browser.');
       return this.client.post(`${Endpoints.plaid}/link_token`, {
-        account_id: accountId,
+        ...(params.accountId && { account_id: params.accountId }),
       });
     };
   }

@@ -748,13 +748,19 @@ export namespace SDK {
       );
     };
 
-    generatePlaidSDKToken = async (): Promise<{
+    generatePlaidSDKToken = async ({
+      accountId,
+    }: {
+      accountId?: string;
+    }): Promise<{
       token: string;
       token_expiration: string;
     }> => {
       if (this.client.IS_NODE)
         return Promise.reject('This request can only be made from a browser.');
-      return this.client.post(`${Endpoints.plaid}/link_token`, {});
+      return this.client.post(`${Endpoints.plaid}/link_token`, {
+        account_id: accountId,
+      });
     };
   }
 }

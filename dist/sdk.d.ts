@@ -193,7 +193,9 @@ export declare namespace SDK {
         generateOnfidoSDKToken: ({ profileId, }: {
             profileId: string;
         }) => Promise<GemResponseType.IOnfidoSDKToken>;
-        generatePlaidSDKToken: () => Promise<{
+        generatePlaidSDKToken: ({ accountId, }: {
+            accountId?: string;
+        }) => Promise<{
             token: string;
             token_expiration: string;
         }>;

@@ -1,6 +1,6 @@
 {
   "name": "@gem.co/api",
-  "version": "1.62.4",
+  "version": "1.62.5",
   "description": "Node.js client library for the Gem API.",
   "main": "./dist/gem.js",
   "scripts": {
@@ -32,18 +32,18 @@
   "license": "MIT",
   "types": "./dist/gem.d.ts",
   "dependencies": {
-    "axios": "^0.21.1",
-    "debug": "^4.2.0",
-    "es6-shim": "^0.35.5",
-    "qs": "^6.9.4",
+    "axios": "^0.21.4",
+    "debug": "^4.3.2",
+    "es6-shim": "^0.35.6",
+    "qs": "^6.10.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.5",
+    "@types/debug": "^4.1.7",
     "@types/form-data": "^2.5.0",
-    "@types/qs": "^6.9.5",
-    "@types/request": "^2.48.5",
-    "form-data": "^3.0.0",
-    "typescript": "^3.9.7"
+    "@types/qs": "^6.9.7",
+    "@types/request": "^2.48.7",
+    "form-data": "^3.0.1",
+    "typescript": "^3.9.10"
   }
 }

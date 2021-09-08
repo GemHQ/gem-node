@@ -757,7 +757,7 @@ export namespace SDK {
       if (this.client.IS_NODE)
         return Promise.reject('This request can only be made from a browser.');
       return this.client.post(`${Endpoints.plaid}/link_token`, {
-        ...(params.accountId && { account_id: params.accountId }),
+        ...(params?.accountId && { account_id: params.accountId }),
       });
     };
   }

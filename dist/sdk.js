@@ -506,6 +506,19 @@ var SDK;
                     }
                 });
             }); };
+            this.updateAccount = function (args) { return __awaiter(_this, void 0, void 0, function () {
+                var accountId, card_params;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            accountId = args.accountId, card_params = args.cardParams;
+                            return [4, this.client.patch(shared_1.Endpoints.accounts + "/" + accountId, { card_params: card_params }, {
+                                    isPCI: true,
+                                })];
+                        case 1: return [2, _a.sent()];
+                    }
+                });
+            }); };
             this.getAccount = function (accountId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.get(shared_1.Endpoints.accounts + "/" + accountId)];

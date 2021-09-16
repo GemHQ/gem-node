@@ -2,7 +2,7 @@ import { FileModel, DocumentModel, ProfileModel, TransactionModel, PlaidAccountM
 import { Client } from './client';
 import { GemResponseType } from './shared';
 import { AxiosInstance } from 'axios';
-import { INewWyreCardAccount } from './models/account';
+import { INewCardParams, INewWyreCardAccount } from './models/account';
 declare type DeepPartial<T> = {
     [P in keyof T]?: T[P] extends Array<infer U> ? Array<DeepPartial<U>> : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>;
 };
@@ -122,6 +122,11 @@ export declare namespace SDK {
         getInstitutionUser: (institutionUserId: string) => Promise<GemResponseType.IInstitutionUser>;
         listInstitutionUsers: (user_id: string, profile_id: string) => Promise<GemResponseType.IInstitutionUser[]>;
         createAccount: (account: PlaidAccountModel | INewWyreCardAccount) => Promise<GemResponseType.IAccount>;
+        updateAccount: (args: {
+            cardParams: INewCardParams;
+        } & {
+            accountId: string;
+        }) => Promise<GemResponseType.IAccount>;
         getAccount: (accountId: string) => Promise<GemResponseType.IAccount>;
         listAccounts: (userId: string) => Promise<GemResponseType.IAccount[]>;
         deleteAccount: (accountId: string) => Promise<GemResponseType.IAccount>;

@@ -11,7 +11,7 @@ import {
 import { Client } from './client';
 import { Endpoints, GemResponseType } from './shared';
 import { AxiosInstance } from 'axios';
-import { INewWyreCardAccount } from './models/account';
+import { INewCardParams, INewWyreCardAccount } from './models/account';
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>
@@ -476,6 +476,19 @@ export namespace SDK {
       return await this.client.post(`${Endpoints.accounts}`, account, {
         isPCI: account.type === AccountTypes.WyreCardAccount,
       });
+    };
+
+    updateAccount = async (
+      args: { cardParams: INewCardParams } & { accountId: string }
+    ): Promise<GemResponseType.IAccount> => {
+      const { accountId, cardParams: card_params } = args;
+      return await this.client.patch(
+        `${Endpoints.accounts}/${accountId}`,
+        { card_params },
+        {
+          isPCI: true,
+        }
+      );
     };
 
     getAccount = async (accountId: string): Promise<GemResponseType.IAccount> =>

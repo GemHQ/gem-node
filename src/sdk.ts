@@ -773,8 +773,8 @@ export namespace SDK {
       return this.client.post(`${Endpoints.plaid}/link_token`, {
         ...(params?.accountId && {
           account_id: params.accountId,
-          is_webview: Boolean(params.isWebView),
         }),
+        is_webview: Boolean(params.isWebView),
       });
     };
   }

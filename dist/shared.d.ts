@@ -90,6 +90,9 @@ export declare namespace GemTypes {
     type FeatureAccessConfigData = {
         flag: 'stable' | 'beta' | 'alpha';
     };
+    type PlaidConfigData = {
+        deep_link_uri: string;
+    };
 }
 export declare namespace GemResponseType {
     type IApplicationConfig = {
@@ -97,8 +100,8 @@ export declare namespace GemResponseType {
         application_id: string;
         created_at: string;
         updated_at: string;
-        type: 'wyre' | 'coinify' | 'onfido' | 'feature_access';
-        data: GemTypes.OnfidoConfigData | GemTypes.WyreConfigData | GemTypes.CoinifyConfigData | GemTypes.FeatureAccessConfigData;
+        type: 'wyre' | 'coinify' | 'onfido' | 'feature_access' | 'plaid';
+        data: GemTypes.OnfidoConfigData | GemTypes.WyreConfigData | GemTypes.CoinifyConfigData | GemTypes.FeatureAccessConfigData | GemTypes.PlaidConfigData;
     };
     interface IProfileVerification {
         id: string;

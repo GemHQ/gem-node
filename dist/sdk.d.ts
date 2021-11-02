@@ -200,6 +200,7 @@ export declare namespace SDK {
         }) => Promise<GemResponseType.IOnfidoSDKToken>;
         generatePlaidSDKToken: (params?: {
             accountId?: string;
+            isWebView?: boolean;
         }) => Promise<{
             token: string;
             token_expiration: string;

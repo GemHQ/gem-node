@@ -762,7 +762,10 @@ var SDK;
                 return __generator(this, function (_a) {
                     if (this.client.IS_NODE)
                         return [2, Promise.reject('This request can only be made from a browser.')];
-                    return [2, this.client.post(shared_1.Endpoints.plaid + "/link_token", __assign({}, ((params === null || params === void 0 ? void 0 : params.accountId) && { account_id: params.accountId })))];
+                    return [2, this.client.post(shared_1.Endpoints.plaid + "/link_token", __assign({}, ((params === null || params === void 0 ? void 0 : params.accountId) && {
+                            account_id: params.accountId,
+                            is_webview: Boolean(params.isWebView),
+                        })))];
                 });
             }); };
             this.client = new client_1.Client(config);

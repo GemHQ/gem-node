@@ -108,6 +108,7 @@ export namespace GemTypes {
   export type WyreConfigData = { is_private: boolean };
   export type CoinifyConfigData = { is_private: boolean };
   export type FeatureAccessConfigData = { flag: 'stable' | 'beta' | 'alpha' };
+  export type PlaidConfigData = { deep_link_uri: string };
 }
 
 export namespace GemResponseType {
@@ -116,12 +117,13 @@ export namespace GemResponseType {
     application_id: string;
     created_at: string;
     updated_at: string;
-    type: 'wyre' | 'coinify' | 'onfido' | 'feature_access';
+    type: 'wyre' | 'coinify' | 'onfido' | 'feature_access' | 'plaid';
     data:
       | GemTypes.OnfidoConfigData
       | GemTypes.WyreConfigData
       | GemTypes.CoinifyConfigData
-      | GemTypes.FeatureAccessConfigData;
+      | GemTypes.FeatureAccessConfigData
+      | GemTypes.PlaidConfigData;
   };
 
   export interface IProfileVerification {

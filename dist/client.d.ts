@@ -3,6 +3,7 @@ declare type ClientConfigType = {
     apiKey?: string;
     secretKey?: string;
     baseUrl?: string;
+    environment?: 'sandbox' | 'production';
     options?: AxiosRequestConfig;
     [k: string]: any;
 };

@@ -66,7 +66,10 @@ export declare namespace SDK {
             }>;
         };
         listApplicationConfigurations: () => Promise<GemResponseType.IApplicationConfig[]>;
-        createUser: (emailAddress?: string) => Promise<GemResponseType.IUser>;
+        createUser: ({ emailAddress, phoneNumber, }: {
+            emailAddress: string;
+            phoneNumber: string;
+        }) => Promise<GemResponseType.IUser>;
         createUserConsent: (userId: string) => Promise<GemResponseType.IBaseMessage>;
         updateUser: (args: {
             userId: string;

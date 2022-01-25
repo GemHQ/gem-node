@@ -23,6 +23,8 @@ var GemAPIError = (function (_super) {
         _this.error = error.error;
         _this.status = error.status;
         _this.error_map = error.error_map;
+        _this.requestId = error === null || error === void 0 ? void 0 : error.headers['x-request-id'];
+        _this.api = error.baseUrl;
         return _this;
     }
     return GemAPIError;

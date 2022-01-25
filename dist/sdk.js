@@ -216,14 +216,20 @@ var SDK;
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
-            this.createUser = function (emailAddress) { return __awaiter(_this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4, this.client.post(shared_1.Endpoints.users, __assign({}, (emailAddress && { email: emailAddress })))];
-                        case 1: return [2, _a.sent()];
-                    }
+            this.createUser = function (_a) {
+                var emailAddress = _a.emailAddress, phoneNumber = _a.phoneNumber;
+                return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4, this.client.post(shared_1.Endpoints.users, {
+                                    email: emailAddress,
+                                    phone_number: phoneNumber,
+                                })];
+                            case 1: return [2, _b.sent()];
+                        }
+                    });
                 });
-            }); };
+            };
             this.createUserConsent = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, this.client.put(shared_1.Endpoints.users + "/" + userId + "/consent")];

@@ -54,6 +54,10 @@ var url = require("url");
 var gem_api_1 = require("./errors/gem_api");
 var axios_1 = require("axios");
 var qs = require("qs");
+var EnvironmentURLs = {
+    production: 'https://api.gem.co',
+    sandbox: 'https://api.sandbox.gem.co',
+};
 var Client = (function () {
     function Client(config) {
         this.IS_NODE = true;
@@ -72,6 +76,10 @@ var Client = (function () {
         this.config = config;
         this.IS_NODE = this.checkForNodeProcess();
         this.config.options = this.config.options || {};
+        this.config.baseUrl =
+            EnvironmentURLs[this.config.environment] ||
+                this.config.baseUrl ||
+                EnvironmentURLs['production'];
         if (this.IS_NODE) {
             if (!config.secretKey) {
                 throw new Error('Gem SDK API secret is missing');
@@ -97,7 +105,7 @@ var Client = (function () {
         if (params === void 0) { params = {}; }
         if (options === void 0) { options = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var reqOpts, _a, data, status, e_1, res, data, status;
+            var reqOpts, _a, data, status, headers, e_1, res, data, status;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -109,12 +117,13 @@ var Client = (function () {
                         _b.trys.push([1, 3, , 4]);
                         return [4, this.axios.request(reqOpts)];
                     case 2:
-                        _a = _b.sent(), data = _a.data, status = _a.status;
+                        _a = _b.sent(), data = _a.data, status = _a.status, headers = _a.headers;
                         if (status >= 200 && status < 300) {
                             return [2, data || {}];
                         }
                         else {
-                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status }));
+                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status,
+                                headers: headers, baseUrl: this.config.baseUrl }));
                         }
                         return [3, 4];
                     case 3:
@@ -122,7 +131,7 @@ var Client = (function () {
                         res = e_1.response;
                         if (res) {
                             data = res.data, status = res.status;
-                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status }));
+                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status, headers: res.headers, baseUrl: this.config.baseUrl }));
                         }
                         else {
                             throw e_1;

@@ -14,8 +14,15 @@ type ClientConfigType = {
   apiKey?: string;
   secretKey?: string;
   baseUrl?: string;
+  // NOTE: Other environments should be provided using baseUrl
+  environment?: 'sandbox' | 'production';
   options?: AxiosRequestConfig;
   [k: string]: any;
+};
+
+const EnvironmentURLs = {
+  production: 'https://api.gem.co',
+  sandbox: 'https://api.sandbox.gem.co',
 };
 
 /**
@@ -33,6 +40,10 @@ export class Client {
     this.config = config;
     this.IS_NODE = this.checkForNodeProcess();
     this.config.options = this.config.options || {};
+    this.config.baseUrl =
+      EnvironmentURLs[this.config.environment] ||
+      this.config.baseUrl ||
+      EnvironmentURLs['production'];
 
     // Runtime environment checks
     if (this.IS_NODE) {
@@ -88,17 +99,29 @@ export class Client {
     const reqOpts = this.createRequestOptions(method, path, params, options);
 
     try {
-      const { data, status }: AxiosResponse = await this.axios.request(reqOpts);
+      const { data, status, headers }: AxiosResponse = await this.axios.request(
+        reqOpts
+      );
       if (status >= 200 && status < 300) {
         return data || {};
       } else {
-        throw new GemAPIError({ ...data, status });
+        throw new GemAPIError({
+          ...data,
+          status,
+          headers,
+          baseUrl: this.config.baseUrl,
+        });
       }
     } catch (e) {
       const res = e.response;
       if (res) {
         const { data, status } = res;
-        throw new GemAPIError({ ...data, status });
+        throw new GemAPIError({
+          ...data,
+          status,
+          headers: res.headers,
+          baseUrl: this.config.baseUrl,
+        });
       } else {
         // Non axios exception
         throw e;

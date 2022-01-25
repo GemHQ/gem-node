@@ -5,7 +5,7 @@ export default class GemAPIError extends Error {
     error_map?: {
         [key: string]: string;
     };
-    requestId?: string;
+    request_id?: string;
     api?: string;
     constructor(error: {
         description: string;
@@ -15,6 +15,6 @@ export default class GemAPIError extends Error {
             [key: string]: string;
         };
         headers?: object;
-        baseUrl?: string;
+        base_url?: string;
     });
 }

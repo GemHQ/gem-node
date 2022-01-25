@@ -123,7 +123,7 @@ var Client = (function () {
                         }
                         else {
                             throw new gem_api_1.default(__assign(__assign({}, data), { status: status,
-                                headers: headers, baseUrl: this.config.baseUrl }));
+                                headers: headers, base_url: this.config.baseUrl }));
                         }
                         return [3, 4];
                     case 3:
@@ -131,7 +131,7 @@ var Client = (function () {
                         res = e_1.response;
                         if (res) {
                             data = res.data, status = res.status;
-                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status, headers: res.headers, baseUrl: this.config.baseUrl }));
+                            throw new gem_api_1.default(__assign(__assign({}, data), { status: status, headers: res.headers, base_url: this.config.baseUrl }));
                         }
                         else {
                             throw e_1;

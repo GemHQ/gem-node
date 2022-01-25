@@ -206,11 +206,16 @@ export namespace SDK {
     /**
      * USERS
      */
-    createUser = async (
-      emailAddress?: string
-    ): Promise<GemResponseType.IUser> =>
+    createUser = async ({
+      emailAddress,
+      phoneNumber,
+    }: {
+      emailAddress: string;
+      phoneNumber: string;
+    }): Promise<GemResponseType.IUser> =>
       await this.client.post(Endpoints.users, {
-        ...(emailAddress && { email: emailAddress }),
+        email: emailAddress,
+        phone_number: phoneNumber,
       });
 
     // TODO: move this to updateUser once supported by API.

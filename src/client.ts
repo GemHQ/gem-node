@@ -109,7 +109,7 @@ export class Client {
           ...data,
           status,
           headers,
-          baseUrl: this.config.baseUrl,
+          base_url: this.config.baseUrl,
         });
       }
     } catch (e) {
@@ -120,7 +120,7 @@ export class Client {
           ...data,
           status,
           headers: res.headers,
-          baseUrl: this.config.baseUrl,
+          base_url: this.config.baseUrl,
         });
       } else {
         // Non axios exception

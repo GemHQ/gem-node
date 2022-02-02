@@ -24,6 +24,25 @@ const gem = new Gem({
   baseUrl: 'https://api.sandbox.gem.co',
 });
 
+// User's profile data
+const profileData = {
+  date_of_birth: '11-28-1989',
+  name: {
+    given_names: 'Charles',
+    family_names: 'Babbage',
+  },
+  social_security_number: '234-34-2122',
+  address: {
+    street_1: '123 any st',
+    street_2: '',
+    city: 'a city',
+    state: 'ca',
+    country: 'us',
+    postal_code: '92602',
+  },
+  default_currency: 'USD',
+};
+
 /**
  *
  * MAIN
@@ -32,16 +51,30 @@ const gem = new Gem({
 
 (async () => {
   try {
-    let transactions = [];
+    /**
+     * Find or create a user and provide their KYC data to Gem.
+     * This will allow the user to skip the upload step in the Gem widget.
+     */
+    const user = await gem.createUser({
+      emailAddress: 'user@example.com',
+      // E.164 format
+      phoneNumber: '+19495678888',
+    });
+    console.log('User:', user);
 
-    const applicationUsers = await gem.listUsers();
-    const firstUser = applicationUsers[0];
+    const profile = await gem.createProfile(user.id, profileData);
+    console.log('\nProfile:', profile);
 
-    if (firstUser) {
-      transactions = await gem.listTransactions({ userId: firstUser.id });
-    }
+    const document = new FormData();
+    // Provide the image as a buffer
+    document.append('files[0][data]', 'FILE_BUFFER');
+    document.append('files[0][orientation]', 'front');
+    document.append('files[0][media_type]', 'image/png');
+    document.append('files[0][description]', 'This is a selfie');
+    document.append('type', 'selfie');
 
-    console.log('User Transactions', transactions);
+    const doc = await gem.createProfileDocument(profile.id, document);
+    console.log('\nNew Document', doc);
   } catch (e) {
     console.error('Gem Error', e);
   }
@@ -76,22 +109,26 @@ Configuration Parameters:
 | getUser   | (userId: string)                         | Get a user by ID. |
 | listUsers | (pageNumber?: number, pageSize?: number) | List all users    |
 
-<!-- #### Profiles
+#### Profiles
 
-| method                 | parameters                                | description                                                             |
-| ---------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
-| createProfile          | ( userId: string, profile: ProfileModel ) | Create a profile.                                                       |
+| method        | parameters                                | description       |
+| ------------- | ----------------------------------------- | ----------------- |
+| createProfile | ( userId: string, profile: ProfileModel ) | Create a profile. |
+
+<!--
 | createTemporaryProfile | ( userId: string, profile: ProfileModel ) | Create a temporary profile. This profile will exist for up to one hour. |
 | getProfile             | ( profileId: string )                     | Get a profile by ID.                                                    |
 | listProfiles           | ( userId: string )                        | Get a list of profiles.                                                 |
 | updateProfile          | ( userId: string, profile: ProfileModel ) | Create a profile.                                                       |
 | deleteProfile          | ( profileId: string )                     | Delete a profile by ID.                                                 | -->
 
-<!-- #### Documents
+#### Documents
 
 | method                | parameters                                | description                                                                 |
 | --------------------- | ----------------------------------------- | --------------------------------------------------------------------------- |
 | createProfileDocument | ( profileId: string, document: FormData ) | Attach a document to a profile. (Documents may have many files associated.) |
+
+<!--
 | listProfileDocuments  | ( profileId: string )                     | List all profile documents.                                                 |
 | updateDocument        | ( profileId: string, document: FormData ) | Update a document.                                                          |
 | deleteDocument        | ( documentId: string )                    | Delete a document by ID.                                                    | -->

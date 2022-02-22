@@ -21,27 +21,8 @@ const { Gem } = require('@gem.co/api').SDK;
 const gem = new Gem({
   apiKey: GEM_API_KEY,
   secretKey: GEM_API_SECRET,
-  baseUrl: 'https://api.sandbox.gem.co',
+  environment: 'sandbox',
 });
-
-// User's profile data
-const profileData = {
-  date_of_birth: '11-28-1989',
-  name: {
-    given_names: 'Charles',
-    family_names: 'Babbage',
-  },
-  social_security_number: '234-34-2122',
-  address: {
-    street_1: '123 any st',
-    street_2: '',
-    city: 'a city',
-    state: 'ca',
-    country: 'us',
-    postal_code: '92602',
-  },
-  default_currency: 'USD',
-};
 
 /**
  *
@@ -51,30 +32,11 @@ const profileData = {
 
 (async () => {
   try {
-    /**
-     * Find or create a user and provide their KYC data to Gem.
-     * This will allow the user to skip the upload step in the Gem widget.
-     */
-    const user = await gem.createUser({
-      emailAddress: 'user@example.com',
-      // E.164 format
-      phoneNumber: '+19495678888',
-    });
-    console.log('User:', user);
+    const applicationUsers = await gem.listUsers();
+    const firstUser = applicationUsers[0];
+    const transactions = await gem.listTransactions({ userId: firstUser.id });
 
-    const profile = await gem.createProfile(user.id, profileData);
-    console.log('\nProfile:', profile);
-
-    const document = new FormData();
-    // Provide the image as a buffer
-    document.append('files[0][data]', 'FILE_BUFFER');
-    document.append('files[0][orientation]', 'front');
-    document.append('files[0][media_type]', 'image/png');
-    document.append('files[0][description]', 'This is a selfie');
-    document.append('type', 'selfie');
-
-    const doc = await gem.createProfileDocument(profile.id, document);
-    console.log('\nNew Document', doc);
+    console.log('User Transactions', transactions);
   } catch (e) {
     console.error('Gem Error', e);
   }
@@ -93,12 +55,12 @@ const gem = new Gem({
 
 Configuration Parameters:
 
-| parameter | description                                                                                                                                    |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| apiKey    | Gem API key for the respective environment.                                                                                                    |
-| secretKey | Gem API secret for the respective environment.                                                                                                 |
-| baseUrl   | The Gem API base URL you want to use. <br>`https://api.gem.co` for production<br>`https://api.sandbox.gem.co` for sandbox.                     |
-| options   | Configuration options that are passed to the [Axios Client](https://github.com/axios/axios#request-config) for _each_ request made to the API. |
+| parameter   | description                                                                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| apiKey      | Gem API key for the respective environment.                                                                                                    |
+| secretKey   | Gem API secret for the respective environment.                                                                                                 |
+| environment | The Gem API environment. Options: **sandbox** or **production**.                                                                               |
+| options     | Configuration options that are passed to the [Axios Client](https://github.com/axios/axios#request-config) for _each_ request made to the API. |
 
 ### SDK Requests
 

@@ -243,11 +243,11 @@ export namespace SDK {
       } = {}
     ): Promise<GemResponseType.IUser[]> => {
       const { pageNumber: page, pageSize: size } = args;
-      return await this.client.get(Endpoints.users, { page, size });
+      return await this.client.get(Endpoints.application_users, { page, size });
     };
 
     getUser = async (userId: string): Promise<GemResponseType.IUser> =>
-      await this.client.get(`${Endpoints.users}/${userId}`);
+      await this.client.get(`${Endpoints.application_users}/${userId}`);
 
     deleteUser = async (
       userId: string
@@ -699,7 +699,7 @@ export namespace SDK {
       userId?: string;
       reCAPTCHAValue?: string;
     }): Promise<GemResponseType.IUser> =>
-      await this.client.post(`${Endpoints.users}`, {
+      await this.client.post(`${Endpoints.application_users}`, {
         email,
         user_id: userId,
         ...(!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue }),

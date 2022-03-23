@@ -24,6 +24,7 @@ export const GEM_CSRF_HEADER_NAME = 'X-Gem-User-Csrf-Token';
  * Gem API endpoints used by the client
  */
 export enum Endpoints {
+  application_users = '/application_users',
   users = '/users',
   profiles = '/profiles',
   documents = '/documents',

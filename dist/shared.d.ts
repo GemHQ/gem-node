@@ -4,6 +4,7 @@ export declare const GEM_BASE_URL = "https://api.sandbox.gem.co";
 export declare const GEM_CSRF_COOKIE_NAME = "gem_user_csrf";
 export declare const GEM_CSRF_HEADER_NAME = "X-Gem-User-Csrf-Token";
 export declare enum Endpoints {
+    application_users = "/application_users",
     users = "/users",
     profiles = "/profiles",
     documents = "/documents",

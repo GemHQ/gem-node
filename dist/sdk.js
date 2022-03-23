@@ -258,7 +258,7 @@ var SDK;
                         switch (_a.label) {
                             case 0:
                                 page = args.pageNumber, size = args.pageSize;
-                                return [4, this.client.get(shared_1.Endpoints.users, { page: page, size: size })];
+                                return [4, this.client.get(shared_1.Endpoints.application_users, { page: page, size: size })];
                             case 1: return [2, _a.sent()];
                         }
                     });
@@ -266,7 +266,7 @@ var SDK;
             };
             this.getUser = function (userId) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.client.get(shared_1.Endpoints.users + "/" + userId)];
+                    case 0: return [4, this.client.get(shared_1.Endpoints.application_users + "/" + userId)];
                     case 1: return [2, _a.sent()];
                 }
             }); }); };
@@ -702,7 +702,7 @@ var SDK;
                 return __awaiter(_this, void 0, void 0, function () {
                     return __generator(this, function (_b) {
                         switch (_b.label) {
-                            case 0: return [4, this.client.post("" + shared_1.Endpoints.users, __assign({ email: email, user_id: userId }, (!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue })))];
+                            case 0: return [4, this.client.post("" + shared_1.Endpoints.application_users, __assign({ email: email, user_id: userId }, (!this.client.IS_NODE && { 'g-recaptcha-response': reCAPTCHAValue })))];
                             case 1: return [2, _b.sent()];
                         }
                     });

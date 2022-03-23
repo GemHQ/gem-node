@@ -8,6 +8,7 @@ exports.GEM_CSRF_COOKIE_NAME = 'gem_user_csrf';
 exports.GEM_CSRF_HEADER_NAME = 'X-Gem-User-Csrf-Token';
 var Endpoints;
 (function (Endpoints) {
+    Endpoints["application_users"] = "/application_users";
     Endpoints["users"] = "/users";
     Endpoints["profiles"] = "/profiles";
     Endpoints["documents"] = "/documents";
